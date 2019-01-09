@@ -133,18 +133,18 @@ workflows:
           branches:
             only:
             - master
-      - build:
-          requires:
-            - lint
-          filters:
-            branches:
-              only:
-                - master
-      - push:
-          requires:
-            - lint
-            - build
-          filters:
-            branches:
-              only:
-                - master
+    - build:
+        requires:
+          - lint
+        filters:
+          branches:
+            only:
+              - master
+    - push:
+        requires:
+          - lint
+          - build
+        filters:
+          branches:
+            only:
+              - master
