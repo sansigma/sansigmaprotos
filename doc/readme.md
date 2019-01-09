@@ -4,22 +4,22 @@
 ## Table of Contents
 
 - [trade_model.proto](#trade_model.proto)
-    - [Arbitrage](#sansigmabuffers.Arbitrage)
-    - [AssetPair](#sansigmabuffers.AssetPair)
-    - [BidAskSchema](#sansigmabuffers.BidAskSchema)
-    - [OrderBook](#sansigmabuffers.OrderBook)
-    - [OrderBooks](#sansigmabuffers.OrderBooks)
-    - [OrderBooksRequest](#sansigmabuffers.OrderBooksRequest)
-    - [OrderPanel](#sansigmabuffers.OrderPanel)
-    - [Spread](#sansigmabuffers.Spread)
-    - [Trade](#sansigmabuffers.Trade)
+    - [Arbitrage](#sansigmaprotos.Arbitrage)
+    - [AssetPair](#sansigmaprotos.AssetPair)
+    - [BidAsk](#sansigmaprotos.BidAsk)
+    - [OrderBook](#sansigmaprotos.OrderBook)
+    - [OrderBooks](#sansigmaprotos.OrderBooks)
+    - [OrderBooksRequest](#sansigmaprotos.OrderBooksRequest)
+    - [OrderPanel](#sansigmaprotos.OrderPanel)
+    - [Spread](#sansigmaprotos.Spread)
+    - [Trade](#sansigmaprotos.Trade)
   
-    - [Arbitrage.ArbitrageType](#sansigmabuffers.Arbitrage.ArbitrageType)
-    - [OrderPanel.OrderSide](#sansigmabuffers.OrderPanel.OrderSide)
+    - [Arbitrage.ArbitrageType](#sansigmaprotos.Arbitrage.ArbitrageType)
+    - [OrderPanel.OrderSide](#sansigmaprotos.OrderPanel.OrderSide)
   
   
-    - [OrderBookStreamApi](#sansigmabuffers.OrderBookStreamApi)
-    - [OrderBooksApi](#sansigmabuffers.OrderBooksApi)
+    - [OrderBookStreamApi](#sansigmaprotos.OrderBookStreamApi)
+    - [OrderBooksApi](#sansigmaprotos.OrderBooksApi)
   
 
 - [Scalar Value Types](#scalar-value-types)
@@ -33,7 +33,7 @@
 
 
 
-<a name="sansigmabuffers.Arbitrage"></a>
+<a name="sansigmaprotos.Arbitrage"></a>
 
 ### Arbitrage
 
@@ -41,8 +41,8 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| type | [Arbitrage.ArbitrageType](#sansigmabuffers.Arbitrage.ArbitrageType) |  |  |
-| orders | [OrderPanel](#sansigmabuffers.OrderPanel) | repeated |  |
+| type | [Arbitrage.ArbitrageType](#sansigmaprotos.Arbitrage.ArbitrageType) |  |  |
+| orders | [OrderPanel](#sansigmaprotos.OrderPanel) | repeated |  |
 | profit | [double](#double) |  |  |
 | profit_rate | [double](#double) |  |  |
 | investment | [double](#double) |  |  |
@@ -53,7 +53,7 @@
 
 
 
-<a name="sansigmabuffers.AssetPair"></a>
+<a name="sansigmaprotos.AssetPair"></a>
 
 ### AssetPair
 
@@ -69,9 +69,9 @@
 
 
 
-<a name="sansigmabuffers.BidAskSchema"></a>
+<a name="sansigmaprotos.BidAsk"></a>
 
-### BidAskSchema
+### BidAsk
 
 
 
@@ -85,7 +85,7 @@
 
 
 
-<a name="sansigmabuffers.OrderBook"></a>
+<a name="sansigmaprotos.OrderBook"></a>
 
 ### OrderBook
 
@@ -97,8 +97,8 @@
 | base | [string](#string) |  |  |
 | quote | [string](#string) |  |  |
 | symbol | [string](#string) |  |  |
-| bids | [BidAskSchema](#sansigmabuffers.BidAskSchema) | repeated |  |
-| asks | [BidAskSchema](#sansigmabuffers.BidAskSchema) | repeated |  |
+| bids | [BidAsk](#sansigmaprotos.BidAsk) | repeated |  |
+| asks | [BidAsk](#sansigmaprotos.BidAsk) | repeated |  |
 | timestamp | [int64](#int64) |  |  |
 
 
@@ -106,7 +106,7 @@
 
 
 
-<a name="sansigmabuffers.OrderBooks"></a>
+<a name="sansigmaprotos.OrderBooks"></a>
 
 ### OrderBooks
 
@@ -114,7 +114,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| all | [OrderBook](#sansigmabuffers.OrderBook) | repeated |  |
+| all | [OrderBook](#sansigmaprotos.OrderBook) | repeated |  |
 | timestamp | [int64](#int64) |  |  |
 
 
@@ -122,7 +122,7 @@
 
 
 
-<a name="sansigmabuffers.OrderBooksRequest"></a>
+<a name="sansigmaprotos.OrderBooksRequest"></a>
 
 ### OrderBooksRequest
 
@@ -139,7 +139,7 @@
 
 
 
-<a name="sansigmabuffers.OrderPanel"></a>
+<a name="sansigmaprotos.OrderPanel"></a>
 
 ### OrderPanel
 
@@ -150,7 +150,7 @@
 | exchange | [string](#string) |  |  |
 | base | [string](#string) |  |  |
 | quote | [string](#string) |  |  |
-| side | [OrderPanel.OrderSide](#sansigmabuffers.OrderPanel.OrderSide) |  |  |
+| side | [OrderPanel.OrderSide](#sansigmaprotos.OrderPanel.OrderSide) |  |  |
 | price | [double](#double) |  |  |
 | depth_amount | [double](#double) |  |  |
 | order_amount | [double](#double) |  |  |
@@ -160,7 +160,7 @@
 
 
 
-<a name="sansigmabuffers.Spread"></a>
+<a name="sansigmaprotos.Spread"></a>
 
 ### Spread
 
@@ -182,7 +182,7 @@
 
 
 
-<a name="sansigmabuffers.Trade"></a>
+<a name="sansigmaprotos.Trade"></a>
 
 ### Trade
 
@@ -207,7 +207,7 @@
  
 
 
-<a name="sansigmabuffers.Arbitrage.ArbitrageType"></a>
+<a name="sansigmaprotos.Arbitrage.ArbitrageType"></a>
 
 ### Arbitrage.ArbitrageType
 
@@ -220,7 +220,7 @@
 
 
 
-<a name="sansigmabuffers.OrderPanel.OrderSide"></a>
+<a name="sansigmaprotos.OrderPanel.OrderSide"></a>
 
 ### OrderPanel.OrderSide
 
@@ -236,24 +236,24 @@
  
 
 
-<a name="sansigmabuffers.OrderBookStreamApi"></a>
+<a name="sansigmaprotos.OrderBookStreamApi"></a>
 
 ### OrderBookStreamApi
 
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetOrderBook | [AssetPair](#sansigmabuffers.AssetPair) | [OrderBook](#sansigmabuffers.OrderBook) stream |  |
+| GetOrderBook | [AssetPair](#sansigmaprotos.AssetPair) | [OrderBook](#sansigmaprotos.OrderBook) stream |  |
 
 
-<a name="sansigmabuffers.OrderBooksApi"></a>
+<a name="sansigmaprotos.OrderBooksApi"></a>
 
 ### OrderBooksApi
 
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetOrderBooks | [OrderBooksRequest](#sansigmabuffers.OrderBooksRequest) | [OrderBooks](#sansigmabuffers.OrderBooks) stream |  |
+| GetOrderBooks | [OrderBooksRequest](#sansigmaprotos.OrderBooksRequest) | [OrderBooks](#sansigmaprotos.OrderBooks) stream |  |
 
  
 
