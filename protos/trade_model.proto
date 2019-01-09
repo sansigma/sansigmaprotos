@@ -41,8 +41,8 @@ message Trade {
 
 message OrderPanel {
     enum OrderSide {
-        Buy = 0;
-        Sell = 1;
+        BUY = 0;
+        SELL = 1;
     }
 
     string exchange = 1;
@@ -56,9 +56,9 @@ message OrderPanel {
 
 message Arbitrage {
     enum ArbitrageType {
-        Simple = 0;
-        Triangular = 1;
-        Circle = 2;
+        SIMPLE = 0;
+        TRIANGULAR = 1;
+        CIRCLE = 2;
     }
     ArbitrageType type = 1;
     repeated OrderPanel orders = 2;
