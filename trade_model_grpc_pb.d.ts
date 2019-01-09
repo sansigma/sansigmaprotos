@@ -1,4 +1,4 @@
-// package: sansigmabuffers
+// package: sansigmaprotos
 // file: trade_model.proto
 
 /* tslint:disable */
@@ -11,7 +11,7 @@ interface IOrderBookStreamApiService extends grpc.ServiceDefinition<grpc.Untyped
 }
 
 interface IOrderBookStreamApiService_IGetOrderBook extends grpc.MethodDefinition<trade_model_pb.AssetPair, trade_model_pb.OrderBook> {
-    path: string; // "/sansigmabuffers.OrderBookStreamApi/GetOrderBook"
+    path: string; // "/sansigmaprotos.OrderBookStreamApi/GetOrderBook"
     requestStream: boolean; // false
     responseStream: boolean; // true
     requestSerialize: grpc.serialize<trade_model_pb.AssetPair>;
@@ -42,7 +42,7 @@ interface IOrderBooksApiService extends grpc.ServiceDefinition<grpc.UntypedServi
 }
 
 interface IOrderBooksApiService_IGetOrderBooks extends grpc.MethodDefinition<trade_model_pb.OrderBooksRequest, trade_model_pb.OrderBooks> {
-    path: string; // "/sansigmabuffers.OrderBooksApi/GetOrderBooks"
+    path: string; // "/sansigmaprotos.OrderBooksApi/GetOrderBooks"
     requestStream: boolean; // false
     responseStream: boolean; // true
     requestSerialize: grpc.serialize<trade_model_pb.OrderBooksRequest>;
