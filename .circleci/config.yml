@@ -1,0 +1,144 @@
+version: 2
+
+references:
+  defaults: &defaults
+    working_directory: ~/grpc-gen
+    machine: true
+
+jobs:
+  lint:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Lint
+          command: docker-compose run --rm lint
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Clean up
+          command: rm -rf pb-go pb-csharp
+      - run:
+          name: Generate gRPC for go
+          command: docker-compose run --rm go
+      - run:
+          name: Generate gRPC for python
+          command: docker-compose run --rm python
+      - run:
+          name: Generate gRPC for typescript
+          command: docker-compose run --rm typescript
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  push:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: git config
+          command: |
+            git config user.email "doumintyu1017@gmail.com"
+            git config user.name "Generator Bot"
+            git remote add upstream https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git
+      - run:
+          name: git commit go-src
+          command: |
+            if [ `git branch -r --list origin/generated/go | wc -l` -eq 1 ]; then
+              echo "checkout generated/go"
+              git fetch origin
+              git worktree add -b generated/go ../go-src origin/generated/go
+              git -C ../go-src rm `git -C ../go-src ls-files`
+            else
+              echo "create generated/go"
+              git worktree add --detach ../go-src
+              git -C ../go-src checkout --orphan generated/go
+              git -C ../go-src rm --cached -r .
+              git -C ../go-src clean -d -f
+            fi
+            cp -a pb-go/* ../go-src/
+            git -C ../go-src add -A
+            git -C ../go-src status
+            result=0
+            git -C ../go-src commit -m "AUTO GENERATED [ci skip]" || result=$?
+            if [ $result -eq 0 ]; then
+              git -C ../go-src push upstream generated/go 2> /dev/null
+            fi
+      - run:
+          name: git commit python-src
+          command: |
+            if [ `git branch -r --list origin/generated/python | wc -l` -eq 1 ]; then
+              echo "checkout generated/python"
+              git fetch origin
+              git worktree add -b generated/python ../python-src origin/generated/python
+              git -C ../python-src rm `git -C ../python-src ls-files`
+            else
+              echo "create generated/python"
+              git worktree add --detach ../python-src
+              git -C ../python-src checkout --orphan generated/python
+              git -C ../python-src rm --cached -r .
+              git -C ../python-src clean -d -f
+            fi
+            cp -a pb-python/* ../python-src/
+            git -C ../python-src add -A
+            git -C ../python-src status
+            result=0
+            git -C ../python-src commit -m "AUTO GENERATED [ci skip]" || result=$?
+            if [ $result -eq 0 ]; then
+              git -C ../python-src push upstream generated/python 2> /dev/null
+            fi
+      - run:
+          name: git commit typescript-src
+          command: |
+            if [ `git branch -r --list origin/generated/typescript | wc -l` -eq 1 ]; then
+              echo "checkout generated/typescript"
+              git fetch origin
+              git worktree add -b generated/typescript ../typescript-src origin/generated/typescript
+              git -C ../typescript-src rm `git -C ../typescript-src ls-files`
+            else
+              echo "create generated/typescript"
+              git worktree add --detach ../typescript-src
+              git -C ../typescript-src checkout --orphan generated/typescript
+              git -C ../typescript-src rm --cached -r .
+              git -C ../typescript-src clean -d -f
+            fi
+            echo 'node_modules' > pb-typescript/.gitignore
+            cp -a pb-typescript/* ../typescript-src/
+            git -C ../typescript-src add -A
+            git -C ../typescript-src status
+            result=0
+            git -C ../typescript-src commit -m "AUTO GENERATED [ci skip]" || result=$?
+            if [ $result -eq 0 ]; then
+              git -C ../typescript-src push upstream generated/typescript 2> /dev/null
+            fi
+
+workflows:
+  version: 2
+  build_and_push:
+    jobs:
+      - lint
+      - build:
+          requires:
+            - lint
+          filters:
+            branches:
+              only:
+                - master
+      - push:
+          requires:
+            - lint
+            - build
+          filters:
+            branches:
+              only:
+                - master
