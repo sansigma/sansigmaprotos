@@ -5,7 +5,7 @@ set -eu
 export PATH="$PATH:$(npm bin)"
 
 PROTO_SRC=./protos
-PROTO_DEST=./pb-ts
+PROTO_DEST=./pb-typescript
 
 mkdir -p ${PROTO_DEST}
 
