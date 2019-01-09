@@ -17,10 +17,9 @@ services:
             - .:/defs
         command: "-d ./protos -o ./pb-python --with-docs markdown,readme.md -l python"
     typescript:
-        image: node:8
+        image: kaito22/grpc-gen-typescript:0.1.0
         volumes:
         - .:/grpc-gen
         command: 'sh -c
         "cd grpc-gen
-        && npm install grpc-tools --no-save grpc_tools_node_protoc_ts
         && bash protoc.sh"'
