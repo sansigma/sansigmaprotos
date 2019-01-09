@@ -128,7 +128,10 @@ workflows:
   version: 2
   build_and_push:
     jobs:
-      - lint
+    - lint:
+        branches:
+          only:
+          - master
       - build:
           requires:
             - lint
