@@ -40,6 +40,9 @@ export class OrderBook extends jspb.Message {
     getQuote(): string;
     setQuote(value: string): void;
 
+    getSymbol(): string;
+    setSymbol(value: string): void;
+
     clearBidsList(): void;
     getBidsList(): Array<BidAskSchema>;
     setBidsList(value: Array<BidAskSchema>): void;
@@ -52,9 +55,6 @@ export class OrderBook extends jspb.Message {
 
     getTimestamp(): number;
     setTimestamp(value: number): void;
-
-    getKey(): string;
-    setKey(value: string): void;
 
 
     serializeBinary(): Uint8Array;
@@ -72,10 +72,10 @@ export namespace OrderBook {
         exchange: string,
         base: string,
         quote: string,
+        symbol: string,
         bidsList: Array<BidAskSchema.AsObject>,
         asksList: Array<BidAskSchema.AsObject>,
         timestamp: number,
-        key: string,
     }
 }
 

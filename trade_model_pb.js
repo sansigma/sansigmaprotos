@@ -214,7 +214,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.sansigmabuffers.OrderBook.repeatedFields_ = [4,5];
+proto.sansigmabuffers.OrderBook.repeatedFields_ = [5,6];
 
 
 
@@ -248,12 +248,12 @@ proto.sansigmabuffers.OrderBook.toObject = function(includeInstance, msg) {
     exchange: jspb.Message.getFieldWithDefault(msg, 1, ""),
     base: jspb.Message.getFieldWithDefault(msg, 2, ""),
     quote: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    symbol: jspb.Message.getFieldWithDefault(msg, 4, ""),
     bidsList: jspb.Message.toObjectList(msg.getBidsList(),
     proto.sansigmabuffers.BidAskSchema.toObject, includeInstance),
     asksList: jspb.Message.toObjectList(msg.getAsksList(),
     proto.sansigmabuffers.BidAskSchema.toObject, includeInstance),
-    timestamp: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    key: jspb.Message.getFieldWithDefault(msg, 7, "")
+    timestamp: jspb.Message.getFieldWithDefault(msg, 7, 0)
   };
 
   if (includeInstance) {
@@ -303,22 +303,22 @@ proto.sansigmabuffers.OrderBook.deserializeBinaryFromReader = function(msg, read
       msg.setQuote(value);
       break;
     case 4:
-      var value = new proto.sansigmabuffers.BidAskSchema;
-      reader.readMessage(value,proto.sansigmabuffers.BidAskSchema.deserializeBinaryFromReader);
-      msg.addBids(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSymbol(value);
       break;
     case 5:
       var value = new proto.sansigmabuffers.BidAskSchema;
       reader.readMessage(value,proto.sansigmabuffers.BidAskSchema.deserializeBinaryFromReader);
-      msg.addAsks(value);
+      msg.addBids(value);
       break;
     case 6:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setTimestamp(value);
+      var value = new proto.sansigmabuffers.BidAskSchema;
+      reader.readMessage(value,proto.sansigmabuffers.BidAskSchema.deserializeBinaryFromReader);
+      msg.addAsks(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setKey(value);
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setTimestamp(value);
       break;
     default:
       reader.skipField();
@@ -370,15 +370,14 @@ proto.sansigmabuffers.OrderBook.serializeBinaryToWriter = function(message, writ
       f
     );
   }
-  f = message.getBidsList();
+  f = message.getSymbol();
   if (f.length > 0) {
-    writer.writeRepeatedMessage(
+    writer.writeString(
       4,
-      f,
-      proto.sansigmabuffers.BidAskSchema.serializeBinaryToWriter
+      f
     );
   }
-  f = message.getAsksList();
+  f = message.getBidsList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       5,
@@ -386,16 +385,17 @@ proto.sansigmabuffers.OrderBook.serializeBinaryToWriter = function(message, writ
       proto.sansigmabuffers.BidAskSchema.serializeBinaryToWriter
     );
   }
+  f = message.getAsksList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      6,
+      f,
+      proto.sansigmabuffers.BidAskSchema.serializeBinaryToWriter
+    );
+  }
   f = message.getTimestamp();
   if (f !== 0) {
     writer.writeInt64(
-      6,
-      f
-    );
-  }
-  f = message.getKey();
-  if (f.length > 0) {
-    writer.writeString(
       7,
       f
     );
@@ -449,48 +449,32 @@ proto.sansigmabuffers.OrderBook.prototype.setQuote = function(value) {
 
 
 /**
- * repeated BidAskSchema bids = 4;
+ * optional string symbol = 4;
+ * @return {string}
+ */
+proto.sansigmabuffers.OrderBook.prototype.getSymbol = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/** @param {string} value */
+proto.sansigmabuffers.OrderBook.prototype.setSymbol = function(value) {
+  jspb.Message.setField(this, 4, value);
+};
+
+
+/**
+ * repeated BidAskSchema bids = 5;
  * @return {!Array.<!proto.sansigmabuffers.BidAskSchema>}
  */
 proto.sansigmabuffers.OrderBook.prototype.getBidsList = function() {
-  return /** @type{!Array.<!proto.sansigmabuffers.BidAskSchema>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.sansigmabuffers.BidAskSchema, 4));
-};
-
-
-/** @param {!Array.<!proto.sansigmabuffers.BidAskSchema>} value */
-proto.sansigmabuffers.OrderBook.prototype.setBidsList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 4, value);
-};
-
-
-/**
- * @param {!proto.sansigmabuffers.BidAskSchema=} opt_value
- * @param {number=} opt_index
- * @return {!proto.sansigmabuffers.BidAskSchema}
- */
-proto.sansigmabuffers.OrderBook.prototype.addBids = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.sansigmabuffers.BidAskSchema, opt_index);
-};
-
-
-proto.sansigmabuffers.OrderBook.prototype.clearBidsList = function() {
-  this.setBidsList([]);
-};
-
-
-/**
- * repeated BidAskSchema asks = 5;
- * @return {!Array.<!proto.sansigmabuffers.BidAskSchema>}
- */
-proto.sansigmabuffers.OrderBook.prototype.getAsksList = function() {
   return /** @type{!Array.<!proto.sansigmabuffers.BidAskSchema>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.sansigmabuffers.BidAskSchema, 5));
 };
 
 
 /** @param {!Array.<!proto.sansigmabuffers.BidAskSchema>} value */
-proto.sansigmabuffers.OrderBook.prototype.setAsksList = function(value) {
+proto.sansigmabuffers.OrderBook.prototype.setBidsList = function(value) {
   jspb.Message.setRepeatedWrapperField(this, 5, value);
 };
 
@@ -500,8 +484,39 @@ proto.sansigmabuffers.OrderBook.prototype.setAsksList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.sansigmabuffers.BidAskSchema}
  */
-proto.sansigmabuffers.OrderBook.prototype.addAsks = function(opt_value, opt_index) {
+proto.sansigmabuffers.OrderBook.prototype.addBids = function(opt_value, opt_index) {
   return jspb.Message.addToRepeatedWrapperField(this, 5, opt_value, proto.sansigmabuffers.BidAskSchema, opt_index);
+};
+
+
+proto.sansigmabuffers.OrderBook.prototype.clearBidsList = function() {
+  this.setBidsList([]);
+};
+
+
+/**
+ * repeated BidAskSchema asks = 6;
+ * @return {!Array.<!proto.sansigmabuffers.BidAskSchema>}
+ */
+proto.sansigmabuffers.OrderBook.prototype.getAsksList = function() {
+  return /** @type{!Array.<!proto.sansigmabuffers.BidAskSchema>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.sansigmabuffers.BidAskSchema, 6));
+};
+
+
+/** @param {!Array.<!proto.sansigmabuffers.BidAskSchema>} value */
+proto.sansigmabuffers.OrderBook.prototype.setAsksList = function(value) {
+  jspb.Message.setRepeatedWrapperField(this, 6, value);
+};
+
+
+/**
+ * @param {!proto.sansigmabuffers.BidAskSchema=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.sansigmabuffers.BidAskSchema}
+ */
+proto.sansigmabuffers.OrderBook.prototype.addAsks = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 6, opt_value, proto.sansigmabuffers.BidAskSchema, opt_index);
 };
 
 
@@ -511,31 +526,16 @@ proto.sansigmabuffers.OrderBook.prototype.clearAsksList = function() {
 
 
 /**
- * optional int64 timestamp = 6;
+ * optional int64 timestamp = 7;
  * @return {number}
  */
 proto.sansigmabuffers.OrderBook.prototype.getTimestamp = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
 };
 
 
 /** @param {number} value */
 proto.sansigmabuffers.OrderBook.prototype.setTimestamp = function(value) {
-  jspb.Message.setField(this, 6, value);
-};
-
-
-/**
- * optional string key = 7;
- * @return {string}
- */
-proto.sansigmabuffers.OrderBook.prototype.getKey = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
-};
-
-
-/** @param {string} value */
-proto.sansigmabuffers.OrderBook.prototype.setKey = function(value) {
   jspb.Message.setField(this, 7, value);
 };
 
