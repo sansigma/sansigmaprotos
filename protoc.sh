@@ -17,7 +17,7 @@ grpc_tools_node_protoc \
   ${PROTO_SRC}/*.proto
 
 grpc_tools_node_protoc \
-  --plugin=protoc-gen-ts=$(npm bin)/protoc-gen-ts \
+  --plugin=protoc-gen-ts=$(which protoc-gen-ts) \
   --ts_out=${PROTO_DEST} \
   -I ${PROTO_SRC} \
   ${PROTO_SRC}/*.proto
