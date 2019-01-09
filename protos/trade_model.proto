@@ -1,7 +1,7 @@
 syntax = "proto3";
-package sansigmabuffers;
+package sansigmaprotos;
 
-message BidAskSchema {
+message BidAsk {
     double price = 1;
     double amount = 2;
 }
@@ -11,8 +11,8 @@ message OrderBook {
     string base = 2;
     string quote = 3;
     string symbol = 4;
-    repeated BidAskSchema bids = 5;
-    repeated BidAskSchema asks = 6;
+    repeated BidAsk bids = 5;
+    repeated BidAsk asks = 6;
     int64 timestamp = 7;
 }
 
