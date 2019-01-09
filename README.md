@@ -16,6 +16,15 @@ https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPON
 
 `GH_TOKEN`: [Github Personal Token](https://github.com/settings/tokens) から取得
 
+### レポジトリの初期化
+
+```
+$ git clone https://github.com/kaito2/grpc-gen-circleci.git <新規プロジェクト名>
+$ cd <新規プロジェクト名>
+$ git remote set-url origin <新規リポジトリURL>
+$ git push -u
+```
+
 ### コード生成
 
 master に push されるたびに `generated/<LANGUAGE>` ブランチにクライアントのコードが生成される 
