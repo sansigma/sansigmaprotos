@@ -115,7 +115,6 @@ jobs:
               git -C ../typescript-src rm --cached -r .
               git -C ../typescript-src clean -d -f
             fi
-            echo 'node_modules' > pb-typescript/.gitignore
             cp -a pb-typescript/* ../typescript-src/
             git -C ../typescript-src add -A
             git -C ../typescript-src status
