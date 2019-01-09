@@ -10,10 +10,10 @@ message OrderBook {
     string exchange = 1;
     string base = 2;
     string quote = 3;
-    repeated BidAskSchema bids = 4;
-    repeated BidAskSchema asks = 5;
-    int64 timestamp = 6;
-    string key = 7;
+    string symbol = 4;
+    repeated BidAskSchema bids = 5;
+    repeated BidAskSchema asks = 6;
+    int64 timestamp = 7;
 }
 
 message Spread {
