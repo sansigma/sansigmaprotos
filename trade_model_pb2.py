@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='sansigmabuffers',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x11trade_model.proto\x12\x0fsansigmabuffers\"-\n\x0c\x42idAskSchema\x12\r\n\x05price\x18\x01 \x01(\x01\x12\x0e\n\x06\x61mount\x18\x02 \x01(\x01\"\xb4\x01\n\tOrderBook\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12\x0c\n\x04\x62\x61se\x18\x02 \x01(\t\x12\r\n\x05quote\x18\x03 \x01(\t\x12+\n\x04\x62ids\x18\x04 \x03(\x0b\x32\x1d.sansigmabuffers.BidAskSchema\x12+\n\x04\x61sks\x18\x05 \x03(\x0b\x32\x1d.sansigmabuffers.BidAskSchema\x12\x11\n\ttimestamp\x18\x06 \x01(\x03\x12\x0b\n\x03key\x18\x07 \x01(\t\"\xa6\x01\n\x06Spread\x12\x15\n\rlong_exchange\x18\x01 \x01(\t\x12\x16\n\x0eshort_exchange\x18\x02 \x01(\t\x12\x0c\n\x04\x62\x61se\x18\x03 \x01(\t\x12\r\n\x05quote\x18\x04 \x01(\t\x12\x13\n\x0bprofit_rate\x18\x05 \x01(\x01\x12\x0e\n\x06profit\x18\x06 \x01(\x01\x12\x11\n\ttimestamp\x18\x07 \x01(\x03\x12\x18\n\x10invested_capital\x18\x08 \x01(\x01\"\x95\x01\n\x05Trade\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x10\n\x08trade_id\x18\x02 \x01(\t\x12\x10\n\x08\x65xchange\x18\x03 \x01(\t\x12\x0c\n\x04\x62\x61se\x18\x04 \x01(\t\x12\r\n\x05quote\x18\x05 \x01(\t\x12\r\n\x05price\x18\x06 \x01(\x01\x12\x0e\n\x06\x61mount\x18\x07 \x01(\x01\x12\x11\n\ttimestamp\x18\x08 \x01(\x03\x12\x0c\n\x04side\x18\t \x01(\t\"\xcb\x01\n\nOrderPanel\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12\x0c\n\x04\x62\x61se\x18\x02 \x01(\t\x12\r\n\x05quote\x18\x03 \x01(\t\x12\x33\n\x04side\x18\x04 \x01(\x0e\x32%.sansigmabuffers.OrderPanel.OrderSide\x12\r\n\x05price\x18\x05 \x01(\x01\x12\x14\n\x0c\x64\x65pth_amount\x18\x06 \x01(\x01\x12\x14\n\x0corder_amount\x18\x07 \x01(\x01\"\x1e\n\tOrderSide\x12\x07\n\x03\x42UY\x10\x00\x12\x08\n\x04SELL\x10\x01\"\xf8\x01\n\tArbitrage\x12\x36\n\x04type\x18\x01 \x01(\x0e\x32(.sansigmabuffers.Arbitrage.ArbitrageType\x12+\n\x06orders\x18\x02 \x03(\x0b\x32\x1b.sansigmabuffers.OrderPanel\x12\x0e\n\x06profit\x18\x03 \x01(\x01\x12\x13\n\x0bprofit_rate\x18\x04 \x01(\x01\x12\x12\n\ninvestment\x18\x05 \x01(\x01\x12\x14\n\x0cprofit_asset\x18\x06 \x01(\t\"7\n\rArbitrageType\x12\n\n\x06SIMPLE\x10\x00\x12\x0e\n\nTRIANGULAR\x10\x01\x12\n\n\x06\x43IRCLE\x10\x02\"(\n\tAssetPair\x12\x0c\n\x04\x62\x61se\x18\x01 \x01(\t\x12\r\n\x05quote\x18\x02 \x01(\t\"H\n\nOrderBooks\x12\'\n\x03\x61ll\x18\x01 \x03(\x0b\x32\x1a.sansigmabuffers.OrderBook\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\"J\n\x11OrderBooksRequest\x12\x0c\n\x04\x62\x61se\x18\x01 \x01(\t\x12\r\n\x05quote\x18\x02 \x01(\t\x12\x18\n\x10\x65xclude_exchange\x18\x03 \x03(\t2`\n\x12OrderBookStreamApi\x12J\n\x0cGetOrderBook\x12\x1a.sansigmabuffers.AssetPair\x1a\x1a.sansigmabuffers.OrderBook\"\x00\x30\x01\x32\x65\n\rOrderBooksApi\x12T\n\rGetOrderBooks\x12\".sansigmabuffers.OrderBooksRequest\x1a\x1b.sansigmabuffers.OrderBooks\"\x00\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x11trade_model.proto\x12\x0fsansigmabuffers\"-\n\x0c\x42idAskSchema\x12\r\n\x05price\x18\x01 \x01(\x01\x12\x0e\n\x06\x61mount\x18\x02 \x01(\x01\"\xb7\x01\n\tOrderBook\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12\x0c\n\x04\x62\x61se\x18\x02 \x01(\t\x12\r\n\x05quote\x18\x03 \x01(\t\x12\x0e\n\x06symbol\x18\x04 \x01(\t\x12+\n\x04\x62ids\x18\x05 \x03(\x0b\x32\x1d.sansigmabuffers.BidAskSchema\x12+\n\x04\x61sks\x18\x06 \x03(\x0b\x32\x1d.sansigmabuffers.BidAskSchema\x12\x11\n\ttimestamp\x18\x07 \x01(\x03\"\xa6\x01\n\x06Spread\x12\x15\n\rlong_exchange\x18\x01 \x01(\t\x12\x16\n\x0eshort_exchange\x18\x02 \x01(\t\x12\x0c\n\x04\x62\x61se\x18\x03 \x01(\t\x12\r\n\x05quote\x18\x04 \x01(\t\x12\x13\n\x0bprofit_rate\x18\x05 \x01(\x01\x12\x0e\n\x06profit\x18\x06 \x01(\x01\x12\x11\n\ttimestamp\x18\x07 \x01(\x03\x12\x18\n\x10invested_capital\x18\x08 \x01(\x01\"\x95\x01\n\x05Trade\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x10\n\x08trade_id\x18\x02 \x01(\t\x12\x10\n\x08\x65xchange\x18\x03 \x01(\t\x12\x0c\n\x04\x62\x61se\x18\x04 \x01(\t\x12\r\n\x05quote\x18\x05 \x01(\t\x12\r\n\x05price\x18\x06 \x01(\x01\x12\x0e\n\x06\x61mount\x18\x07 \x01(\x01\x12\x11\n\ttimestamp\x18\x08 \x01(\x03\x12\x0c\n\x04side\x18\t \x01(\t\"\xcb\x01\n\nOrderPanel\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12\x0c\n\x04\x62\x61se\x18\x02 \x01(\t\x12\r\n\x05quote\x18\x03 \x01(\t\x12\x33\n\x04side\x18\x04 \x01(\x0e\x32%.sansigmabuffers.OrderPanel.OrderSide\x12\r\n\x05price\x18\x05 \x01(\x01\x12\x14\n\x0c\x64\x65pth_amount\x18\x06 \x01(\x01\x12\x14\n\x0corder_amount\x18\x07 \x01(\x01\"\x1e\n\tOrderSide\x12\x07\n\x03\x42UY\x10\x00\x12\x08\n\x04SELL\x10\x01\"\xf8\x01\n\tArbitrage\x12\x36\n\x04type\x18\x01 \x01(\x0e\x32(.sansigmabuffers.Arbitrage.ArbitrageType\x12+\n\x06orders\x18\x02 \x03(\x0b\x32\x1b.sansigmabuffers.OrderPanel\x12\x0e\n\x06profit\x18\x03 \x01(\x01\x12\x13\n\x0bprofit_rate\x18\x04 \x01(\x01\x12\x12\n\ninvestment\x18\x05 \x01(\x01\x12\x14\n\x0cprofit_asset\x18\x06 \x01(\t\"7\n\rArbitrageType\x12\n\n\x06SIMPLE\x10\x00\x12\x0e\n\nTRIANGULAR\x10\x01\x12\n\n\x06\x43IRCLE\x10\x02\"(\n\tAssetPair\x12\x0c\n\x04\x62\x61se\x18\x01 \x01(\t\x12\r\n\x05quote\x18\x02 \x01(\t\"H\n\nOrderBooks\x12\'\n\x03\x61ll\x18\x01 \x03(\x0b\x32\x1a.sansigmabuffers.OrderBook\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\"J\n\x11OrderBooksRequest\x12\x0c\n\x04\x62\x61se\x18\x01 \x01(\t\x12\r\n\x05quote\x18\x02 \x01(\t\x12\x18\n\x10\x65xclude_exchange\x18\x03 \x03(\t2`\n\x12OrderBookStreamApi\x12J\n\x0cGetOrderBook\x12\x1a.sansigmabuffers.AssetPair\x1a\x1a.sansigmabuffers.OrderBook\"\x00\x30\x01\x32\x65\n\rOrderBooksApi\x12T\n\rGetOrderBooks\x12\".sansigmabuffers.OrderBooksRequest\x1a\x1b.sansigmabuffers.OrderBooks\"\x00\x30\x01\x62\x06proto3')
 )
 
 
@@ -41,8 +41,8 @@ _ORDERPANEL_ORDERSIDE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=763,
-  serialized_end=793,
+  serialized_start=766,
+  serialized_end=796,
 )
 _sym_db.RegisterEnumDescriptor(_ORDERPANEL_ORDERSIDE)
 
@@ -67,8 +67,8 @@ _ARBITRAGE_ARBITRAGETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=989,
-  serialized_end=1044,
+  serialized_start=992,
+  serialized_end=1047,
 )
 _sym_db.RegisterEnumDescriptor(_ARBITRAGE_ARBITRAGETYPE)
 
@@ -140,30 +140,30 @@ _ORDERBOOK = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='bids', full_name='sansigmabuffers.OrderBook.bids', index=3,
-      number=4, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
+      name='symbol', full_name='sansigmabuffers.OrderBook.symbol', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='asks', full_name='sansigmabuffers.OrderBook.asks', index=4,
+      name='bids', full_name='sansigmabuffers.OrderBook.bids', index=4,
       number=5, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='timestamp', full_name='sansigmabuffers.OrderBook.timestamp', index=5,
-      number=6, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
+      name='asks', full_name='sansigmabuffers.OrderBook.asks', index=5,
+      number=6, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='key', full_name='sansigmabuffers.OrderBook.key', index=6,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='timestamp', full_name='sansigmabuffers.OrderBook.timestamp', index=6,
+      number=7, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -180,7 +180,7 @@ _ORDERBOOK = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=86,
-  serialized_end=266,
+  serialized_end=269,
 )
 
 
@@ -259,8 +259,8 @@ _SPREAD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=269,
-  serialized_end=435,
+  serialized_start=272,
+  serialized_end=438,
 )
 
 
@@ -346,8 +346,8 @@ _TRADE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=438,
-  serialized_end=587,
+  serialized_start=441,
+  serialized_end=590,
 )
 
 
@@ -420,8 +420,8 @@ _ORDERPANEL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=590,
-  serialized_end=793,
+  serialized_start=593,
+  serialized_end=796,
 )
 
 
@@ -487,8 +487,8 @@ _ARBITRAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=796,
-  serialized_end=1044,
+  serialized_start=799,
+  serialized_end=1047,
 )
 
 
@@ -525,8 +525,8 @@ _ASSETPAIR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1046,
-  serialized_end=1086,
+  serialized_start=1049,
+  serialized_end=1089,
 )
 
 
@@ -563,8 +563,8 @@ _ORDERBOOKS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1088,
-  serialized_end=1160,
+  serialized_start=1091,
+  serialized_end=1163,
 )
 
 
@@ -608,8 +608,8 @@ _ORDERBOOKSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1162,
-  serialized_end=1236,
+  serialized_start=1165,
+  serialized_end=1239,
 )
 
 _ORDERBOOK.fields_by_name['bids'].message_type = _BIDASKSCHEMA
@@ -702,8 +702,8 @@ _ORDERBOOKSTREAMAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=1238,
-  serialized_end=1334,
+  serialized_start=1241,
+  serialized_end=1337,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetOrderBook',
@@ -726,8 +726,8 @@ _ORDERBOOKSAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   serialized_options=None,
-  serialized_start=1336,
-  serialized_end=1437,
+  serialized_start=1339,
+  serialized_end=1440,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetOrderBooks',

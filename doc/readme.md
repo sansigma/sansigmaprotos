@@ -96,10 +96,10 @@
 | exchange | [string](#string) |  |  |
 | base | [string](#string) |  |  |
 | quote | [string](#string) |  |  |
+| symbol | [string](#string) |  |  |
 | bids | [BidAskSchema](#sansigmabuffers.BidAskSchema) | repeated |  |
 | asks | [BidAskSchema](#sansigmabuffers.BidAskSchema) | repeated |  |
 | timestamp | [int64](#int64) |  |  |
-| key | [string](#string) |  |  |
 
 
 
