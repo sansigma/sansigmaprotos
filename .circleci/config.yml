@@ -53,7 +53,7 @@ jobs:
           command: |
             git config user.email "doumintyu1017@gmail.com"
             git config user.name "Generator Bot"
-            git remote add upstream ${GITHUB_URL}
+            git remote add upstream https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git
       - run:
           name: git commit go-src
           command: |
@@ -74,7 +74,6 @@ jobs:
             git -C ../go-src status
             result=0
             git -C ../go-src commit -m "AUTO GENERATED [ci skip]" || result=$?
-            echo "result: ${result}"
             if [ $result -eq 0 ]; then
               git -C ../go-src push upstream generated/go 2> /dev/null
             fi
