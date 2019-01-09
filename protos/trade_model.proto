@@ -1,0 +1,95 @@
+syntax = "proto3";
+package sansigmabuffers;
+
+message BidAskSchema {
+    double price = 1;
+    double amount = 2;
+}
+
+message OrderBook {
+    string exchange = 1;
+    string base = 2;
+    string quote = 3;
+    repeated BidAskSchema bids = 4;
+    repeated BidAskSchema asks = 5;
+    int64 timestamp = 6;
+    string key = 7;
+}
+
+message Spread {
+    string long_exchange = 1;
+    string short_exchange = 2;
+    string base = 3;
+    string quote = 4;
+    double profit_rate = 5;
+    double profit = 6;
+    int64 timestamp = 7;
+    double invested_capital = 8;
+}
+
+message Trade {
+    string key = 1;
+    string trade_id = 2;
+    string exchange = 3;
+    string base = 4;
+    string quote = 5;
+    double price = 6;
+    double amount = 7;
+    int64 timestamp = 8;
+    string side = 9;
+}
+
+message OrderPanel {
+    enum OrderSide {
+        Buy = 0;
+        Sell = 1;
+    }
+
+    string exchange = 1;
+    string base = 2;
+    string quote = 3;
+    OrderSide side = 4;
+    double price = 5;
+    double depth_amount = 6;
+    double order_amount = 7;
+}
+
+message Arbitrage {
+    enum ArbitrageType {
+        Simple = 0;
+        Triangular = 1;
+        Circle = 2;
+    }
+    ArbitrageType type = 1;
+    repeated OrderPanel orders = 2;
+    double profit = 3;
+    double profit_rate = 4;
+    double investment = 5;
+    string profit_asset = 6;
+}
+
+service OrderBookStreamApi {
+    rpc GetOrderBook (AssetPair) returns (stream OrderBook) {
+    }
+}
+
+message AssetPair {
+    string base = 1;
+    string quote = 2;
+}
+
+message OrderBooks {
+    repeated OrderBook all = 1;
+    int64 timestamp = 2;
+}
+
+message OrderBooksRequest {
+    string base = 1;
+    string quote = 2;
+    repeated string exclude_exchange = 3;
+}
+
+service OrderBooksApi {
+    rpc GetOrderBooks (OrderBooksRequest) returns (stream OrderBooks) {
+    }
+}
