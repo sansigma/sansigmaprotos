@@ -15,7 +15,7 @@ class OrderBookStreamApiStub(object):
       channel: A grpc.Channel.
     """
     self.GetOrderBook = channel.unary_stream(
-        '/sansigmabuffers.OrderBookStreamApi/GetOrderBook',
+        '/sansigmaprotos.OrderBookStreamApi/GetOrderBook',
         request_serializer=trade__model__pb2.AssetPair.SerializeToString,
         response_deserializer=trade__model__pb2.OrderBook.FromString,
         )
@@ -42,7 +42,7 @@ def add_OrderBookStreamApiServicer_to_server(servicer, server):
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
-      'sansigmabuffers.OrderBookStreamApi', rpc_method_handlers)
+      'sansigmaprotos.OrderBookStreamApi', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -57,7 +57,7 @@ class OrderBooksApiStub(object):
       channel: A grpc.Channel.
     """
     self.GetOrderBooks = channel.unary_stream(
-        '/sansigmabuffers.OrderBooksApi/GetOrderBooks',
+        '/sansigmaprotos.OrderBooksApi/GetOrderBooks',
         request_serializer=trade__model__pb2.OrderBooksRequest.SerializeToString,
         response_deserializer=trade__model__pb2.OrderBooks.FromString,
         )
@@ -84,5 +84,5 @@ def add_OrderBooksApiServicer_to_server(servicer, server):
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
-      'sansigmabuffers.OrderBooksApi', rpc_method_handlers)
+      'sansigmaprotos.OrderBooksApi', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))

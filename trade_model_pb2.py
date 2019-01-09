@@ -16,17 +16,17 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='trade_model.proto',
-  package='sansigmabuffers',
+  package='sansigmaprotos',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x11trade_model.proto\x12\x0fsansigmabuffers\"-\n\x0c\x42idAskSchema\x12\r\n\x05price\x18\x01 \x01(\x01\x12\x0e\n\x06\x61mount\x18\x02 \x01(\x01\"\xb7\x01\n\tOrderBook\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12\x0c\n\x04\x62\x61se\x18\x02 \x01(\t\x12\r\n\x05quote\x18\x03 \x01(\t\x12\x0e\n\x06symbol\x18\x04 \x01(\t\x12+\n\x04\x62ids\x18\x05 \x03(\x0b\x32\x1d.sansigmabuffers.BidAskSchema\x12+\n\x04\x61sks\x18\x06 \x03(\x0b\x32\x1d.sansigmabuffers.BidAskSchema\x12\x11\n\ttimestamp\x18\x07 \x01(\x03\"\xa6\x01\n\x06Spread\x12\x15\n\rlong_exchange\x18\x01 \x01(\t\x12\x16\n\x0eshort_exchange\x18\x02 \x01(\t\x12\x0c\n\x04\x62\x61se\x18\x03 \x01(\t\x12\r\n\x05quote\x18\x04 \x01(\t\x12\x13\n\x0bprofit_rate\x18\x05 \x01(\x01\x12\x0e\n\x06profit\x18\x06 \x01(\x01\x12\x11\n\ttimestamp\x18\x07 \x01(\x03\x12\x18\n\x10invested_capital\x18\x08 \x01(\x01\"\x95\x01\n\x05Trade\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x10\n\x08trade_id\x18\x02 \x01(\t\x12\x10\n\x08\x65xchange\x18\x03 \x01(\t\x12\x0c\n\x04\x62\x61se\x18\x04 \x01(\t\x12\r\n\x05quote\x18\x05 \x01(\t\x12\r\n\x05price\x18\x06 \x01(\x01\x12\x0e\n\x06\x61mount\x18\x07 \x01(\x01\x12\x11\n\ttimestamp\x18\x08 \x01(\x03\x12\x0c\n\x04side\x18\t \x01(\t\"\xcb\x01\n\nOrderPanel\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12\x0c\n\x04\x62\x61se\x18\x02 \x01(\t\x12\r\n\x05quote\x18\x03 \x01(\t\x12\x33\n\x04side\x18\x04 \x01(\x0e\x32%.sansigmabuffers.OrderPanel.OrderSide\x12\r\n\x05price\x18\x05 \x01(\x01\x12\x14\n\x0c\x64\x65pth_amount\x18\x06 \x01(\x01\x12\x14\n\x0corder_amount\x18\x07 \x01(\x01\"\x1e\n\tOrderSide\x12\x07\n\x03\x42UY\x10\x00\x12\x08\n\x04SELL\x10\x01\"\xf8\x01\n\tArbitrage\x12\x36\n\x04type\x18\x01 \x01(\x0e\x32(.sansigmabuffers.Arbitrage.ArbitrageType\x12+\n\x06orders\x18\x02 \x03(\x0b\x32\x1b.sansigmabuffers.OrderPanel\x12\x0e\n\x06profit\x18\x03 \x01(\x01\x12\x13\n\x0bprofit_rate\x18\x04 \x01(\x01\x12\x12\n\ninvestment\x18\x05 \x01(\x01\x12\x14\n\x0cprofit_asset\x18\x06 \x01(\t\"7\n\rArbitrageType\x12\n\n\x06SIMPLE\x10\x00\x12\x0e\n\nTRIANGULAR\x10\x01\x12\n\n\x06\x43IRCLE\x10\x02\"(\n\tAssetPair\x12\x0c\n\x04\x62\x61se\x18\x01 \x01(\t\x12\r\n\x05quote\x18\x02 \x01(\t\"H\n\nOrderBooks\x12\'\n\x03\x61ll\x18\x01 \x03(\x0b\x32\x1a.sansigmabuffers.OrderBook\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\"J\n\x11OrderBooksRequest\x12\x0c\n\x04\x62\x61se\x18\x01 \x01(\t\x12\r\n\x05quote\x18\x02 \x01(\t\x12\x18\n\x10\x65xclude_exchange\x18\x03 \x03(\t2`\n\x12OrderBookStreamApi\x12J\n\x0cGetOrderBook\x12\x1a.sansigmabuffers.AssetPair\x1a\x1a.sansigmabuffers.OrderBook\"\x00\x30\x01\x32\x65\n\rOrderBooksApi\x12T\n\rGetOrderBooks\x12\".sansigmabuffers.OrderBooksRequest\x1a\x1b.sansigmabuffers.OrderBooks\"\x00\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x11trade_model.proto\x12\x0esansigmaprotos\"\'\n\x06\x42idAsk\x12\r\n\x05price\x18\x01 \x01(\x01\x12\x0e\n\x06\x61mount\x18\x02 \x01(\x01\"\xa9\x01\n\tOrderBook\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12\x0c\n\x04\x62\x61se\x18\x02 \x01(\t\x12\r\n\x05quote\x18\x03 \x01(\t\x12\x0e\n\x06symbol\x18\x04 \x01(\t\x12$\n\x04\x62ids\x18\x05 \x03(\x0b\x32\x16.sansigmaprotos.BidAsk\x12$\n\x04\x61sks\x18\x06 \x03(\x0b\x32\x16.sansigmaprotos.BidAsk\x12\x11\n\ttimestamp\x18\x07 \x01(\x03\"\xa6\x01\n\x06Spread\x12\x15\n\rlong_exchange\x18\x01 \x01(\t\x12\x16\n\x0eshort_exchange\x18\x02 \x01(\t\x12\x0c\n\x04\x62\x61se\x18\x03 \x01(\t\x12\r\n\x05quote\x18\x04 \x01(\t\x12\x13\n\x0bprofit_rate\x18\x05 \x01(\x01\x12\x0e\n\x06profit\x18\x06 \x01(\x01\x12\x11\n\ttimestamp\x18\x07 \x01(\x03\x12\x18\n\x10invested_capital\x18\x08 \x01(\x01\"\x95\x01\n\x05Trade\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x10\n\x08trade_id\x18\x02 \x01(\t\x12\x10\n\x08\x65xchange\x18\x03 \x01(\t\x12\x0c\n\x04\x62\x61se\x18\x04 \x01(\t\x12\r\n\x05quote\x18\x05 \x01(\t\x12\r\n\x05price\x18\x06 \x01(\x01\x12\x0e\n\x06\x61mount\x18\x07 \x01(\x01\x12\x11\n\ttimestamp\x18\x08 \x01(\x03\x12\x0c\n\x04side\x18\t \x01(\t\"\xca\x01\n\nOrderPanel\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12\x0c\n\x04\x62\x61se\x18\x02 \x01(\t\x12\r\n\x05quote\x18\x03 \x01(\t\x12\x32\n\x04side\x18\x04 \x01(\x0e\x32$.sansigmaprotos.OrderPanel.OrderSide\x12\r\n\x05price\x18\x05 \x01(\x01\x12\x14\n\x0c\x64\x65pth_amount\x18\x06 \x01(\x01\x12\x14\n\x0corder_amount\x18\x07 \x01(\x01\"\x1e\n\tOrderSide\x12\x07\n\x03\x42UY\x10\x00\x12\x08\n\x04SELL\x10\x01\"\xf6\x01\n\tArbitrage\x12\x35\n\x04type\x18\x01 \x01(\x0e\x32\'.sansigmaprotos.Arbitrage.ArbitrageType\x12*\n\x06orders\x18\x02 \x03(\x0b\x32\x1a.sansigmaprotos.OrderPanel\x12\x0e\n\x06profit\x18\x03 \x01(\x01\x12\x13\n\x0bprofit_rate\x18\x04 \x01(\x01\x12\x12\n\ninvestment\x18\x05 \x01(\x01\x12\x14\n\x0cprofit_asset\x18\x06 \x01(\t\"7\n\rArbitrageType\x12\n\n\x06SIMPLE\x10\x00\x12\x0e\n\nTRIANGULAR\x10\x01\x12\n\n\x06\x43IRCLE\x10\x02\"(\n\tAssetPair\x12\x0c\n\x04\x62\x61se\x18\x01 \x01(\t\x12\r\n\x05quote\x18\x02 \x01(\t\"G\n\nOrderBooks\x12&\n\x03\x61ll\x18\x01 \x03(\x0b\x32\x19.sansigmaprotos.OrderBook\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\"J\n\x11OrderBooksRequest\x12\x0c\n\x04\x62\x61se\x18\x01 \x01(\t\x12\r\n\x05quote\x18\x02 \x01(\t\x12\x18\n\x10\x65xclude_exchange\x18\x03 \x03(\t2^\n\x12OrderBookStreamApi\x12H\n\x0cGetOrderBook\x12\x19.sansigmaprotos.AssetPair\x1a\x19.sansigmaprotos.OrderBook\"\x00\x30\x01\x32\x63\n\rOrderBooksApi\x12R\n\rGetOrderBooks\x12!.sansigmaprotos.OrderBooksRequest\x1a\x1a.sansigmaprotos.OrderBooks\"\x00\x30\x01\x62\x06proto3')
 )
 
 
 
 _ORDERPANEL_ORDERSIDE = _descriptor.EnumDescriptor(
   name='OrderSide',
-  full_name='sansigmabuffers.OrderPanel.OrderSide',
+  full_name='sansigmaprotos.OrderPanel.OrderSide',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -41,14 +41,14 @@ _ORDERPANEL_ORDERSIDE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=766,
-  serialized_end=796,
+  serialized_start=744,
+  serialized_end=774,
 )
 _sym_db.RegisterEnumDescriptor(_ORDERPANEL_ORDERSIDE)
 
 _ARBITRAGE_ARBITRAGETYPE = _descriptor.EnumDescriptor(
   name='ArbitrageType',
-  full_name='sansigmabuffers.Arbitrage.ArbitrageType',
+  full_name='sansigmaprotos.Arbitrage.ArbitrageType',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -67,28 +67,28 @@ _ARBITRAGE_ARBITRAGETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=992,
-  serialized_end=1047,
+  serialized_start=968,
+  serialized_end=1023,
 )
 _sym_db.RegisterEnumDescriptor(_ARBITRAGE_ARBITRAGETYPE)
 
 
-_BIDASKSCHEMA = _descriptor.Descriptor(
-  name='BidAskSchema',
-  full_name='sansigmabuffers.BidAskSchema',
+_BIDASK = _descriptor.Descriptor(
+  name='BidAsk',
+  full_name='sansigmaprotos.BidAsk',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='price', full_name='sansigmabuffers.BidAskSchema.price', index=0,
+      name='price', full_name='sansigmaprotos.BidAsk.price', index=0,
       number=1, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='amount', full_name='sansigmabuffers.BidAskSchema.amount', index=1,
+      name='amount', full_name='sansigmaprotos.BidAsk.amount', index=1,
       number=2, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
@@ -106,62 +106,62 @@ _BIDASKSCHEMA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=38,
-  serialized_end=83,
+  serialized_start=37,
+  serialized_end=76,
 )
 
 
 _ORDERBOOK = _descriptor.Descriptor(
   name='OrderBook',
-  full_name='sansigmabuffers.OrderBook',
+  full_name='sansigmaprotos.OrderBook',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='exchange', full_name='sansigmabuffers.OrderBook.exchange', index=0,
+      name='exchange', full_name='sansigmaprotos.OrderBook.exchange', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='base', full_name='sansigmabuffers.OrderBook.base', index=1,
+      name='base', full_name='sansigmaprotos.OrderBook.base', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='quote', full_name='sansigmabuffers.OrderBook.quote', index=2,
+      name='quote', full_name='sansigmaprotos.OrderBook.quote', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='symbol', full_name='sansigmabuffers.OrderBook.symbol', index=3,
+      name='symbol', full_name='sansigmaprotos.OrderBook.symbol', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='bids', full_name='sansigmabuffers.OrderBook.bids', index=4,
+      name='bids', full_name='sansigmaprotos.OrderBook.bids', index=4,
       number=5, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='asks', full_name='sansigmabuffers.OrderBook.asks', index=5,
+      name='asks', full_name='sansigmaprotos.OrderBook.asks', index=5,
       number=6, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='timestamp', full_name='sansigmabuffers.OrderBook.timestamp', index=6,
+      name='timestamp', full_name='sansigmaprotos.OrderBook.timestamp', index=6,
       number=7, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -179,69 +179,69 @@ _ORDERBOOK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=86,
-  serialized_end=269,
+  serialized_start=79,
+  serialized_end=248,
 )
 
 
 _SPREAD = _descriptor.Descriptor(
   name='Spread',
-  full_name='sansigmabuffers.Spread',
+  full_name='sansigmaprotos.Spread',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='long_exchange', full_name='sansigmabuffers.Spread.long_exchange', index=0,
+      name='long_exchange', full_name='sansigmaprotos.Spread.long_exchange', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='short_exchange', full_name='sansigmabuffers.Spread.short_exchange', index=1,
+      name='short_exchange', full_name='sansigmaprotos.Spread.short_exchange', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='base', full_name='sansigmabuffers.Spread.base', index=2,
+      name='base', full_name='sansigmaprotos.Spread.base', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='quote', full_name='sansigmabuffers.Spread.quote', index=3,
+      name='quote', full_name='sansigmaprotos.Spread.quote', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='profit_rate', full_name='sansigmabuffers.Spread.profit_rate', index=4,
+      name='profit_rate', full_name='sansigmaprotos.Spread.profit_rate', index=4,
       number=5, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='profit', full_name='sansigmabuffers.Spread.profit', index=5,
+      name='profit', full_name='sansigmaprotos.Spread.profit', index=5,
       number=6, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='timestamp', full_name='sansigmabuffers.Spread.timestamp', index=6,
+      name='timestamp', full_name='sansigmaprotos.Spread.timestamp', index=6,
       number=7, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='invested_capital', full_name='sansigmabuffers.Spread.invested_capital', index=7,
+      name='invested_capital', full_name='sansigmaprotos.Spread.invested_capital', index=7,
       number=8, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
@@ -259,76 +259,76 @@ _SPREAD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=272,
-  serialized_end=438,
+  serialized_start=251,
+  serialized_end=417,
 )
 
 
 _TRADE = _descriptor.Descriptor(
   name='Trade',
-  full_name='sansigmabuffers.Trade',
+  full_name='sansigmaprotos.Trade',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='sansigmabuffers.Trade.key', index=0,
+      name='key', full_name='sansigmaprotos.Trade.key', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='trade_id', full_name='sansigmabuffers.Trade.trade_id', index=1,
+      name='trade_id', full_name='sansigmaprotos.Trade.trade_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='exchange', full_name='sansigmabuffers.Trade.exchange', index=2,
+      name='exchange', full_name='sansigmaprotos.Trade.exchange', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='base', full_name='sansigmabuffers.Trade.base', index=3,
+      name='base', full_name='sansigmaprotos.Trade.base', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='quote', full_name='sansigmabuffers.Trade.quote', index=4,
+      name='quote', full_name='sansigmaprotos.Trade.quote', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='price', full_name='sansigmabuffers.Trade.price', index=5,
+      name='price', full_name='sansigmaprotos.Trade.price', index=5,
       number=6, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='amount', full_name='sansigmabuffers.Trade.amount', index=6,
+      name='amount', full_name='sansigmaprotos.Trade.amount', index=6,
       number=7, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='timestamp', full_name='sansigmabuffers.Trade.timestamp', index=7,
+      name='timestamp', full_name='sansigmaprotos.Trade.timestamp', index=7,
       number=8, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='side', full_name='sansigmabuffers.Trade.side', index=8,
+      name='side', full_name='sansigmaprotos.Trade.side', index=8,
       number=9, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -346,62 +346,62 @@ _TRADE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=441,
-  serialized_end=590,
+  serialized_start=420,
+  serialized_end=569,
 )
 
 
 _ORDERPANEL = _descriptor.Descriptor(
   name='OrderPanel',
-  full_name='sansigmabuffers.OrderPanel',
+  full_name='sansigmaprotos.OrderPanel',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='exchange', full_name='sansigmabuffers.OrderPanel.exchange', index=0,
+      name='exchange', full_name='sansigmaprotos.OrderPanel.exchange', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='base', full_name='sansigmabuffers.OrderPanel.base', index=1,
+      name='base', full_name='sansigmaprotos.OrderPanel.base', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='quote', full_name='sansigmabuffers.OrderPanel.quote', index=2,
+      name='quote', full_name='sansigmaprotos.OrderPanel.quote', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='side', full_name='sansigmabuffers.OrderPanel.side', index=3,
+      name='side', full_name='sansigmaprotos.OrderPanel.side', index=3,
       number=4, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='price', full_name='sansigmabuffers.OrderPanel.price', index=4,
+      name='price', full_name='sansigmaprotos.OrderPanel.price', index=4,
       number=5, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='depth_amount', full_name='sansigmabuffers.OrderPanel.depth_amount', index=5,
+      name='depth_amount', full_name='sansigmaprotos.OrderPanel.depth_amount', index=5,
       number=6, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='order_amount', full_name='sansigmabuffers.OrderPanel.order_amount', index=6,
+      name='order_amount', full_name='sansigmaprotos.OrderPanel.order_amount', index=6,
       number=7, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
@@ -420,55 +420,55 @@ _ORDERPANEL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=593,
-  serialized_end=796,
+  serialized_start=572,
+  serialized_end=774,
 )
 
 
 _ARBITRAGE = _descriptor.Descriptor(
   name='Arbitrage',
-  full_name='sansigmabuffers.Arbitrage',
+  full_name='sansigmaprotos.Arbitrage',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='type', full_name='sansigmabuffers.Arbitrage.type', index=0,
+      name='type', full_name='sansigmaprotos.Arbitrage.type', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='orders', full_name='sansigmabuffers.Arbitrage.orders', index=1,
+      name='orders', full_name='sansigmaprotos.Arbitrage.orders', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='profit', full_name='sansigmabuffers.Arbitrage.profit', index=2,
+      name='profit', full_name='sansigmaprotos.Arbitrage.profit', index=2,
       number=3, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='profit_rate', full_name='sansigmabuffers.Arbitrage.profit_rate', index=3,
+      name='profit_rate', full_name='sansigmaprotos.Arbitrage.profit_rate', index=3,
       number=4, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='investment', full_name='sansigmabuffers.Arbitrage.investment', index=4,
+      name='investment', full_name='sansigmaprotos.Arbitrage.investment', index=4,
       number=5, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='profit_asset', full_name='sansigmabuffers.Arbitrage.profit_asset', index=5,
+      name='profit_asset', full_name='sansigmaprotos.Arbitrage.profit_asset', index=5,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -487,27 +487,27 @@ _ARBITRAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=799,
-  serialized_end=1047,
+  serialized_start=777,
+  serialized_end=1023,
 )
 
 
 _ASSETPAIR = _descriptor.Descriptor(
   name='AssetPair',
-  full_name='sansigmabuffers.AssetPair',
+  full_name='sansigmaprotos.AssetPair',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='base', full_name='sansigmabuffers.AssetPair.base', index=0,
+      name='base', full_name='sansigmaprotos.AssetPair.base', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='quote', full_name='sansigmabuffers.AssetPair.quote', index=1,
+      name='quote', full_name='sansigmaprotos.AssetPair.quote', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -525,27 +525,27 @@ _ASSETPAIR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1049,
-  serialized_end=1089,
+  serialized_start=1025,
+  serialized_end=1065,
 )
 
 
 _ORDERBOOKS = _descriptor.Descriptor(
   name='OrderBooks',
-  full_name='sansigmabuffers.OrderBooks',
+  full_name='sansigmaprotos.OrderBooks',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='all', full_name='sansigmabuffers.OrderBooks.all', index=0,
+      name='all', full_name='sansigmaprotos.OrderBooks.all', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='timestamp', full_name='sansigmabuffers.OrderBooks.timestamp', index=1,
+      name='timestamp', full_name='sansigmaprotos.OrderBooks.timestamp', index=1,
       number=2, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -563,34 +563,34 @@ _ORDERBOOKS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1091,
-  serialized_end=1163,
+  serialized_start=1067,
+  serialized_end=1138,
 )
 
 
 _ORDERBOOKSREQUEST = _descriptor.Descriptor(
   name='OrderBooksRequest',
-  full_name='sansigmabuffers.OrderBooksRequest',
+  full_name='sansigmaprotos.OrderBooksRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='base', full_name='sansigmabuffers.OrderBooksRequest.base', index=0,
+      name='base', full_name='sansigmaprotos.OrderBooksRequest.base', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='quote', full_name='sansigmabuffers.OrderBooksRequest.quote', index=1,
+      name='quote', full_name='sansigmaprotos.OrderBooksRequest.quote', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='exclude_exchange', full_name='sansigmabuffers.OrderBooksRequest.exclude_exchange', index=2,
+      name='exclude_exchange', full_name='sansigmaprotos.OrderBooksRequest.exclude_exchange', index=2,
       number=3, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -608,19 +608,19 @@ _ORDERBOOKSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1165,
-  serialized_end=1239,
+  serialized_start=1140,
+  serialized_end=1214,
 )
 
-_ORDERBOOK.fields_by_name['bids'].message_type = _BIDASKSCHEMA
-_ORDERBOOK.fields_by_name['asks'].message_type = _BIDASKSCHEMA
+_ORDERBOOK.fields_by_name['bids'].message_type = _BIDASK
+_ORDERBOOK.fields_by_name['asks'].message_type = _BIDASK
 _ORDERPANEL.fields_by_name['side'].enum_type = _ORDERPANEL_ORDERSIDE
 _ORDERPANEL_ORDERSIDE.containing_type = _ORDERPANEL
 _ARBITRAGE.fields_by_name['type'].enum_type = _ARBITRAGE_ARBITRAGETYPE
 _ARBITRAGE.fields_by_name['orders'].message_type = _ORDERPANEL
 _ARBITRAGE_ARBITRAGETYPE.containing_type = _ARBITRAGE
 _ORDERBOOKS.fields_by_name['all'].message_type = _ORDERBOOK
-DESCRIPTOR.message_types_by_name['BidAskSchema'] = _BIDASKSCHEMA
+DESCRIPTOR.message_types_by_name['BidAsk'] = _BIDASK
 DESCRIPTOR.message_types_by_name['OrderBook'] = _ORDERBOOK
 DESCRIPTOR.message_types_by_name['Spread'] = _SPREAD
 DESCRIPTOR.message_types_by_name['Trade'] = _TRADE
@@ -631,66 +631,66 @@ DESCRIPTOR.message_types_by_name['OrderBooks'] = _ORDERBOOKS
 DESCRIPTOR.message_types_by_name['OrderBooksRequest'] = _ORDERBOOKSREQUEST
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-BidAskSchema = _reflection.GeneratedProtocolMessageType('BidAskSchema', (_message.Message,), dict(
-  DESCRIPTOR = _BIDASKSCHEMA,
+BidAsk = _reflection.GeneratedProtocolMessageType('BidAsk', (_message.Message,), dict(
+  DESCRIPTOR = _BIDASK,
   __module__ = 'trade_model_pb2'
-  # @@protoc_insertion_point(class_scope:sansigmabuffers.BidAskSchema)
+  # @@protoc_insertion_point(class_scope:sansigmaprotos.BidAsk)
   ))
-_sym_db.RegisterMessage(BidAskSchema)
+_sym_db.RegisterMessage(BidAsk)
 
 OrderBook = _reflection.GeneratedProtocolMessageType('OrderBook', (_message.Message,), dict(
   DESCRIPTOR = _ORDERBOOK,
   __module__ = 'trade_model_pb2'
-  # @@protoc_insertion_point(class_scope:sansigmabuffers.OrderBook)
+  # @@protoc_insertion_point(class_scope:sansigmaprotos.OrderBook)
   ))
 _sym_db.RegisterMessage(OrderBook)
 
 Spread = _reflection.GeneratedProtocolMessageType('Spread', (_message.Message,), dict(
   DESCRIPTOR = _SPREAD,
   __module__ = 'trade_model_pb2'
-  # @@protoc_insertion_point(class_scope:sansigmabuffers.Spread)
+  # @@protoc_insertion_point(class_scope:sansigmaprotos.Spread)
   ))
 _sym_db.RegisterMessage(Spread)
 
 Trade = _reflection.GeneratedProtocolMessageType('Trade', (_message.Message,), dict(
   DESCRIPTOR = _TRADE,
   __module__ = 'trade_model_pb2'
-  # @@protoc_insertion_point(class_scope:sansigmabuffers.Trade)
+  # @@protoc_insertion_point(class_scope:sansigmaprotos.Trade)
   ))
 _sym_db.RegisterMessage(Trade)
 
 OrderPanel = _reflection.GeneratedProtocolMessageType('OrderPanel', (_message.Message,), dict(
   DESCRIPTOR = _ORDERPANEL,
   __module__ = 'trade_model_pb2'
-  # @@protoc_insertion_point(class_scope:sansigmabuffers.OrderPanel)
+  # @@protoc_insertion_point(class_scope:sansigmaprotos.OrderPanel)
   ))
 _sym_db.RegisterMessage(OrderPanel)
 
 Arbitrage = _reflection.GeneratedProtocolMessageType('Arbitrage', (_message.Message,), dict(
   DESCRIPTOR = _ARBITRAGE,
   __module__ = 'trade_model_pb2'
-  # @@protoc_insertion_point(class_scope:sansigmabuffers.Arbitrage)
+  # @@protoc_insertion_point(class_scope:sansigmaprotos.Arbitrage)
   ))
 _sym_db.RegisterMessage(Arbitrage)
 
 AssetPair = _reflection.GeneratedProtocolMessageType('AssetPair', (_message.Message,), dict(
   DESCRIPTOR = _ASSETPAIR,
   __module__ = 'trade_model_pb2'
-  # @@protoc_insertion_point(class_scope:sansigmabuffers.AssetPair)
+  # @@protoc_insertion_point(class_scope:sansigmaprotos.AssetPair)
   ))
 _sym_db.RegisterMessage(AssetPair)
 
 OrderBooks = _reflection.GeneratedProtocolMessageType('OrderBooks', (_message.Message,), dict(
   DESCRIPTOR = _ORDERBOOKS,
   __module__ = 'trade_model_pb2'
-  # @@protoc_insertion_point(class_scope:sansigmabuffers.OrderBooks)
+  # @@protoc_insertion_point(class_scope:sansigmaprotos.OrderBooks)
   ))
 _sym_db.RegisterMessage(OrderBooks)
 
 OrderBooksRequest = _reflection.GeneratedProtocolMessageType('OrderBooksRequest', (_message.Message,), dict(
   DESCRIPTOR = _ORDERBOOKSREQUEST,
   __module__ = 'trade_model_pb2'
-  # @@protoc_insertion_point(class_scope:sansigmabuffers.OrderBooksRequest)
+  # @@protoc_insertion_point(class_scope:sansigmaprotos.OrderBooksRequest)
   ))
 _sym_db.RegisterMessage(OrderBooksRequest)
 
@@ -698,16 +698,16 @@ _sym_db.RegisterMessage(OrderBooksRequest)
 
 _ORDERBOOKSTREAMAPI = _descriptor.ServiceDescriptor(
   name='OrderBookStreamApi',
-  full_name='sansigmabuffers.OrderBookStreamApi',
+  full_name='sansigmaprotos.OrderBookStreamApi',
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=1241,
-  serialized_end=1337,
+  serialized_start=1216,
+  serialized_end=1310,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetOrderBook',
-    full_name='sansigmabuffers.OrderBookStreamApi.GetOrderBook',
+    full_name='sansigmaprotos.OrderBookStreamApi.GetOrderBook',
     index=0,
     containing_service=None,
     input_type=_ASSETPAIR,
@@ -722,16 +722,16 @@ DESCRIPTOR.services_by_name['OrderBookStreamApi'] = _ORDERBOOKSTREAMAPI
 
 _ORDERBOOKSAPI = _descriptor.ServiceDescriptor(
   name='OrderBooksApi',
-  full_name='sansigmabuffers.OrderBooksApi',
+  full_name='sansigmaprotos.OrderBooksApi',
   file=DESCRIPTOR,
   index=1,
   serialized_options=None,
-  serialized_start=1339,
-  serialized_end=1440,
+  serialized_start=1312,
+  serialized_end=1411,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetOrderBooks',
-    full_name='sansigmabuffers.OrderBooksApi.GetOrderBooks',
+    full_name='sansigmaprotos.OrderBooksApi.GetOrderBooks',
     index=0,
     containing_service=None,
     input_type=_ORDERBOOKSREQUEST,
