@@ -14,7 +14,7 @@ CircleCI で python, go, typescript の gRPC コードを生成するテンプ�
 https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git
 ```
 
-`GH_TOKEN`: [Github Personal Token](https://github.com/settings/developers) から取得
+`GH_TOKEN`: [Github Personal Token](https://github.com/settings/tokens) から取得
 
 ### コード生成
 
