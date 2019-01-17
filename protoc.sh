@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#typescript コード生成用 スクリプト
 
 set -eu
 
