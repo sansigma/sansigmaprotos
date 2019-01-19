@@ -132,7 +132,7 @@
 | ----- | ---- | ----- | ----------- |
 | base | [string](#string) |  |  |
 | quote | [string](#string) |  |  |
-| exclude_exchange | [string](#string) | repeated |  |
+| exchanges | [string](#string) | repeated |  |
 
 
 
