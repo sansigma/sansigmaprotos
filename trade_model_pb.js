@@ -2273,7 +2273,7 @@ proto.sansigmaprotos.OrderBooksRequest.toObject = function(includeInstance, msg)
   var f, obj = {
     base: jspb.Message.getFieldWithDefault(msg, 1, ""),
     quote: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    excludeExchangeList: jspb.Message.getRepeatedField(msg, 3)
+    exchangesList: jspb.Message.getRepeatedField(msg, 3)
   };
 
   if (includeInstance) {
@@ -2320,7 +2320,7 @@ proto.sansigmaprotos.OrderBooksRequest.deserializeBinaryFromReader = function(ms
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.addExcludeExchange(value);
+      msg.addExchanges(value);
       break;
     default:
       reader.skipField();
@@ -2365,7 +2365,7 @@ proto.sansigmaprotos.OrderBooksRequest.serializeBinaryToWriter = function(messag
       f
     );
   }
-  f = message.getExcludeExchangeList();
+  f = message.getExchangesList();
   if (f.length > 0) {
     writer.writeRepeatedString(
       3,
@@ -2406,16 +2406,16 @@ proto.sansigmaprotos.OrderBooksRequest.prototype.setQuote = function(value) {
 
 
 /**
- * repeated string exclude_exchange = 3;
+ * repeated string exchanges = 3;
  * @return {!Array<string>}
  */
-proto.sansigmaprotos.OrderBooksRequest.prototype.getExcludeExchangeList = function() {
+proto.sansigmaprotos.OrderBooksRequest.prototype.getExchangesList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
 };
 
 
 /** @param {!Array<string>} value */
-proto.sansigmaprotos.OrderBooksRequest.prototype.setExcludeExchangeList = function(value) {
+proto.sansigmaprotos.OrderBooksRequest.prototype.setExchangesList = function(value) {
   jspb.Message.setField(this, 3, value || []);
 };
 
@@ -2424,13 +2424,13 @@ proto.sansigmaprotos.OrderBooksRequest.prototype.setExcludeExchangeList = functi
  * @param {!string} value
  * @param {number=} opt_index
  */
-proto.sansigmaprotos.OrderBooksRequest.prototype.addExcludeExchange = function(value, opt_index) {
+proto.sansigmaprotos.OrderBooksRequest.prototype.addExchanges = function(value, opt_index) {
   jspb.Message.addToRepeatedField(this, 3, value, opt_index);
 };
 
 
-proto.sansigmaprotos.OrderBooksRequest.prototype.clearExcludeExchangeList = function() {
-  this.setExcludeExchangeList([]);
+proto.sansigmaprotos.OrderBooksRequest.prototype.clearExchangesList = function() {
+  this.setExchangesList([]);
 };
 
 

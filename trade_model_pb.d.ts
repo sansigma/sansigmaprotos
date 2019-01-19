@@ -91,8 +91,8 @@ export class OrderBooksRequest {
   setBase(a: string): void;
   getQuote(): string;
   setQuote(a: string): void;
-  getExcludeExchangeList(): string[];
-  setExcludeExchangeList(a: string[]): void;
+  getExchangesList(): string[];
+  setExchangesList(a: string[]): void;
   toObject(): OrderBooksRequest.AsObject;
   serializeBinary(): Uint8Array;
   static deserializeBinary: (bytes: {}) => OrderBooksRequest;
@@ -102,7 +102,7 @@ export namespace OrderBooksRequest {
   export type AsObject = {
     Base: string;
     Quote: string;
-    ExcludeExchangeList: string[];
+    ExchangesList: string[];
   }
 }
 
