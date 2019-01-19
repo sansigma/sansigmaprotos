@@ -86,7 +86,7 @@ message OrderBooks {
 message OrderBooksRequest {
     string base = 1;
     string quote = 2;
-    repeated string exclude_exchange = 3;
+    repeated string exchanges = 3;
 }
 
 service OrderBooksApi {
