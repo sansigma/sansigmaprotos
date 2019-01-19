@@ -341,10 +341,10 @@ export class OrderBooksRequest extends jspb.Message {
     getQuote(): string;
     setQuote(value: string): void;
 
-    clearExcludeExchangeList(): void;
-    getExcludeExchangeList(): Array<string>;
-    setExcludeExchangeList(value: Array<string>): void;
-    addExcludeExchange(value: string, index?: number): string;
+    clearExchangesList(): void;
+    getExchangesList(): Array<string>;
+    setExchangesList(value: Array<string>): void;
+    addExchanges(value: string, index?: number): string;
 
 
     serializeBinary(): Uint8Array;
@@ -361,6 +361,6 @@ export namespace OrderBooksRequest {
     export type AsObject = {
         base: string,
         quote: string,
-        excludeExchangeList: Array<string>,
+        exchangesList: Array<string>,
     }
 }
