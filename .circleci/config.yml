@@ -154,11 +154,7 @@ workflows:
   version: 2
   build_and_push:
     jobs:
-    - lint:
-        filters:
-          branches:
-            only:
-            - master
+    - lint
     - build:
         requires:
           - lint
