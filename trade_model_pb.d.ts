@@ -129,8 +129,8 @@ export namespace Spread {
 }
 
 export class Trade extends jspb.Message { 
-    getKey(): string;
-    setKey(value: string): void;
+    getSymbol(): string;
+    setSymbol(value: string): void;
 
     getTradeId(): string;
     setTradeId(value: string): void;
@@ -169,7 +169,7 @@ export class Trade extends jspb.Message {
 
 export namespace Trade {
     export type AsObject = {
-        key: string,
+        symbol: string,
         tradeId: string,
         exchange: string,
         base: string,
@@ -282,28 +282,36 @@ export namespace Arbitrage {
 
 }
 
-export class AssetPair extends jspb.Message { 
+export class Market extends jspb.Message { 
     getBase(): string;
     setBase(value: string): void;
 
     getQuote(): string;
     setQuote(value: string): void;
 
+    getSymbol(): string;
+    setSymbol(value: string): void;
+
+    getExchange(): string;
+    setExchange(value: string): void;
+
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): AssetPair.AsObject;
-    static toObject(includeInstance: boolean, msg: AssetPair): AssetPair.AsObject;
+    toObject(includeInstance?: boolean): Market.AsObject;
+    static toObject(includeInstance: boolean, msg: Market): Market.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: AssetPair, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): AssetPair;
-    static deserializeBinaryFromReader(message: AssetPair, reader: jspb.BinaryReader): AssetPair;
+    static serializeBinaryToWriter(message: Market, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): Market;
+    static deserializeBinaryFromReader(message: Market, reader: jspb.BinaryReader): Market;
 }
 
-export namespace AssetPair {
+export namespace Market {
     export type AsObject = {
         base: string,
         quote: string,
+        symbol: string,
+        exchange: string,
     }
 }
 
@@ -362,5 +370,85 @@ export namespace OrderBooksRequest {
         base: string,
         quote: string,
         exchangesList: Array<string>,
+    }
+}
+
+export class GetTradesRequest extends jspb.Message { 
+    getWindowingSize(): number;
+    setWindowingSize(value: number): void;
+
+    clearMarketsList(): void;
+    getMarketsList(): Array<Market>;
+    setMarketsList(value: Array<Market>): void;
+    addMarkets(value?: Market, index?: number): Market;
+
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetTradesRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetTradesRequest): GetTradesRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetTradesRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetTradesRequest;
+    static deserializeBinaryFromReader(message: GetTradesRequest, reader: jspb.BinaryReader): GetTradesRequest;
+}
+
+export namespace GetTradesRequest {
+    export type AsObject = {
+        windowingSize: number,
+        marketsList: Array<Market.AsObject>,
+    }
+}
+
+export class TradesWithMarket extends jspb.Message { 
+
+    hasMarket(): boolean;
+    clearMarket(): void;
+    getMarket(): Market | undefined;
+    setMarket(value?: Market): void;
+
+    clearTradesList(): void;
+    getTradesList(): Array<Trade>;
+    setTradesList(value: Array<Trade>): void;
+    addTrades(value?: Trade, index?: number): Trade;
+
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): TradesWithMarket.AsObject;
+    static toObject(includeInstance: boolean, msg: TradesWithMarket): TradesWithMarket.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: TradesWithMarket, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): TradesWithMarket;
+    static deserializeBinaryFromReader(message: TradesWithMarket, reader: jspb.BinaryReader): TradesWithMarket;
+}
+
+export namespace TradesWithMarket {
+    export type AsObject = {
+        market?: Market.AsObject,
+        tradesList: Array<Trade.AsObject>,
+    }
+}
+
+export class GetTradesResponse extends jspb.Message { 
+    clearTradesWithMarketList(): void;
+    getTradesWithMarketList(): Array<TradesWithMarket>;
+    setTradesWithMarketList(value: Array<TradesWithMarket>): void;
+    addTradesWithMarket(value?: TradesWithMarket, index?: number): TradesWithMarket;
+
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetTradesResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetTradesResponse): GetTradesResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetTradesResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetTradesResponse;
+    static deserializeBinaryFromReader(message: GetTradesResponse, reader: jspb.BinaryReader): GetTradesResponse;
+}
+
+export namespace GetTradesResponse {
+    export type AsObject = {
+        tradesWithMarketList: Array<TradesWithMarket.AsObject>,
     }
 }
