@@ -5,21 +5,25 @@
 
 - [trade_model.proto](#trade_model.proto)
     - [Arbitrage](#sansigmaprotos.Arbitrage)
-    - [AssetPair](#sansigmaprotos.AssetPair)
     - [BidAsk](#sansigmaprotos.BidAsk)
+    - [GetTradesRequest](#sansigmaprotos.GetTradesRequest)
+    - [GetTradesResponse](#sansigmaprotos.GetTradesResponse)
+    - [Market](#sansigmaprotos.Market)
     - [OrderBook](#sansigmaprotos.OrderBook)
     - [OrderBooks](#sansigmaprotos.OrderBooks)
     - [OrderBooksRequest](#sansigmaprotos.OrderBooksRequest)
     - [OrderPanel](#sansigmaprotos.OrderPanel)
     - [Spread](#sansigmaprotos.Spread)
     - [Trade](#sansigmaprotos.Trade)
+    - [TradesWithMarket](#sansigmaprotos.TradesWithMarket)
   
     - [Arbitrage.ArbitrageType](#sansigmaprotos.Arbitrage.ArbitrageType)
     - [OrderPanel.OrderSide](#sansigmaprotos.OrderPanel.OrderSide)
   
   
+    - [HubApi](#sansigmaprotos.HubApi)
     - [OrderBookStreamApi](#sansigmaprotos.OrderBookStreamApi)
-    - [OrderBooksApi](#sansigmaprotos.OrderBooksApi)
+    - [TradeStreamApi](#sansigmaprotos.TradeStreamApi)
   
 
 - [Scalar Value Types](#scalar-value-types)
@@ -53,22 +57,6 @@
 
 
 
-<a name="sansigmaprotos.AssetPair"></a>
-
-### AssetPair
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| base | [string](#string) |  |  |
-| quote | [string](#string) |  |  |
-
-
-
-
-
-
 <a name="sansigmaprotos.BidAsk"></a>
 
 ### BidAsk
@@ -79,6 +67,55 @@
 | ----- | ---- | ----- | ----------- |
 | price | [double](#double) |  |  |
 | amount | [double](#double) |  |  |
+
+
+
+
+
+
+<a name="sansigmaprotos.GetTradesRequest"></a>
+
+### GetTradesRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| windowing_size | [int64](#int64) |  | unit is seconds |
+| markets | [Market](#sansigmaprotos.Market) | repeated |  |
+
+
+
+
+
+
+<a name="sansigmaprotos.GetTradesResponse"></a>
+
+### GetTradesResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| trades_with_market | [TradesWithMarket](#sansigmaprotos.TradesWithMarket) | repeated |  |
+
+
+
+
+
+
+<a name="sansigmaprotos.Market"></a>
+
+### Market
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| base | [string](#string) |  |  |
+| quote | [string](#string) |  |  |
+| symbol | [string](#string) |  |  |
+| exchange | [string](#string) |  |  |
 
 
 
@@ -190,7 +227,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
+| symbol | [string](#string) |  |  |
 | trade_id | [string](#string) |  |  |
 | exchange | [string](#string) |  |  |
 | base | [string](#string) |  |  |
@@ -199,6 +236,22 @@
 | amount | [double](#double) |  |  |
 | timestamp | [int64](#int64) |  |  |
 | side | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="sansigmaprotos.TradesWithMarket"></a>
+
+### TradesWithMarket
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| market | [Market](#sansigmaprotos.Market) |  |  |
+| trades | [Trade](#sansigmaprotos.Trade) | repeated |  |
 
 
 
@@ -236,6 +289,17 @@
  
 
 
+<a name="sansigmaprotos.HubApi"></a>
+
+### HubApi
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| GetOrderBooks | [OrderBooksRequest](#sansigmaprotos.OrderBooksRequest) | [OrderBooks](#sansigmaprotos.OrderBooks) stream |  |
+| GetTrades | [GetTradesRequest](#sansigmaprotos.GetTradesRequest) | [GetTradesResponse](#sansigmaprotos.GetTradesResponse) stream |  |
+
+
 <a name="sansigmaprotos.OrderBookStreamApi"></a>
 
 ### OrderBookStreamApi
@@ -243,17 +307,17 @@
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetOrderBook | [AssetPair](#sansigmaprotos.AssetPair) | [OrderBook](#sansigmaprotos.OrderBook) stream |  |
+| GetOrderBook | [Market](#sansigmaprotos.Market) | [OrderBook](#sansigmaprotos.OrderBook) stream |  |
 
 
-<a name="sansigmaprotos.OrderBooksApi"></a>
+<a name="sansigmaprotos.TradeStreamApi"></a>
 
-### OrderBooksApi
+### TradeStreamApi
 
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetOrderBooks | [OrderBooksRequest](#sansigmaprotos.OrderBooksRequest) | [OrderBooks](#sansigmaprotos.OrderBooks) stream |  |
+| GetTrade | [Market](#sansigmaprotos.Market) | [Trade](#sansigmaprotos.Trade) stream |  |
 
  
 
