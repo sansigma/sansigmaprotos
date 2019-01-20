@@ -16,12 +16,49 @@ export namespace BidAsk {
   }
 }
 
+export class GetOrderBooksRequest {
+  constructor ();
+  getMarketList(): Market[];
+  setMarketList(a: Market[]): void;
+  toObject(): GetOrderBooksRequest.AsObject;
+  serializeBinary(): Uint8Array;
+  static deserializeBinary: (bytes: {}) => GetOrderBooksRequest;
+}
+
+export namespace GetOrderBooksRequest {
+  export type AsObject = {
+    MarketList: Market[];
+  }
+}
+
+export class GetOrderBooksResponse {
+  constructor ();
+  getAllList(): OrderBook[];
+  setAllList(a: OrderBook[]): void;
+  getTimestamp(): number;
+  setTimestamp(a: number): void;
+  toObject(): GetOrderBooksResponse.AsObject;
+  serializeBinary(): Uint8Array;
+  static deserializeBinary: (bytes: {}) => GetOrderBooksResponse;
+}
+
+export namespace GetOrderBooksResponse {
+  export type AsObject = {
+    AllList: OrderBook[];
+    Timestamp: number;
+  }
+}
+
 export class GetTradesRequest {
   constructor ();
-  getWindowingSize(): number;
-  setWindowingSize(a: number): void;
   getMarketsList(): Market[];
   setMarketsList(a: Market[]): void;
+  getVelocityWindowingSize(): number;
+  setVelocityWindowingSize(a: number): void;
+  getVolatilityWindowingSize(): number;
+  setVolatilityWindowingSize(a: number): void;
+  getVolumeWindowingSize(): number;
+  setVolumeWindowingSize(a: number): void;
   toObject(): GetTradesRequest.AsObject;
   serializeBinary(): Uint8Array;
   static deserializeBinary: (bytes: {}) => GetTradesRequest;
@@ -29,8 +66,10 @@ export class GetTradesRequest {
 
 export namespace GetTradesRequest {
   export type AsObject = {
-    WindowingSize: number;
     MarketsList: Market[];
+    VelocityWindowingSize: number;
+    VolatilityWindowingSize: number;
+    VolumeWindowingSize: number;
   }
 }
 
@@ -51,10 +90,6 @@ export namespace GetTradesResponse {
 
 export class Market {
   constructor ();
-  getBase(): string;
-  setBase(a: string): void;
-  getQuote(): string;
-  setQuote(a: string): void;
   getSymbol(): string;
   setSymbol(a: string): void;
   getExchange(): string;
@@ -66,8 +101,6 @@ export class Market {
 
 export namespace Market {
   export type AsObject = {
-    Base: string;
-    Quote: string;
     Symbol: string;
     Exchange: string;
   }
@@ -103,45 +136,6 @@ export namespace OrderBook {
     BidsList: BidAsk[];
     AsksList: BidAsk[];
     Timestamp: number;
-  }
-}
-
-export class OrderBooks {
-  constructor ();
-  getAllList(): OrderBook[];
-  setAllList(a: OrderBook[]): void;
-  getTimestamp(): number;
-  setTimestamp(a: number): void;
-  toObject(): OrderBooks.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => OrderBooks;
-}
-
-export namespace OrderBooks {
-  export type AsObject = {
-    AllList: OrderBook[];
-    Timestamp: number;
-  }
-}
-
-export class OrderBooksRequest {
-  constructor ();
-  getBase(): string;
-  setBase(a: string): void;
-  getQuote(): string;
-  setQuote(a: string): void;
-  getExchangesList(): string[];
-  setExchangesList(a: string[]): void;
-  toObject(): OrderBooksRequest.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => OrderBooksRequest;
-}
-
-export namespace OrderBooksRequest {
-  export type AsObject = {
-    Base: string;
-    Quote: string;
-    ExchangesList: string[];
   }
 }
 
@@ -184,12 +178,54 @@ export namespace Trade {
   }
 }
 
+export class TradeWithAdditionalInfo {
+  constructor ();
+  getTrade(): Trade;
+  setTrade(a: Trade): void;
+  getVelocity(): number;
+  setVelocity(a: number): void;
+  getAcceleration(): number;
+  setAcceleration(a: number): void;
+  getVolatility(): number;
+  setVolatility(a: number): void;
+  getVolumeBase(): number;
+  setVolumeBase(a: number): void;
+  getVolumeQuote(): number;
+  setVolumeQuote(a: number): void;
+  getMomentumRate(): number;
+  setMomentumRate(a: number): void;
+  getVelocityWindowingSize(): number;
+  setVelocityWindowingSize(a: number): void;
+  getVolatilityWindowingSize(): number;
+  setVolatilityWindowingSize(a: number): void;
+  getVolumeWindowingSize(): number;
+  setVolumeWindowingSize(a: number): void;
+  toObject(): TradeWithAdditionalInfo.AsObject;
+  serializeBinary(): Uint8Array;
+  static deserializeBinary: (bytes: {}) => TradeWithAdditionalInfo;
+}
+
+export namespace TradeWithAdditionalInfo {
+  export type AsObject = {
+    Trade: Trade;
+    Velocity: number;
+    Acceleration: number;
+    Volatility: number;
+    VolumeBase: number;
+    VolumeQuote: number;
+    MomentumRate: number;
+    VelocityWindowingSize: number;
+    VolatilityWindowingSize: number;
+    VolumeWindowingSize: number;
+  }
+}
+
 export class TradesWithMarket {
   constructor ();
   getMarket(): Market;
   setMarket(a: Market): void;
-  getTradesList(): Trade[];
-  setTradesList(a: Trade[]): void;
+  getTradesList(): TradeWithAdditionalInfo[];
+  setTradesList(a: TradeWithAdditionalInfo[]): void;
   toObject(): TradesWithMarket.AsObject;
   serializeBinary(): Uint8Array;
   static deserializeBinary: (bytes: {}) => TradesWithMarket;
@@ -198,7 +234,7 @@ export class TradesWithMarket {
 export namespace TradesWithMarket {
   export type AsObject = {
     Market: Market;
-    TradesList: Trade[];
+    TradesList: TradeWithAdditionalInfo[];
   }
 }
 

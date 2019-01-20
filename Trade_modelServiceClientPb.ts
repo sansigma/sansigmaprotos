@@ -10,13 +10,14 @@
 import * as grpcWeb from 'grpc-web';
 import {
   BidAsk,
+  GetOrderBooksRequest,
+  GetOrderBooksResponse,
   GetTradesRequest,
   GetTradesResponse,
   Market,
   OrderBook,
-  OrderBooks,
-  OrderBooksRequest,
   Trade,
+  TradeWithAdditionalInfo,
   TradesWithMarket} from './trade_model_pb';
 
 export class OrderBookStreamApiClient {
@@ -116,15 +117,15 @@ export class HubApiClient {
   }
 
   methodInfoGetOrderBooks = new grpcWeb.AbstractClientBase.MethodInfo(
-    OrderBooks,
-    (request: OrderBooksRequest) => {
+    GetOrderBooksResponse,
+    (request: GetOrderBooksRequest) => {
       return request.serializeBinary();
     },
-    OrderBooks.deserializeBinary
+    GetOrderBooksResponse.deserializeBinary
   );
 
   getOrderBooks(
-    request: OrderBooksRequest,
+    request: GetOrderBooksRequest,
     metadata: grpcWeb.Metadata) {
     return this.client_.serverStreaming(
       this.hostname_ +

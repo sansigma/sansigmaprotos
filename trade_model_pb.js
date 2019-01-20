@@ -14,16 +14,17 @@ var global = Function('return this')();
 goog.exportSymbol('proto.sansigmaprotos.Arbitrage', null, global);
 goog.exportSymbol('proto.sansigmaprotos.Arbitrage.ArbitrageType', null, global);
 goog.exportSymbol('proto.sansigmaprotos.BidAsk', null, global);
+goog.exportSymbol('proto.sansigmaprotos.GetOrderBooksRequest', null, global);
+goog.exportSymbol('proto.sansigmaprotos.GetOrderBooksResponse', null, global);
 goog.exportSymbol('proto.sansigmaprotos.GetTradesRequest', null, global);
 goog.exportSymbol('proto.sansigmaprotos.GetTradesResponse', null, global);
 goog.exportSymbol('proto.sansigmaprotos.Market', null, global);
 goog.exportSymbol('proto.sansigmaprotos.OrderBook', null, global);
-goog.exportSymbol('proto.sansigmaprotos.OrderBooks', null, global);
-goog.exportSymbol('proto.sansigmaprotos.OrderBooksRequest', null, global);
 goog.exportSymbol('proto.sansigmaprotos.OrderPanel', null, global);
 goog.exportSymbol('proto.sansigmaprotos.OrderPanel.OrderSide', null, global);
 goog.exportSymbol('proto.sansigmaprotos.Spread', null, global);
 goog.exportSymbol('proto.sansigmaprotos.Trade', null, global);
+goog.exportSymbol('proto.sansigmaprotos.TradeWithAdditionalInfo', null, global);
 goog.exportSymbol('proto.sansigmaprotos.TradesWithMarket', null, global);
 
 /**
@@ -1903,10 +1904,8 @@ proto.sansigmaprotos.Market.prototype.toObject = function(opt_includeInstance) {
  */
 proto.sansigmaprotos.Market.toObject = function(includeInstance, msg) {
   var f, obj = {
-    base: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    quote: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    symbol: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    exchange: jspb.Message.getFieldWithDefault(msg, 4, "")
+    symbol: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    exchange: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -1945,17 +1944,9 @@ proto.sansigmaprotos.Market.deserializeBinaryFromReader = function(msg, reader) 
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setBase(value);
-      break;
-    case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setQuote(value);
-      break;
-    case 3:
-      var value = /** @type {string} */ (reader.readString());
       msg.setSymbol(value);
       break;
-    case 4:
+    case 2:
       var value = /** @type {string} */ (reader.readString());
       msg.setExchange(value);
       break;
@@ -1988,94 +1979,50 @@ proto.sansigmaprotos.Market.prototype.serializeBinary = function() {
  */
 proto.sansigmaprotos.Market.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getBase();
+  f = message.getSymbol();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getQuote();
+  f = message.getExchange();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getSymbol();
-  if (f.length > 0) {
-    writer.writeString(
-      3,
-      f
-    );
-  }
-  f = message.getExchange();
-  if (f.length > 0) {
-    writer.writeString(
-      4,
-      f
-    );
-  }
 };
 
 
 /**
- * optional string base = 1;
+ * optional string symbol = 1;
  * @return {string}
  */
-proto.sansigmaprotos.Market.prototype.getBase = function() {
+proto.sansigmaprotos.Market.prototype.getSymbol = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /** @param {string} value */
-proto.sansigmaprotos.Market.prototype.setBase = function(value) {
+proto.sansigmaprotos.Market.prototype.setSymbol = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string quote = 2;
+ * optional string exchange = 2;
  * @return {string}
  */
-proto.sansigmaprotos.Market.prototype.getQuote = function() {
+proto.sansigmaprotos.Market.prototype.getExchange = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /** @param {string} value */
-proto.sansigmaprotos.Market.prototype.setQuote = function(value) {
-  jspb.Message.setProto3StringField(this, 2, value);
-};
-
-
-/**
- * optional string symbol = 3;
- * @return {string}
- */
-proto.sansigmaprotos.Market.prototype.getSymbol = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/** @param {string} value */
-proto.sansigmaprotos.Market.prototype.setSymbol = function(value) {
-  jspb.Message.setProto3StringField(this, 3, value);
-};
-
-
-/**
- * optional string exchange = 4;
- * @return {string}
- */
-proto.sansigmaprotos.Market.prototype.getExchange = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
-};
-
-
-/** @param {string} value */
 proto.sansigmaprotos.Market.prototype.setExchange = function(value) {
-  jspb.Message.setProto3StringField(this, 4, value);
+  jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
@@ -2090,19 +2037,19 @@ proto.sansigmaprotos.Market.prototype.setExchange = function(value) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.sansigmaprotos.OrderBooks = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.sansigmaprotos.OrderBooks.repeatedFields_, null);
+proto.sansigmaprotos.GetOrderBooksResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.sansigmaprotos.GetOrderBooksResponse.repeatedFields_, null);
 };
-goog.inherits(proto.sansigmaprotos.OrderBooks, jspb.Message);
+goog.inherits(proto.sansigmaprotos.GetOrderBooksResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.sansigmaprotos.OrderBooks.displayName = 'proto.sansigmaprotos.OrderBooks';
+  proto.sansigmaprotos.GetOrderBooksResponse.displayName = 'proto.sansigmaprotos.GetOrderBooksResponse';
 }
 /**
  * List of repeated fields within this message type.
  * @private {!Array<number>}
  * @const
  */
-proto.sansigmaprotos.OrderBooks.repeatedFields_ = [1];
+proto.sansigmaprotos.GetOrderBooksResponse.repeatedFields_ = [1];
 
 
 
@@ -2117,8 +2064,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.sansigmaprotos.OrderBooks.prototype.toObject = function(opt_includeInstance) {
-  return proto.sansigmaprotos.OrderBooks.toObject(opt_includeInstance, this);
+proto.sansigmaprotos.GetOrderBooksResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.sansigmaprotos.GetOrderBooksResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -2127,11 +2074,11 @@ proto.sansigmaprotos.OrderBooks.prototype.toObject = function(opt_includeInstanc
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.sansigmaprotos.OrderBooks} msg The msg instance to transform.
+ * @param {!proto.sansigmaprotos.GetOrderBooksResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.sansigmaprotos.OrderBooks.toObject = function(includeInstance, msg) {
+proto.sansigmaprotos.GetOrderBooksResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     allList: jspb.Message.toObjectList(msg.getAllList(),
     proto.sansigmaprotos.OrderBook.toObject, includeInstance),
@@ -2149,23 +2096,23 @@ proto.sansigmaprotos.OrderBooks.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.sansigmaprotos.OrderBooks}
+ * @return {!proto.sansigmaprotos.GetOrderBooksResponse}
  */
-proto.sansigmaprotos.OrderBooks.deserializeBinary = function(bytes) {
+proto.sansigmaprotos.GetOrderBooksResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.sansigmaprotos.OrderBooks;
-  return proto.sansigmaprotos.OrderBooks.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.sansigmaprotos.GetOrderBooksResponse;
+  return proto.sansigmaprotos.GetOrderBooksResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.sansigmaprotos.OrderBooks} msg The message object to deserialize into.
+ * @param {!proto.sansigmaprotos.GetOrderBooksResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.sansigmaprotos.OrderBooks}
+ * @return {!proto.sansigmaprotos.GetOrderBooksResponse}
  */
-proto.sansigmaprotos.OrderBooks.deserializeBinaryFromReader = function(msg, reader) {
+proto.sansigmaprotos.GetOrderBooksResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -2194,9 +2141,9 @@ proto.sansigmaprotos.OrderBooks.deserializeBinaryFromReader = function(msg, read
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.sansigmaprotos.OrderBooks.prototype.serializeBinary = function() {
+proto.sansigmaprotos.GetOrderBooksResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.sansigmaprotos.OrderBooks.serializeBinaryToWriter(this, writer);
+  proto.sansigmaprotos.GetOrderBooksResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -2204,11 +2151,11 @@ proto.sansigmaprotos.OrderBooks.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.sansigmaprotos.OrderBooks} message
+ * @param {!proto.sansigmaprotos.GetOrderBooksResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.sansigmaprotos.OrderBooks.serializeBinaryToWriter = function(message, writer) {
+proto.sansigmaprotos.GetOrderBooksResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getAllList();
   if (f.length > 0) {
@@ -2232,14 +2179,14 @@ proto.sansigmaprotos.OrderBooks.serializeBinaryToWriter = function(message, writ
  * repeated OrderBook all = 1;
  * @return {!Array<!proto.sansigmaprotos.OrderBook>}
  */
-proto.sansigmaprotos.OrderBooks.prototype.getAllList = function() {
+proto.sansigmaprotos.GetOrderBooksResponse.prototype.getAllList = function() {
   return /** @type{!Array<!proto.sansigmaprotos.OrderBook>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.sansigmaprotos.OrderBook, 1));
 };
 
 
 /** @param {!Array<!proto.sansigmaprotos.OrderBook>} value */
-proto.sansigmaprotos.OrderBooks.prototype.setAllList = function(value) {
+proto.sansigmaprotos.GetOrderBooksResponse.prototype.setAllList = function(value) {
   jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
@@ -2249,12 +2196,12 @@ proto.sansigmaprotos.OrderBooks.prototype.setAllList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.sansigmaprotos.OrderBook}
  */
-proto.sansigmaprotos.OrderBooks.prototype.addAll = function(opt_value, opt_index) {
+proto.sansigmaprotos.GetOrderBooksResponse.prototype.addAll = function(opt_value, opt_index) {
   return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.sansigmaprotos.OrderBook, opt_index);
 };
 
 
-proto.sansigmaprotos.OrderBooks.prototype.clearAllList = function() {
+proto.sansigmaprotos.GetOrderBooksResponse.prototype.clearAllList = function() {
   this.setAllList([]);
 };
 
@@ -2263,13 +2210,13 @@ proto.sansigmaprotos.OrderBooks.prototype.clearAllList = function() {
  * optional int64 timestamp = 2;
  * @return {number}
  */
-proto.sansigmaprotos.OrderBooks.prototype.getTimestamp = function() {
+proto.sansigmaprotos.GetOrderBooksResponse.prototype.getTimestamp = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
 /** @param {number} value */
-proto.sansigmaprotos.OrderBooks.prototype.setTimestamp = function(value) {
+proto.sansigmaprotos.GetOrderBooksResponse.prototype.setTimestamp = function(value) {
   jspb.Message.setProto3IntField(this, 2, value);
 };
 
@@ -2285,19 +2232,19 @@ proto.sansigmaprotos.OrderBooks.prototype.setTimestamp = function(value) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.sansigmaprotos.OrderBooksRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.sansigmaprotos.OrderBooksRequest.repeatedFields_, null);
+proto.sansigmaprotos.GetOrderBooksRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.sansigmaprotos.GetOrderBooksRequest.repeatedFields_, null);
 };
-goog.inherits(proto.sansigmaprotos.OrderBooksRequest, jspb.Message);
+goog.inherits(proto.sansigmaprotos.GetOrderBooksRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.sansigmaprotos.OrderBooksRequest.displayName = 'proto.sansigmaprotos.OrderBooksRequest';
+  proto.sansigmaprotos.GetOrderBooksRequest.displayName = 'proto.sansigmaprotos.GetOrderBooksRequest';
 }
 /**
  * List of repeated fields within this message type.
  * @private {!Array<number>}
  * @const
  */
-proto.sansigmaprotos.OrderBooksRequest.repeatedFields_ = [3];
+proto.sansigmaprotos.GetOrderBooksRequest.repeatedFields_ = [1];
 
 
 
@@ -2312,8 +2259,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.sansigmaprotos.OrderBooksRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.sansigmaprotos.OrderBooksRequest.toObject(opt_includeInstance, this);
+proto.sansigmaprotos.GetOrderBooksRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.sansigmaprotos.GetOrderBooksRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -2322,15 +2269,14 @@ proto.sansigmaprotos.OrderBooksRequest.prototype.toObject = function(opt_include
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.sansigmaprotos.OrderBooksRequest} msg The msg instance to transform.
+ * @param {!proto.sansigmaprotos.GetOrderBooksRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.sansigmaprotos.OrderBooksRequest.toObject = function(includeInstance, msg) {
+proto.sansigmaprotos.GetOrderBooksRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    base: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    quote: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    exchangesList: jspb.Message.getRepeatedField(msg, 3)
+    marketList: jspb.Message.toObjectList(msg.getMarketList(),
+    proto.sansigmaprotos.Market.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -2344,23 +2290,23 @@ proto.sansigmaprotos.OrderBooksRequest.toObject = function(includeInstance, msg)
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.sansigmaprotos.OrderBooksRequest}
+ * @return {!proto.sansigmaprotos.GetOrderBooksRequest}
  */
-proto.sansigmaprotos.OrderBooksRequest.deserializeBinary = function(bytes) {
+proto.sansigmaprotos.GetOrderBooksRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.sansigmaprotos.OrderBooksRequest;
-  return proto.sansigmaprotos.OrderBooksRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.sansigmaprotos.GetOrderBooksRequest;
+  return proto.sansigmaprotos.GetOrderBooksRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.sansigmaprotos.OrderBooksRequest} msg The message object to deserialize into.
+ * @param {!proto.sansigmaprotos.GetOrderBooksRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.sansigmaprotos.OrderBooksRequest}
+ * @return {!proto.sansigmaprotos.GetOrderBooksRequest}
  */
-proto.sansigmaprotos.OrderBooksRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.sansigmaprotos.GetOrderBooksRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -2368,16 +2314,9 @@ proto.sansigmaprotos.OrderBooksRequest.deserializeBinaryFromReader = function(ms
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setBase(value);
-      break;
-    case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setQuote(value);
-      break;
-    case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.addExchanges(value);
+      var value = new proto.sansigmaprotos.Market;
+      reader.readMessage(value,proto.sansigmaprotos.Market.deserializeBinaryFromReader);
+      msg.addMarket(value);
       break;
     default:
       reader.skipField();
@@ -2392,9 +2331,9 @@ proto.sansigmaprotos.OrderBooksRequest.deserializeBinaryFromReader = function(ms
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.sansigmaprotos.OrderBooksRequest.prototype.serializeBinary = function() {
+proto.sansigmaprotos.GetOrderBooksRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.sansigmaprotos.OrderBooksRequest.serializeBinaryToWriter(this, writer);
+  proto.sansigmaprotos.GetOrderBooksRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -2402,92 +2341,51 @@ proto.sansigmaprotos.OrderBooksRequest.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.sansigmaprotos.OrderBooksRequest} message
+ * @param {!proto.sansigmaprotos.GetOrderBooksRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.sansigmaprotos.OrderBooksRequest.serializeBinaryToWriter = function(message, writer) {
+proto.sansigmaprotos.GetOrderBooksRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getBase();
+  f = message.getMarketList();
   if (f.length > 0) {
-    writer.writeString(
+    writer.writeRepeatedMessage(
       1,
-      f
-    );
-  }
-  f = message.getQuote();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
-      f
-    );
-  }
-  f = message.getExchangesList();
-  if (f.length > 0) {
-    writer.writeRepeatedString(
-      3,
-      f
+      f,
+      proto.sansigmaprotos.Market.serializeBinaryToWriter
     );
   }
 };
 
 
 /**
- * optional string base = 1;
- * @return {string}
+ * repeated Market market = 1;
+ * @return {!Array<!proto.sansigmaprotos.Market>}
  */
-proto.sansigmaprotos.OrderBooksRequest.prototype.getBase = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+proto.sansigmaprotos.GetOrderBooksRequest.prototype.getMarketList = function() {
+  return /** @type{!Array<!proto.sansigmaprotos.Market>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.sansigmaprotos.Market, 1));
 };
 
 
-/** @param {string} value */
-proto.sansigmaprotos.OrderBooksRequest.prototype.setBase = function(value) {
-  jspb.Message.setProto3StringField(this, 1, value);
+/** @param {!Array<!proto.sansigmaprotos.Market>} value */
+proto.sansigmaprotos.GetOrderBooksRequest.prototype.setMarketList = function(value) {
+  jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
 
 /**
- * optional string quote = 2;
- * @return {string}
- */
-proto.sansigmaprotos.OrderBooksRequest.prototype.getQuote = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/** @param {string} value */
-proto.sansigmaprotos.OrderBooksRequest.prototype.setQuote = function(value) {
-  jspb.Message.setProto3StringField(this, 2, value);
-};
-
-
-/**
- * repeated string exchanges = 3;
- * @return {!Array<string>}
- */
-proto.sansigmaprotos.OrderBooksRequest.prototype.getExchangesList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
-};
-
-
-/** @param {!Array<string>} value */
-proto.sansigmaprotos.OrderBooksRequest.prototype.setExchangesList = function(value) {
-  jspb.Message.setField(this, 3, value || []);
-};
-
-
-/**
- * @param {!string} value
+ * @param {!proto.sansigmaprotos.Market=} opt_value
  * @param {number=} opt_index
+ * @return {!proto.sansigmaprotos.Market}
  */
-proto.sansigmaprotos.OrderBooksRequest.prototype.addExchanges = function(value, opt_index) {
-  jspb.Message.addToRepeatedField(this, 3, value, opt_index);
+proto.sansigmaprotos.GetOrderBooksRequest.prototype.addMarket = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.sansigmaprotos.Market, opt_index);
 };
 
 
-proto.sansigmaprotos.OrderBooksRequest.prototype.clearExchangesList = function() {
-  this.setExchangesList([]);
+proto.sansigmaprotos.GetOrderBooksRequest.prototype.clearMarketList = function() {
+  this.setMarketList([]);
 };
 
 
@@ -2514,7 +2412,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.sansigmaprotos.GetTradesRequest.repeatedFields_ = [2];
+proto.sansigmaprotos.GetTradesRequest.repeatedFields_ = [1];
 
 
 
@@ -2545,9 +2443,11 @@ proto.sansigmaprotos.GetTradesRequest.prototype.toObject = function(opt_includeI
  */
 proto.sansigmaprotos.GetTradesRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    windowingSize: jspb.Message.getFieldWithDefault(msg, 1, 0),
     marketsList: jspb.Message.toObjectList(msg.getMarketsList(),
-    proto.sansigmaprotos.Market.toObject, includeInstance)
+    proto.sansigmaprotos.Market.toObject, includeInstance),
+    velocityWindowingSize: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    volatilityWindowingSize: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    volumeWindowingSize: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -2585,13 +2485,21 @@ proto.sansigmaprotos.GetTradesRequest.deserializeBinaryFromReader = function(msg
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setWindowingSize(value);
-      break;
-    case 2:
       var value = new proto.sansigmaprotos.Market;
       reader.readMessage(value,proto.sansigmaprotos.Market.deserializeBinaryFromReader);
       msg.addMarkets(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setVelocityWindowingSize(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setVolatilityWindowingSize(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setVolumeWindowingSize(value);
       break;
     default:
       reader.skipField();
@@ -2622,52 +2530,51 @@ proto.sansigmaprotos.GetTradesRequest.prototype.serializeBinary = function() {
  */
 proto.sansigmaprotos.GetTradesRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getWindowingSize();
-  if (f !== 0) {
-    writer.writeInt64(
-      1,
-      f
-    );
-  }
   f = message.getMarketsList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      2,
+      1,
       f,
       proto.sansigmaprotos.Market.serializeBinaryToWriter
     );
   }
+  f = message.getVelocityWindowingSize();
+  if (f !== 0) {
+    writer.writeInt64(
+      2,
+      f
+    );
+  }
+  f = message.getVolatilityWindowingSize();
+  if (f !== 0) {
+    writer.writeInt64(
+      3,
+      f
+    );
+  }
+  f = message.getVolumeWindowingSize();
+  if (f !== 0) {
+    writer.writeInt64(
+      4,
+      f
+    );
+  }
 };
 
 
 /**
- * optional int64 windowing_size = 1;
- * @return {number}
- */
-proto.sansigmaprotos.GetTradesRequest.prototype.getWindowingSize = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
-};
-
-
-/** @param {number} value */
-proto.sansigmaprotos.GetTradesRequest.prototype.setWindowingSize = function(value) {
-  jspb.Message.setProto3IntField(this, 1, value);
-};
-
-
-/**
- * repeated Market markets = 2;
+ * repeated Market markets = 1;
  * @return {!Array<!proto.sansigmaprotos.Market>}
  */
 proto.sansigmaprotos.GetTradesRequest.prototype.getMarketsList = function() {
   return /** @type{!Array<!proto.sansigmaprotos.Market>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.sansigmaprotos.Market, 2));
+    jspb.Message.getRepeatedWrapperField(this, proto.sansigmaprotos.Market, 1));
 };
 
 
 /** @param {!Array<!proto.sansigmaprotos.Market>} value */
 proto.sansigmaprotos.GetTradesRequest.prototype.setMarketsList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 2, value);
+  jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
 
@@ -2677,12 +2584,459 @@ proto.sansigmaprotos.GetTradesRequest.prototype.setMarketsList = function(value)
  * @return {!proto.sansigmaprotos.Market}
  */
 proto.sansigmaprotos.GetTradesRequest.prototype.addMarkets = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.sansigmaprotos.Market, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.sansigmaprotos.Market, opt_index);
 };
 
 
 proto.sansigmaprotos.GetTradesRequest.prototype.clearMarketsList = function() {
   this.setMarketsList([]);
+};
+
+
+/**
+ * optional int64 velocity_windowing_size = 2;
+ * @return {number}
+ */
+proto.sansigmaprotos.GetTradesRequest.prototype.getVelocityWindowingSize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/** @param {number} value */
+proto.sansigmaprotos.GetTradesRequest.prototype.setVelocityWindowingSize = function(value) {
+  jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional int64 volatility_windowing_size = 3;
+ * @return {number}
+ */
+proto.sansigmaprotos.GetTradesRequest.prototype.getVolatilityWindowingSize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/** @param {number} value */
+proto.sansigmaprotos.GetTradesRequest.prototype.setVolatilityWindowingSize = function(value) {
+  jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional int64 volume_windowing_size = 4;
+ * @return {number}
+ */
+proto.sansigmaprotos.GetTradesRequest.prototype.getVolumeWindowingSize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/** @param {number} value */
+proto.sansigmaprotos.GetTradesRequest.prototype.setVolumeWindowingSize = function(value) {
+  jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.sansigmaprotos.TradeWithAdditionalInfo, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.sansigmaprotos.TradeWithAdditionalInfo.displayName = 'proto.sansigmaprotos.TradeWithAdditionalInfo';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.toObject = function(opt_includeInstance) {
+  return proto.sansigmaprotos.TradeWithAdditionalInfo.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.sansigmaprotos.TradeWithAdditionalInfo} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    trade: (f = msg.getTrade()) && proto.sansigmaprotos.Trade.toObject(includeInstance, f),
+    velocity: +jspb.Message.getFieldWithDefault(msg, 2, 0.0),
+    acceleration: +jspb.Message.getFieldWithDefault(msg, 3, 0.0),
+    volatility: +jspb.Message.getFieldWithDefault(msg, 4, 0.0),
+    volumeBase: +jspb.Message.getFieldWithDefault(msg, 5, 0.0),
+    volumeQuote: +jspb.Message.getFieldWithDefault(msg, 6, 0.0),
+    momentumRate: +jspb.Message.getFieldWithDefault(msg, 7, 0.0),
+    velocityWindowingSize: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    volatilityWindowingSize: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    volumeWindowingSize: jspb.Message.getFieldWithDefault(msg, 10, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.sansigmaprotos.TradeWithAdditionalInfo}
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.sansigmaprotos.TradeWithAdditionalInfo;
+  return proto.sansigmaprotos.TradeWithAdditionalInfo.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.sansigmaprotos.TradeWithAdditionalInfo} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.sansigmaprotos.TradeWithAdditionalInfo}
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.sansigmaprotos.Trade;
+      reader.readMessage(value,proto.sansigmaprotos.Trade.deserializeBinaryFromReader);
+      msg.setTrade(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setVelocity(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setAcceleration(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setVolatility(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setVolumeBase(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setVolumeQuote(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setMomentumRate(value);
+      break;
+    case 8:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setVelocityWindowingSize(value);
+      break;
+    case 9:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setVolatilityWindowingSize(value);
+      break;
+    case 10:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setVolumeWindowingSize(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.sansigmaprotos.TradeWithAdditionalInfo.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.sansigmaprotos.TradeWithAdditionalInfo} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTrade();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.sansigmaprotos.Trade.serializeBinaryToWriter
+    );
+  }
+  f = message.getVelocity();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      2,
+      f
+    );
+  }
+  f = message.getAcceleration();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      3,
+      f
+    );
+  }
+  f = message.getVolatility();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      4,
+      f
+    );
+  }
+  f = message.getVolumeBase();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      5,
+      f
+    );
+  }
+  f = message.getVolumeQuote();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      6,
+      f
+    );
+  }
+  f = message.getMomentumRate();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      7,
+      f
+    );
+  }
+  f = message.getVelocityWindowingSize();
+  if (f !== 0) {
+    writer.writeInt64(
+      8,
+      f
+    );
+  }
+  f = message.getVolatilityWindowingSize();
+  if (f !== 0) {
+    writer.writeInt64(
+      9,
+      f
+    );
+  }
+  f = message.getVolumeWindowingSize();
+  if (f !== 0) {
+    writer.writeInt64(
+      10,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional Trade trade = 1;
+ * @return {?proto.sansigmaprotos.Trade}
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.getTrade = function() {
+  return /** @type{?proto.sansigmaprotos.Trade} */ (
+    jspb.Message.getWrapperField(this, proto.sansigmaprotos.Trade, 1));
+};
+
+
+/** @param {?proto.sansigmaprotos.Trade|undefined} value */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.setTrade = function(value) {
+  jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.clearTrade = function() {
+  this.setTrade(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.hasTrade = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional double velocity = 2;
+ * @return {number}
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.getVelocity = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 2, 0.0));
+};
+
+
+/** @param {number} value */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.setVelocity = function(value) {
+  jspb.Message.setProto3FloatField(this, 2, value);
+};
+
+
+/**
+ * optional double acceleration = 3;
+ * @return {number}
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.getAcceleration = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 3, 0.0));
+};
+
+
+/** @param {number} value */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.setAcceleration = function(value) {
+  jspb.Message.setProto3FloatField(this, 3, value);
+};
+
+
+/**
+ * optional double volatility = 4;
+ * @return {number}
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.getVolatility = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 4, 0.0));
+};
+
+
+/** @param {number} value */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.setVolatility = function(value) {
+  jspb.Message.setProto3FloatField(this, 4, value);
+};
+
+
+/**
+ * optional double volume_base = 5;
+ * @return {number}
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.getVolumeBase = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 5, 0.0));
+};
+
+
+/** @param {number} value */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.setVolumeBase = function(value) {
+  jspb.Message.setProto3FloatField(this, 5, value);
+};
+
+
+/**
+ * optional double volume_quote = 6;
+ * @return {number}
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.getVolumeQuote = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 6, 0.0));
+};
+
+
+/** @param {number} value */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.setVolumeQuote = function(value) {
+  jspb.Message.setProto3FloatField(this, 6, value);
+};
+
+
+/**
+ * optional double momentum_rate = 7;
+ * @return {number}
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.getMomentumRate = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 7, 0.0));
+};
+
+
+/** @param {number} value */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.setMomentumRate = function(value) {
+  jspb.Message.setProto3FloatField(this, 7, value);
+};
+
+
+/**
+ * optional int64 velocity_windowing_size = 8;
+ * @return {number}
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.getVelocityWindowingSize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
+};
+
+
+/** @param {number} value */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.setVelocityWindowingSize = function(value) {
+  jspb.Message.setProto3IntField(this, 8, value);
+};
+
+
+/**
+ * optional int64 volatility_windowing_size = 9;
+ * @return {number}
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.getVolatilityWindowingSize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
+};
+
+
+/** @param {number} value */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.setVolatilityWindowingSize = function(value) {
+  jspb.Message.setProto3IntField(this, 9, value);
+};
+
+
+/**
+ * optional int64 volume_windowing_size = 10;
+ * @return {number}
+ */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.getVolumeWindowingSize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+};
+
+
+/** @param {number} value */
+proto.sansigmaprotos.TradeWithAdditionalInfo.prototype.setVolumeWindowingSize = function(value) {
+  jspb.Message.setProto3IntField(this, 10, value);
 };
 
 
@@ -2742,7 +3096,7 @@ proto.sansigmaprotos.TradesWithMarket.toObject = function(includeInstance, msg) 
   var f, obj = {
     market: (f = msg.getMarket()) && proto.sansigmaprotos.Market.toObject(includeInstance, f),
     tradesList: jspb.Message.toObjectList(msg.getTradesList(),
-    proto.sansigmaprotos.Trade.toObject, includeInstance)
+    proto.sansigmaprotos.TradeWithAdditionalInfo.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -2785,8 +3139,8 @@ proto.sansigmaprotos.TradesWithMarket.deserializeBinaryFromReader = function(msg
       msg.setMarket(value);
       break;
     case 2:
-      var value = new proto.sansigmaprotos.Trade;
-      reader.readMessage(value,proto.sansigmaprotos.Trade.deserializeBinaryFromReader);
+      var value = new proto.sansigmaprotos.TradeWithAdditionalInfo;
+      reader.readMessage(value,proto.sansigmaprotos.TradeWithAdditionalInfo.deserializeBinaryFromReader);
       msg.addTrades(value);
       break;
     default:
@@ -2831,7 +3185,7 @@ proto.sansigmaprotos.TradesWithMarket.serializeBinaryToWriter = function(message
     writer.writeRepeatedMessage(
       2,
       f,
-      proto.sansigmaprotos.Trade.serializeBinaryToWriter
+      proto.sansigmaprotos.TradeWithAdditionalInfo.serializeBinaryToWriter
     );
   }
 };
@@ -2868,28 +3222,28 @@ proto.sansigmaprotos.TradesWithMarket.prototype.hasMarket = function() {
 
 
 /**
- * repeated Trade trades = 2;
- * @return {!Array<!proto.sansigmaprotos.Trade>}
+ * repeated TradeWithAdditionalInfo trades = 2;
+ * @return {!Array<!proto.sansigmaprotos.TradeWithAdditionalInfo>}
  */
 proto.sansigmaprotos.TradesWithMarket.prototype.getTradesList = function() {
-  return /** @type{!Array<!proto.sansigmaprotos.Trade>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.sansigmaprotos.Trade, 2));
+  return /** @type{!Array<!proto.sansigmaprotos.TradeWithAdditionalInfo>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.sansigmaprotos.TradeWithAdditionalInfo, 2));
 };
 
 
-/** @param {!Array<!proto.sansigmaprotos.Trade>} value */
+/** @param {!Array<!proto.sansigmaprotos.TradeWithAdditionalInfo>} value */
 proto.sansigmaprotos.TradesWithMarket.prototype.setTradesList = function(value) {
   jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
 
 /**
- * @param {!proto.sansigmaprotos.Trade=} opt_value
+ * @param {!proto.sansigmaprotos.TradeWithAdditionalInfo=} opt_value
  * @param {number=} opt_index
- * @return {!proto.sansigmaprotos.Trade}
+ * @return {!proto.sansigmaprotos.TradeWithAdditionalInfo}
  */
 proto.sansigmaprotos.TradesWithMarket.prototype.addTrades = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.sansigmaprotos.Trade, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.sansigmaprotos.TradeWithAdditionalInfo, opt_index);
 };
 
 
