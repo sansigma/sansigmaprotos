@@ -9,11 +9,15 @@
 
 import * as grpcWeb from 'grpc-web';
 import {
-  AssetPair,
   BidAsk,
+  GetTradesRequest,
+  GetTradesResponse,
+  Market,
   OrderBook,
   OrderBooks,
-  OrderBooksRequest} from './trade_model_pb';
+  OrderBooksRequest,
+  Trade,
+  TradesWithMarket} from './trade_model_pb';
 
 export class OrderBookStreamApiClient {
   client_: grpcWeb.AbstractClientBase;
@@ -35,14 +39,14 @@ export class OrderBookStreamApiClient {
 
   methodInfoGetOrderBook = new grpcWeb.AbstractClientBase.MethodInfo(
     OrderBook,
-    (request: AssetPair) => {
+    (request: Market) => {
       return request.serializeBinary();
     },
     OrderBook.deserializeBinary
   );
 
   getOrderBook(
-    request: AssetPair,
+    request: Market,
     metadata: grpcWeb.Metadata) {
     return this.client_.serverStreaming(
       this.hostname_ +
@@ -54,7 +58,46 @@ export class OrderBookStreamApiClient {
 
 }
 
-export class OrderBooksApiClient {
+export class TradeStreamApiClient {
+  client_: grpcWeb.AbstractClientBase;
+  hostname_: string;
+  credentials_: null | { [index: string]: string; };
+  options_: null | { [index: string]: string; };
+
+  constructor (hostname: string,
+               credentials: null | { [index: string]: string; },
+               options: null | { [index: string]: string; }) {
+    if (!options) options = {};
+    options['format'] = 'text';
+
+    this.client_ = new grpcWeb.GrpcWebClientBase(options);
+    this.hostname_ = hostname;
+    this.credentials_ = credentials;
+    this.options_ = options;
+  }
+
+  methodInfoGetTrade = new grpcWeb.AbstractClientBase.MethodInfo(
+    Trade,
+    (request: Market) => {
+      return request.serializeBinary();
+    },
+    Trade.deserializeBinary
+  );
+
+  getTrade(
+    request: Market,
+    metadata: grpcWeb.Metadata) {
+    return this.client_.serverStreaming(
+      this.hostname_ +
+        '/sansigmaprotos.TradeStreamApi/GetTrade',
+      request,
+      metadata,
+      this.methodInfoGetTrade);
+  }
+
+}
+
+export class HubApiClient {
   client_: grpcWeb.AbstractClientBase;
   hostname_: string;
   credentials_: null | { [index: string]: string; };
@@ -85,10 +128,29 @@ export class OrderBooksApiClient {
     metadata: grpcWeb.Metadata) {
     return this.client_.serverStreaming(
       this.hostname_ +
-        '/sansigmaprotos.OrderBooksApi/GetOrderBooks',
+        '/sansigmaprotos.HubApi/GetOrderBooks',
       request,
       metadata,
       this.methodInfoGetOrderBooks);
+  }
+
+  methodInfoGetTrades = new grpcWeb.AbstractClientBase.MethodInfo(
+    GetTradesResponse,
+    (request: GetTradesRequest) => {
+      return request.serializeBinary();
+    },
+    GetTradesResponse.deserializeBinary
+  );
+
+  getTrades(
+    request: GetTradesRequest,
+    metadata: grpcWeb.Metadata) {
+    return this.client_.serverStreaming(
+      this.hostname_ +
+        '/sansigmaprotos.HubApi/GetTrades',
+      request,
+      metadata,
+      this.methodInfoGetTrades);
   }
 
 }
