@@ -109,7 +109,7 @@ message OrderBooksRequest {
 
 message GetTradesRequest {
     // unit is seconds
-    int64 windowingSize = 1;
+    int64 windowing_size = 1;
     repeated Market markets = 2;
 }
 
@@ -119,5 +119,5 @@ message TradesWithMarket {
 }
 
 message GetTradesResponse {
-    repeated TradesWithMarket tradesWithMarket = 1;
+    repeated TradesWithMarket trades_with_market = 1;
 }
