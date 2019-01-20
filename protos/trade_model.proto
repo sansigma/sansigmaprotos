@@ -28,7 +28,7 @@ message Spread {
 }
 
 message Trade {
-    string key = 1;
+    string symbol = 1;
     string trade_id = 2;
     string exchange = 3;
     string base = 4;
@@ -68,19 +68,37 @@ message Arbitrage {
     string profit_asset = 6;
 }
 
+// API from Hub server to Pashiri
+
 service OrderBookStreamApi {
-    rpc GetOrderBook (AssetPair) returns (stream OrderBook) {
+    rpc GetOrderBook (Market) returns (stream OrderBook) {
     }
 }
 
-message AssetPair {
+message Market {
     string base = 1;
     string quote = 2;
+    string symbol = 3;
+    string exchange = 4;
 }
 
 message OrderBooks {
     repeated OrderBook all = 1;
     int64 timestamp = 2;
+}
+
+service TradeStreamApi {
+    rpc GetTrade (Market) returns (stream Trade) {
+    }
+}
+
+// API from End user to Hub server
+
+service HubApi {
+    rpc GetOrderBooks (OrderBooksRequest) returns (stream OrderBooks) {
+    }
+    rpc GetTrades (GetTradesRequest) returns (stream GetTradesResponse) {
+    }
 }
 
 message OrderBooksRequest {
@@ -89,7 +107,17 @@ message OrderBooksRequest {
     repeated string exchanges = 3;
 }
 
-service OrderBooksApi {
-    rpc GetOrderBooks (OrderBooksRequest) returns (stream OrderBooks) {
-    }
+message GetTradesRequest {
+    // unit is seconds
+    int64 windowingSize = 1;
+    repeated Market markets = 2;
+}
+
+message TradesWithMarket {
+    Market market = 1;
+    repeated Trade trades = 2;
+}
+
+message GetTradesResponse {
+    repeated TradesWithMarket tradesWithMarket = 1;
 }
