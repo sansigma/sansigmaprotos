@@ -76,13 +76,11 @@ service OrderBookStreamApi {
 }
 
 message Market {
-    string base = 1;
-    string quote = 2;
-    string symbol = 3;
-    string exchange = 4;
+    string symbol = 1;
+    string exchange = 2;
 }
 
-message OrderBooks {
+message GetOrderBooksResponse {
     repeated OrderBook all = 1;
     int64 timestamp = 2;
 }
@@ -95,27 +93,43 @@ service TradeStreamApi {
 // API from End user to Hub server
 
 service HubApi {
-    rpc GetOrderBooks (OrderBooksRequest) returns (stream OrderBooks) {
+    rpc GetOrderBooks (GetOrderBooksRequest) returns (stream GetOrderBooksResponse) {
     }
     rpc GetTrades (GetTradesRequest) returns (stream GetTradesResponse) {
     }
 }
 
-message OrderBooksRequest {
-    string base = 1;
-    string quote = 2;
-    repeated string exchanges = 3;
+message GetOrderBooksRequest {
+    repeated Market market = 1;
 }
 
 message GetTradesRequest {
+    repeated Market markets = 1;
     // unit is seconds
-    int64 windowing_size = 1;
-    repeated Market markets = 2;
+    int64 velocity_windowing_size = 2;
+    int64 volatility_windowing_size = 3;
+    int64 volume_windowing_size = 4;
+}
+
+message TradeWithAdditionalInfo {
+    Trade trade = 1;
+    // 時間あたりの価格変化の移動平均
+    double velocity = 2;
+    double acceleration = 3;
+    // 時間あたりの最大価格差
+    double volatility = 4;
+    double volume_base = 5;
+    double volume_quote = 6;
+    // 時間あたりの(buy_volume - sell_volume)/volume
+    double momentum_rate = 7;
+    int64 velocity_windowing_size = 8;
+    int64 volatility_windowing_size = 9;
+    int64 volume_windowing_size = 10;
 }
 
 message TradesWithMarket {
     Market market = 1;
-    repeated Trade trades = 2;
+    repeated TradeWithAdditionalInfo trades = 2;
 }
 
 message GetTradesResponse {
