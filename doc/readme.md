@@ -6,15 +6,16 @@
 - [trade_model.proto](#trade_model.proto)
     - [Arbitrage](#sansigmaprotos.Arbitrage)
     - [BidAsk](#sansigmaprotos.BidAsk)
+    - [GetOrderBooksRequest](#sansigmaprotos.GetOrderBooksRequest)
+    - [GetOrderBooksResponse](#sansigmaprotos.GetOrderBooksResponse)
     - [GetTradesRequest](#sansigmaprotos.GetTradesRequest)
     - [GetTradesResponse](#sansigmaprotos.GetTradesResponse)
     - [Market](#sansigmaprotos.Market)
     - [OrderBook](#sansigmaprotos.OrderBook)
-    - [OrderBooks](#sansigmaprotos.OrderBooks)
-    - [OrderBooksRequest](#sansigmaprotos.OrderBooksRequest)
     - [OrderPanel](#sansigmaprotos.OrderPanel)
     - [Spread](#sansigmaprotos.Spread)
     - [Trade](#sansigmaprotos.Trade)
+    - [TradeWithAdditionalInfo](#sansigmaprotos.TradeWithAdditionalInfo)
     - [TradesWithMarket](#sansigmaprotos.TradesWithMarket)
   
     - [Arbitrage.ArbitrageType](#sansigmaprotos.Arbitrage.ArbitrageType)
@@ -73,6 +74,37 @@
 
 
 
+<a name="sansigmaprotos.GetOrderBooksRequest"></a>
+
+### GetOrderBooksRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| market | [Market](#sansigmaprotos.Market) | repeated |  |
+
+
+
+
+
+
+<a name="sansigmaprotos.GetOrderBooksResponse"></a>
+
+### GetOrderBooksResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| all | [OrderBook](#sansigmaprotos.OrderBook) | repeated |  |
+| timestamp | [int64](#int64) |  |  |
+
+
+
+
+
+
 <a name="sansigmaprotos.GetTradesRequest"></a>
 
 ### GetTradesRequest
@@ -81,8 +113,10 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| windowing_size | [int64](#int64) |  | unit is seconds |
 | markets | [Market](#sansigmaprotos.Market) | repeated |  |
+| velocity_windowing_size | [int64](#int64) |  | unit is seconds |
+| volatility_windowing_size | [int64](#int64) |  |  |
+| volume_windowing_size | [int64](#int64) |  |  |
 
 
 
@@ -112,8 +146,6 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| base | [string](#string) |  |  |
-| quote | [string](#string) |  |  |
 | symbol | [string](#string) |  |  |
 | exchange | [string](#string) |  |  |
 
@@ -137,39 +169,6 @@
 | bids | [BidAsk](#sansigmaprotos.BidAsk) | repeated |  |
 | asks | [BidAsk](#sansigmaprotos.BidAsk) | repeated |  |
 | timestamp | [int64](#int64) |  |  |
-
-
-
-
-
-
-<a name="sansigmaprotos.OrderBooks"></a>
-
-### OrderBooks
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| all | [OrderBook](#sansigmaprotos.OrderBook) | repeated |  |
-| timestamp | [int64](#int64) |  |  |
-
-
-
-
-
-
-<a name="sansigmaprotos.OrderBooksRequest"></a>
-
-### OrderBooksRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| base | [string](#string) |  |  |
-| quote | [string](#string) |  |  |
-| exchanges | [string](#string) | repeated |  |
 
 
 
@@ -242,6 +241,30 @@
 
 
 
+<a name="sansigmaprotos.TradeWithAdditionalInfo"></a>
+
+### TradeWithAdditionalInfo
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| trade | [Trade](#sansigmaprotos.Trade) |  |  |
+| velocity | [double](#double) |  | 時間あたりの価格変化の移動平均 |
+| acceleration | [double](#double) |  |  |
+| volatility | [double](#double) |  | 時間あたりの最大価格差 |
+| volume_base | [double](#double) |  |  |
+| volume_quote | [double](#double) |  |  |
+| momentum_rate | [double](#double) |  | 時間あたりの(buy_volume - sell_volume)/volume |
+| velocity_windowing_size | [int64](#int64) |  |  |
+| volatility_windowing_size | [int64](#int64) |  |  |
+| volume_windowing_size | [int64](#int64) |  |  |
+
+
+
+
+
+
 <a name="sansigmaprotos.TradesWithMarket"></a>
 
 ### TradesWithMarket
@@ -251,7 +274,7 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | market | [Market](#sansigmaprotos.Market) |  |  |
-| trades | [Trade](#sansigmaprotos.Trade) | repeated |  |
+| trades | [TradeWithAdditionalInfo](#sansigmaprotos.TradeWithAdditionalInfo) | repeated |  |
 
 
 
@@ -296,7 +319,7 @@
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetOrderBooks | [OrderBooksRequest](#sansigmaprotos.OrderBooksRequest) | [OrderBooks](#sansigmaprotos.OrderBooks) stream |  |
+| GetOrderBooks | [GetOrderBooksRequest](#sansigmaprotos.GetOrderBooksRequest) | [GetOrderBooksResponse](#sansigmaprotos.GetOrderBooksResponse) stream |  |
 | GetTrades | [GetTradesRequest](#sansigmaprotos.GetTradesRequest) | [GetTradesResponse](#sansigmaprotos.GetTradesResponse) stream |  |
 
 

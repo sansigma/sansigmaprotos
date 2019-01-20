@@ -103,8 +103,8 @@ class HubApiStub(object):
     """
     self.GetOrderBooks = channel.unary_stream(
         '/sansigmaprotos.HubApi/GetOrderBooks',
-        request_serializer=trade__model__pb2.OrderBooksRequest.SerializeToString,
-        response_deserializer=trade__model__pb2.OrderBooks.FromString,
+        request_serializer=trade__model__pb2.GetOrderBooksRequest.SerializeToString,
+        response_deserializer=trade__model__pb2.GetOrderBooksResponse.FromString,
         )
     self.GetTrades = channel.unary_stream(
         '/sansigmaprotos.HubApi/GetTrades',
@@ -137,8 +137,8 @@ def add_HubApiServicer_to_server(servicer, server):
   rpc_method_handlers = {
       'GetOrderBooks': grpc.unary_stream_rpc_method_handler(
           servicer.GetOrderBooks,
-          request_deserializer=trade__model__pb2.OrderBooksRequest.FromString,
-          response_serializer=trade__model__pb2.OrderBooks.SerializeToString,
+          request_deserializer=trade__model__pb2.GetOrderBooksRequest.FromString,
+          response_serializer=trade__model__pb2.GetOrderBooksResponse.SerializeToString,
       ),
       'GetTrades': grpc.unary_stream_rpc_method_handler(
           servicer.GetTrades,
