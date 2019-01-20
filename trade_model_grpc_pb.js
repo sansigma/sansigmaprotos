@@ -4,6 +4,28 @@
 var grpc = require('grpc');
 var trade_model_pb = require('./trade_model_pb.js');
 
+function serialize_sansigmaprotos_GetOrderBooksRequest(arg) {
+  if (!(arg instanceof trade_model_pb.GetOrderBooksRequest)) {
+    throw new Error('Expected argument of type sansigmaprotos.GetOrderBooksRequest');
+  }
+  return new Buffer(arg.serializeBinary());
+}
+
+function deserialize_sansigmaprotos_GetOrderBooksRequest(buffer_arg) {
+  return trade_model_pb.GetOrderBooksRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_sansigmaprotos_GetOrderBooksResponse(arg) {
+  if (!(arg instanceof trade_model_pb.GetOrderBooksResponse)) {
+    throw new Error('Expected argument of type sansigmaprotos.GetOrderBooksResponse');
+  }
+  return new Buffer(arg.serializeBinary());
+}
+
+function deserialize_sansigmaprotos_GetOrderBooksResponse(buffer_arg) {
+  return trade_model_pb.GetOrderBooksResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_sansigmaprotos_GetTradesRequest(arg) {
   if (!(arg instanceof trade_model_pb.GetTradesRequest)) {
     throw new Error('Expected argument of type sansigmaprotos.GetTradesRequest');
@@ -46,28 +68,6 @@ function serialize_sansigmaprotos_OrderBook(arg) {
 
 function deserialize_sansigmaprotos_OrderBook(buffer_arg) {
   return trade_model_pb.OrderBook.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_sansigmaprotos_OrderBooks(arg) {
-  if (!(arg instanceof trade_model_pb.OrderBooks)) {
-    throw new Error('Expected argument of type sansigmaprotos.OrderBooks');
-  }
-  return new Buffer(arg.serializeBinary());
-}
-
-function deserialize_sansigmaprotos_OrderBooks(buffer_arg) {
-  return trade_model_pb.OrderBooks.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_sansigmaprotos_OrderBooksRequest(arg) {
-  if (!(arg instanceof trade_model_pb.OrderBooksRequest)) {
-    throw new Error('Expected argument of type sansigmaprotos.OrderBooksRequest');
-  }
-  return new Buffer(arg.serializeBinary());
-}
-
-function deserialize_sansigmaprotos_OrderBooksRequest(buffer_arg) {
-  return trade_model_pb.OrderBooksRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_sansigmaprotos_Trade(arg) {
@@ -121,12 +121,12 @@ var HubApiService = exports.HubApiService = {
     path: '/sansigmaprotos.HubApi/GetOrderBooks',
     requestStream: false,
     responseStream: true,
-    requestType: trade_model_pb.OrderBooksRequest,
-    responseType: trade_model_pb.OrderBooks,
-    requestSerialize: serialize_sansigmaprotos_OrderBooksRequest,
-    requestDeserialize: deserialize_sansigmaprotos_OrderBooksRequest,
-    responseSerialize: serialize_sansigmaprotos_OrderBooks,
-    responseDeserialize: deserialize_sansigmaprotos_OrderBooks,
+    requestType: trade_model_pb.GetOrderBooksRequest,
+    responseType: trade_model_pb.GetOrderBooksResponse,
+    requestSerialize: serialize_sansigmaprotos_GetOrderBooksRequest,
+    requestDeserialize: deserialize_sansigmaprotos_GetOrderBooksRequest,
+    responseSerialize: serialize_sansigmaprotos_GetOrderBooksResponse,
+    responseDeserialize: deserialize_sansigmaprotos_GetOrderBooksResponse,
   },
   getTrades: {
     path: '/sansigmaprotos.HubApi/GetTrades',

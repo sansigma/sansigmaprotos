@@ -73,14 +73,14 @@ interface IHubApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImple
     getTrades: IHubApiService_IGetTrades;
 }
 
-interface IHubApiService_IGetOrderBooks extends grpc.MethodDefinition<trade_model_pb.OrderBooksRequest, trade_model_pb.OrderBooks> {
+interface IHubApiService_IGetOrderBooks extends grpc.MethodDefinition<trade_model_pb.GetOrderBooksRequest, trade_model_pb.GetOrderBooksResponse> {
     path: string; // "/sansigmaprotos.HubApi/GetOrderBooks"
     requestStream: boolean; // false
     responseStream: boolean; // true
-    requestSerialize: grpc.serialize<trade_model_pb.OrderBooksRequest>;
-    requestDeserialize: grpc.deserialize<trade_model_pb.OrderBooksRequest>;
-    responseSerialize: grpc.serialize<trade_model_pb.OrderBooks>;
-    responseDeserialize: grpc.deserialize<trade_model_pb.OrderBooks>;
+    requestSerialize: grpc.serialize<trade_model_pb.GetOrderBooksRequest>;
+    requestDeserialize: grpc.deserialize<trade_model_pb.GetOrderBooksRequest>;
+    responseSerialize: grpc.serialize<trade_model_pb.GetOrderBooksResponse>;
+    responseDeserialize: grpc.deserialize<trade_model_pb.GetOrderBooksResponse>;
 }
 interface IHubApiService_IGetTrades extends grpc.MethodDefinition<trade_model_pb.GetTradesRequest, trade_model_pb.GetTradesResponse> {
     path: string; // "/sansigmaprotos.HubApi/GetTrades"
@@ -95,21 +95,21 @@ interface IHubApiService_IGetTrades extends grpc.MethodDefinition<trade_model_pb
 export const HubApiService: IHubApiService;
 
 export interface IHubApiServer {
-    getOrderBooks: grpc.handleServerStreamingCall<trade_model_pb.OrderBooksRequest, trade_model_pb.OrderBooks>;
+    getOrderBooks: grpc.handleServerStreamingCall<trade_model_pb.GetOrderBooksRequest, trade_model_pb.GetOrderBooksResponse>;
     getTrades: grpc.handleServerStreamingCall<trade_model_pb.GetTradesRequest, trade_model_pb.GetTradesResponse>;
 }
 
 export interface IHubApiClient {
-    getOrderBooks(request: trade_model_pb.OrderBooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<trade_model_pb.OrderBooks>;
-    getOrderBooks(request: trade_model_pb.OrderBooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<trade_model_pb.OrderBooks>;
+    getOrderBooks(request: trade_model_pb.GetOrderBooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<trade_model_pb.GetOrderBooksResponse>;
+    getOrderBooks(request: trade_model_pb.GetOrderBooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<trade_model_pb.GetOrderBooksResponse>;
     getTrades(request: trade_model_pb.GetTradesRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<trade_model_pb.GetTradesResponse>;
     getTrades(request: trade_model_pb.GetTradesRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<trade_model_pb.GetTradesResponse>;
 }
 
 export class HubApiClient extends grpc.Client implements IHubApiClient {
     constructor(address: string, credentials: grpc.ChannelCredentials, options?: object);
-    public getOrderBooks(request: trade_model_pb.OrderBooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<trade_model_pb.OrderBooks>;
-    public getOrderBooks(request: trade_model_pb.OrderBooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<trade_model_pb.OrderBooks>;
+    public getOrderBooks(request: trade_model_pb.GetOrderBooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<trade_model_pb.GetOrderBooksResponse>;
+    public getOrderBooks(request: trade_model_pb.GetOrderBooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<trade_model_pb.GetOrderBooksResponse>;
     public getTrades(request: trade_model_pb.GetTradesRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<trade_model_pb.GetTradesResponse>;
     public getTrades(request: trade_model_pb.GetTradesRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<trade_model_pb.GetTradesResponse>;
 }
