@@ -10,12 +10,12 @@ services:
         image: namely/protoc-all:1.16_0
         volumes:
             - .:/defs
-        command: "-d ./protos -o ./pb-go --with-docs markdown,readme.md --descriptor_set_out=api_descriptor.pb -l go"
+        command: "-d ./protos -o ./pb-go --with-docs markdown,readme.md -l go"
     python:
         image: namely/protoc-all:1.16_0
         volumes:
             - .:/defs
-        command: "-d ./protos -o ./pb-python --with-docs markdown,readme.md --descriptor_set_out=api_descriptor.pb \ -l python"
+        command: "-d ./protos -o ./pb-python --with-docs markdown,readme.md -l python"
     typescript:
         image: kaito22/grpc-gen-typescript:0.1.0
         volumes:
@@ -27,4 +27,4 @@ services:
         image: namely/protoc-all:1.16_0
         volumes:
         - .:/defs
-        command: "-d ./protos -o ./pb-web --with-docs markdown,readme.md --descriptor_set_out=api_descriptor.pb \ -l web"
+        command: "-d ./protos -o ./pb-web --with-docs markdown,readme.md -l web"
