@@ -2,6 +2,10 @@ syntax = "proto3";
 
 package ssigma.type;
 
+message Trades {
+    repeated Trade trades = 1;
+}
+
 message Trade {
     string symbol = 1;
     string trade_id = 2;
