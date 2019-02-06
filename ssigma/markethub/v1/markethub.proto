@@ -8,17 +8,9 @@ import "ssigma/type/orderbook.proto";
 
 
 service MarketHubServiceV1 {
-    rpc GetOrderBooks (GetOrderBooksRequest) returns (stream GetOrderBooksResponse) {}
     rpc GetTrades (GetTradesRequest) returns (stream GetTradesResponse) {}
-}
-
-message GetOrderBooksRequest {
-    repeated ssigma.type.Market market = 1;
-}
-
-message GetOrderBooksResponse {
-    repeated ssigma.type.OrderBook all = 1;
-    int64 timestamp = 2;
+    rpc GetOrderBooks (GetOrderBooksRequest) returns (stream GetOrderBooksResponse) {}
+    rpc GetTradesAndOrderBooks (GetTradesAndOrderBooksRequest) returns (stream GetTradesAndOrderBooksResponse) {}
 }
 
 message GetTradesRequest {
@@ -31,6 +23,25 @@ message GetTradesRequest {
 
 message GetTradesResponse {
     repeated TradesWithMarket trades_with_market = 1;
+}
+
+message GetOrderBooksRequest {
+    repeated ssigma.type.Market market = 1;
+}
+
+message GetOrderBooksResponse {
+    repeated ssigma.type.OrderBook all = 1;
+    int64 timestamp = 2;
+}
+
+message GetTradesAndOrderBooksRequest {
+    GetTradesRequest trades_req = 1;
+    GetOrderBooksRequest orderbooks_req = 2;
+}
+
+message GetTradesAndOrderBooksResponse {
+    GetTradesResponse trades_res = 1;
+    GetOrderBooksResponse orderbooks_res = 2;
 }
 
 message TradeWithAdditionalInfo {
