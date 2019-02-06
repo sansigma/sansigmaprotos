@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package ssigma.pashiriwebsocket.v1;
+
+import "ssigma/type/market.proto";
+import "ssigma/type/trade.proto";
+
+service PashiriWebsocketServiceV1 {
+    rpc GetOrderBook (ssigma.type.Market) returns (stream ssigma.type.Trade) {}
+}

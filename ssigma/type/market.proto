@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package ssigma.type;
+
+message Market {
+    string symbol = 1;
+    string exchange = 2;
+}
