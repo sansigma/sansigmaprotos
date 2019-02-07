@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package ssigma.pashiriwebsocket.v1;
+
+import "sansigmaprotos/type/market.proto";
+import "sansigmaprotos/type/trade.proto";
+
+option go_package = "sansigmaprotos/pashiriwebsocket/v1;pashiriwebsocket";
+
+service PashiriWebsocketServiceV1 {
+    rpc GetTrades (ssigma.type.Market) returns (stream ssigma.type.Trades) {}
+}
