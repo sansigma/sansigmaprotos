@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package ssigma.type;
 
+option go_package = "github.com/sansigma/sansigmaprotos/ssigma/type;orderbook";
+
 message BidAsk {
     double price = 1;
     double amount = 2;

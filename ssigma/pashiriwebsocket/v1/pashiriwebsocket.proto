@@ -5,6 +5,8 @@ package ssigma.pashiriwebsocket.v1;
 import "ssigma/type/market.proto";
 import "ssigma/type/trade.proto";
 
+option go_package = "github.com/sansigma/sansigmaprotos/ssigma/pashiriwebsocket/v1;pashiriwebsocket";
+
 service PashiriWebsocketServiceV1 {
     rpc GetTrades (ssigma.type.Market) returns (stream ssigma.type.Trades) {}
 }

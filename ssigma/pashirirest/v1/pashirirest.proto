@@ -5,6 +5,8 @@ package ssigma.pashirirest.v1;
 import "ssigma/type/market.proto";
 import "ssigma/type/orderbook.proto";
 
+option go_package = "github.com/sansigma/sansigmaprotos/ssigma/pashirirest/v1;pashirirest";
+
 service PashiriRestServiceV1 {
     rpc GetOrderBook (ssigma.type.Market) returns (stream ssigma.type.OrderBook) {}
 }
