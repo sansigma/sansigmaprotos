@@ -2,11 +2,11 @@ syntax = "proto3";
 
 package ssigma.markethub.v1;
 
-import "ssigma/type/market.proto";
-import "ssigma/type/trade.proto";
-import "ssigma/type/orderbook.proto";
+import "sansigmaprotos/type/market.proto";
+import "sansigmaprotos/type/trade.proto";
+import "sansigmaprotos/type/orderbook.proto";
 
-option go_package = "github.com/sansigma/sansigmaprotos/ssigma/markethub/v1;markethub";
+option go_package = "sansigmaprotos/markethub/v1;markethub";
 
 service MarketHubServiceV1 {
     rpc GetTrades (GetTradesRequest) returns (stream GetTradesResponse) {}
