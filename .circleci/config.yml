@@ -12,7 +12,7 @@ jobs:
       - checkout
       - run:
           name: Lint
-          command: docker-compose run --rm lint
+          command: for file in `find sansigmaprotos -name '*.proto'`; do docker run -v $(pwd):/$(pwd) -w $(pwd) znly/protoc -I. --lint_out=. $file; done
       - persist_to_workspace:
           root: .
           paths:
