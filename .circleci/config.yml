@@ -72,7 +72,7 @@ jobs:
               git -C ../go-src rm --cached -r .
               git -C ../go-src clean -d -f
             fi
-            cp -a pb-go/sansigmaprotos/* ../go-src/
+            cp -a gen/pb-go/sansigmaprotos/* ../go-src/
             git -C ../go-src add -A
             git -C ../go-src status
             result=0
@@ -95,7 +95,7 @@ jobs:
               git -C ../python-src rm --cached -r .
               git -C ../python-src clean -d -f
             fi
-            cp -a pb-python/sansigmaprotos/* ../python-src/
+            cp -a gen/pb-python/sansigmaprotos/* ../python-src/
             git -C ../python-src add -A
             git -C ../python-src status
             result=0
@@ -118,7 +118,7 @@ jobs:
               git -C ../typescript-src rm --cached -r .
               git -C ../typescript-src clean -d -f
             fi
-            cp -a pb-typescript/sansigmaprotos/* ../typescript-src/
+            cp -a gen/pb-typescript/sansigmaprotos/* ../typescript-src/
             git -C ../typescript-src add -A
             git -C ../typescript-src status
             result=0
@@ -141,7 +141,7 @@ jobs:
               git -C ../web-src rm --cached -r .
               git -C ../web-src clean -d -f
             fi
-            cp -a pb-web/sansigmaprotos/* ../web-src/
+            cp -a gen/pb-web/sansigmaprotos/* ../web-src/
             git -C ../web-src add -A
             git -C ../web-src status
             result=0
