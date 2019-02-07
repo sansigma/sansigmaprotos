@@ -95,7 +95,7 @@ jobs:
               git -C ../python-src rm --cached -r .
               git -C ../python-src clean -d -f
             fi
-            cp -a gen/pb-python/sansigmaprotos/* ../python-src/
+            cp -a gen/pb_python/sansigmaprotos/* ../python-src/
             git -C ../python-src add -A
             git -C ../python-src status
             result=0
