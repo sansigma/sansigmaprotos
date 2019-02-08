@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package ssigma.type;
 
-option go_package = "sansigmaprotos/type/market;market";
+option go_package = "github.com/sansigma/apisgo/type/market;market";
 
 message Market {
     string symbol = 1;

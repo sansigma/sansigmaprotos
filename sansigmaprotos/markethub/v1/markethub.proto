@@ -6,7 +6,7 @@ import "sansigmaprotos/type/market.proto";
 import "sansigmaprotos/type/trade.proto";
 import "sansigmaprotos/type/orderbook.proto";
 
-option go_package = "sansigmaprotos/markethub/v1;markethub";
+option go_package = "github.com/sansigma/apisgo/markethub/v1;markethub";
 
 service MarketHubServiceV1 {
     rpc GetTrades (GetTradesRequest) returns (stream GetTradesResponse) {}
