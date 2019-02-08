@@ -10,7 +10,7 @@ PROTO_DEST=./gen/pb-typescript
 
 mkdir -p ${PROTO_DEST}
 
-for file in `find sansigmaprotos -name '*.proto'`; do
+for file in `find ssigmaapi -name '*.proto'`; do
     grpc_tools_node_protoc \
       --js_out=import_style=commonjs,binary:${PROTO_DEST} \
       --grpc_out=${PROTO_DEST} \
