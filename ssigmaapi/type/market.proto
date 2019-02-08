@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package ssigmaapi.type;
+
+option go_package = "github.com/sansigma/ssigmaapigo/type/market;market";
+
+message Market {
+    string symbol = 1;
+    string exchange = 2;
+}
