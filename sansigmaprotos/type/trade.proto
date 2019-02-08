@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package ssigma.type;
 
-option go_package = "sansigmaprotos/type/trade;trade";
+option go_package = "github.com/sansigma/apisgo/type/trade;trade";
 
 message Trades {
     repeated Trade trades = 1;
