@@ -1,5 +1,5 @@
-// package: ssigma.type
-// file: sansigmaprotos/type/orderbook.proto
+// package: ssigmaapi.type
+// file: ssigmaapi/type/orderbook.proto
 
 /* tslint:disable */
 

@@ -11,6 +11,6 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
-var sansigmaprotos_type_market_pb = require('../../../sansigmaprotos/type/market_pb.js');
-var sansigmaprotos_type_trade_pb = require('../../../sansigmaprotos/type/trade_pb.js');
-goog.object.extend(exports, proto.ssigma.pashiriwebsocket.v1);
+var ssigmaapi_type_market_pb = require('../../../ssigmaapi/type/market_pb.js');
+var ssigmaapi_type_trade_pb = require('../../../ssigmaapi/type/trade_pb.js');
+goog.object.extend(exports, proto.ssigmaapi.pashiriwebsocket.v1);

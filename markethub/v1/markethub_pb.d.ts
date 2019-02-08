@@ -1,18 +1,18 @@
-// package: ssigma.markethub.v1
-// file: sansigmaprotos/markethub/v1/markethub.proto
+// package: ssigmaapi.markethub.v1
+// file: ssigmaapi/markethub/v1/markethub.proto
 
 /* tslint:disable */
 
 import * as jspb from "google-protobuf";
-import * as sansigmaprotos_type_market_pb from "../../../sansigmaprotos/type/market_pb";
-import * as sansigmaprotos_type_trade_pb from "../../../sansigmaprotos/type/trade_pb";
-import * as sansigmaprotos_type_orderbook_pb from "../../../sansigmaprotos/type/orderbook_pb";
+import * as ssigmaapi_type_market_pb from "../../../ssigmaapi/type/market_pb";
+import * as ssigmaapi_type_trade_pb from "../../../ssigmaapi/type/trade_pb";
+import * as ssigmaapi_type_orderbook_pb from "../../../ssigmaapi/type/orderbook_pb";
 
 export class GetTradesRequest extends jspb.Message { 
     clearMarketsList(): void;
-    getMarketsList(): Array<sansigmaprotos_type_market_pb.Market>;
-    setMarketsList(value: Array<sansigmaprotos_type_market_pb.Market>): void;
-    addMarkets(value?: sansigmaprotos_type_market_pb.Market, index?: number): sansigmaprotos_type_market_pb.Market;
+    getMarketsList(): Array<ssigmaapi_type_market_pb.Market>;
+    setMarketsList(value: Array<ssigmaapi_type_market_pb.Market>): void;
+    addMarkets(value?: ssigmaapi_type_market_pb.Market, index?: number): ssigmaapi_type_market_pb.Market;
 
     getVelocityWindowingSize(): number;
     setVelocityWindowingSize(value: number): void;
@@ -36,7 +36,7 @@ export class GetTradesRequest extends jspb.Message {
 
 export namespace GetTradesRequest {
     export type AsObject = {
-        marketsList: Array<sansigmaprotos_type_market_pb.Market.AsObject>,
+        marketsList: Array<ssigmaapi_type_market_pb.Market.AsObject>,
         velocityWindowingSize: number,
         volatilityWindowingSize: number,
         volumeWindowingSize: number,
@@ -74,9 +74,9 @@ export namespace GetTradesResponse {
 
 export class GetOrderBooksRequest extends jspb.Message { 
     clearMarketList(): void;
-    getMarketList(): Array<sansigmaprotos_type_market_pb.Market>;
-    setMarketList(value: Array<sansigmaprotos_type_market_pb.Market>): void;
-    addMarket(value?: sansigmaprotos_type_market_pb.Market, index?: number): sansigmaprotos_type_market_pb.Market;
+    getMarketList(): Array<ssigmaapi_type_market_pb.Market>;
+    setMarketList(value: Array<ssigmaapi_type_market_pb.Market>): void;
+    addMarket(value?: ssigmaapi_type_market_pb.Market, index?: number): ssigmaapi_type_market_pb.Market;
 
 
     serializeBinary(): Uint8Array;
@@ -91,15 +91,15 @@ export class GetOrderBooksRequest extends jspb.Message {
 
 export namespace GetOrderBooksRequest {
     export type AsObject = {
-        marketList: Array<sansigmaprotos_type_market_pb.Market.AsObject>,
+        marketList: Array<ssigmaapi_type_market_pb.Market.AsObject>,
     }
 }
 
 export class GetOrderBooksResponse extends jspb.Message { 
     clearAllList(): void;
-    getAllList(): Array<sansigmaprotos_type_orderbook_pb.OrderBook>;
-    setAllList(value: Array<sansigmaprotos_type_orderbook_pb.OrderBook>): void;
-    addAll(value?: sansigmaprotos_type_orderbook_pb.OrderBook, index?: number): sansigmaprotos_type_orderbook_pb.OrderBook;
+    getAllList(): Array<ssigmaapi_type_orderbook_pb.OrderBook>;
+    setAllList(value: Array<ssigmaapi_type_orderbook_pb.OrderBook>): void;
+    addAll(value?: ssigmaapi_type_orderbook_pb.OrderBook, index?: number): ssigmaapi_type_orderbook_pb.OrderBook;
 
     getTimestamp(): number;
     setTimestamp(value: number): void;
@@ -122,7 +122,7 @@ export class GetOrderBooksResponse extends jspb.Message {
 
 export namespace GetOrderBooksResponse {
     export type AsObject = {
-        allList: Array<sansigmaprotos_type_orderbook_pb.OrderBook.AsObject>,
+        allList: Array<ssigmaapi_type_orderbook_pb.OrderBook.AsObject>,
         timestamp: number,
         exchangeStatusList: Array<ExchangeStatus.AsObject>,
     }
@@ -200,8 +200,8 @@ export class TradeWithAdditionalInfo extends jspb.Message {
 
     hasTrade(): boolean;
     clearTrade(): void;
-    getTrade(): sansigmaprotos_type_trade_pb.Trade | undefined;
-    setTrade(value?: sansigmaprotos_type_trade_pb.Trade): void;
+    getTrade(): ssigmaapi_type_trade_pb.Trade | undefined;
+    setTrade(value?: ssigmaapi_type_trade_pb.Trade): void;
 
     getVelocity(): number;
     setVelocity(value: number): void;
@@ -243,7 +243,7 @@ export class TradeWithAdditionalInfo extends jspb.Message {
 
 export namespace TradeWithAdditionalInfo {
     export type AsObject = {
-        trade?: sansigmaprotos_type_trade_pb.Trade.AsObject,
+        trade?: ssigmaapi_type_trade_pb.Trade.AsObject,
         velocity: number,
         acceleration: number,
         volatility: number,
@@ -260,8 +260,8 @@ export class TradesWithMarket extends jspb.Message {
 
     hasMarket(): boolean;
     clearMarket(): void;
-    getMarket(): sansigmaprotos_type_market_pb.Market | undefined;
-    setMarket(value?: sansigmaprotos_type_market_pb.Market): void;
+    getMarket(): ssigmaapi_type_market_pb.Market | undefined;
+    setMarket(value?: ssigmaapi_type_market_pb.Market): void;
 
     clearTradesList(): void;
     getTradesList(): Array<TradeWithAdditionalInfo>;
@@ -281,7 +281,7 @@ export class TradesWithMarket extends jspb.Message {
 
 export namespace TradesWithMarket {
     export type AsObject = {
-        market?: sansigmaprotos_type_market_pb.Market.AsObject,
+        market?: ssigmaapi_type_market_pb.Market.AsObject,
         tradesList: Array<TradeWithAdditionalInfo.AsObject>,
     }
 }

@@ -1,5 +1,5 @@
-// package: ssigma.type
-// file: sansigmaprotos/type/trade.proto
+// package: ssigmaapi.type
+// file: ssigmaapi/type/trade.proto
 
 /* tslint:disable */
 
