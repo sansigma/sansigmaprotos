@@ -20,8 +20,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='sansigmaprotos/pashirirest/v1/pashirirest.proto',
   package='ssigma.pashirirest.v1',
   syntax='proto3',
-  serialized_options=_b('Z)sansigmaprotos/pashirirest/v1;pashirirest'),
-  serialized_pb=_b('\n/sansigmaprotos/pashirirest/v1/pashirirest.proto\x12\x15ssigma.pashirirest.v1\x1a sansigmaprotos/type/market.proto\x1a#sansigmaprotos/type/orderbook.proto2W\n\x14PashiriRestServiceV1\x12?\n\x0cGetOrderBook\x12\x13.ssigma.type.Market\x1a\x16.ssigma.type.OrderBook\"\x00\x30\x01\x42+Z)sansigmaprotos/pashirirest/v1;pashirirestb\x06proto3')
+  serialized_options=_b('Z5github.com/sansigma/apisgo/pashirirest/v1;pashirirest'),
+  serialized_pb=_b('\n/sansigmaprotos/pashirirest/v1/pashirirest.proto\x12\x15ssigma.pashirirest.v1\x1a sansigmaprotos/type/market.proto\x1a#sansigmaprotos/type/orderbook.proto2W\n\x14PashiriRestServiceV1\x12?\n\x0cGetOrderBook\x12\x13.ssigma.type.Market\x1a\x16.ssigma.type.OrderBook\"\x00\x30\x01\x42\x37Z5github.com/sansigma/apisgo/pashirirest/v1;pashirirestb\x06proto3')
   ,
   dependencies=[sansigmaprotos_dot_type_dot_market__pb2.DESCRIPTOR,sansigmaprotos_dot_type_dot_orderbook__pb2.DESCRIPTOR,])
 

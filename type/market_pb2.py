@@ -18,8 +18,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='sansigmaprotos/type/market.proto',
   package='ssigma.type',
   syntax='proto3',
-  serialized_options=_b('Z!sansigmaprotos/type/market;market'),
-  serialized_pb=_b('\n sansigmaprotos/type/market.proto\x12\x0bssigma.type\"*\n\x06Market\x12\x0e\n\x06symbol\x18\x01 \x01(\t\x12\x10\n\x08\x65xchange\x18\x02 \x01(\tB#Z!sansigmaprotos/type/market;marketb\x06proto3')
+  serialized_options=_b('Z-github.com/sansigma/apisgo/type/market;market'),
+  serialized_pb=_b('\n sansigmaprotos/type/market.proto\x12\x0bssigma.type\"*\n\x06Market\x12\x0e\n\x06symbol\x18\x01 \x01(\t\x12\x10\n\x08\x65xchange\x18\x02 \x01(\tB/Z-github.com/sansigma/apisgo/type/market;marketb\x06proto3')
 )
 
 
