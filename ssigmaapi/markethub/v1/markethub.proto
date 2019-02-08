@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package ssigma.markethub.v1;
+package ssigmaapi.markethub.v1;
 
-import "sansigmaprotos/type/market.proto";
-import "sansigmaprotos/type/trade.proto";
-import "sansigmaprotos/type/orderbook.proto";
+import "ssigmaapi/type/market.proto";
+import "ssigmaapi/type/trade.proto";
+import "ssigmaapi/type/orderbook.proto";
 
-option go_package = "github.com/sansigma/apisgo/markethub/v1;markethub";
+option go_package = "github.com/sansigma/ssigmaapigo/markethub/v1;markethub";
 
 service MarketHubServiceV1 {
     rpc GetTrades (GetTradesRequest) returns (stream GetTradesResponse) {}
@@ -15,7 +15,7 @@ service MarketHubServiceV1 {
 }
 
 message GetTradesRequest {
-    repeated ssigma.type.Market markets = 1;
+    repeated ssigmaapi.type.Market markets = 1;
     // unit is seconds
     int64 velocity_windowing_size = 2;
     int64 volatility_windowing_size = 3;
@@ -28,11 +28,11 @@ message GetTradesResponse {
 }
 
 message GetOrderBooksRequest {
-    repeated ssigma.type.Market market = 1;
+    repeated ssigmaapi.type.Market market = 1;
 }
 
 message GetOrderBooksResponse {
-    repeated ssigma.type.OrderBook all = 1;
+    repeated ssigmaapi.type.OrderBook all = 1;
     int64 timestamp = 2;
     repeated ExchangeStatus exchange_status = 3;
 }
@@ -49,7 +49,7 @@ message GetTradesAndOrderBooksResponse {
 }
 
 message TradeWithAdditionalInfo {
-    ssigma.type.Trade trade = 1;
+    ssigmaapi.type.Trade trade = 1;
     // 時間あたりの価格変化の移動平均
     double velocity = 2;
     double acceleration = 3;
@@ -65,7 +65,7 @@ message TradeWithAdditionalInfo {
 }
 
 message TradesWithMarket {
-    ssigma.type.Market market = 1;
+    ssigmaapi.type.Market market = 1;
     repeated TradeWithAdditionalInfo trades = 2;
 }
 
