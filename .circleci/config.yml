@@ -72,7 +72,7 @@ jobs:
               git -C ../go-src rm --cached -r .
               git -C ../go-src clean -d -f
             fi
-            cp -a gen/pb-go/sansigmaprotos/* ../go-src/
+            cp -a gen/pb-go/github.com/sansigma/aipsgo/* ../go-src/
             git -C ../go-src add -A
             git -C ../go-src status
             result=0
