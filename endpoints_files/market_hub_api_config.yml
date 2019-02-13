@@ -1,0 +1,34 @@
+# ${hoge} is template for terraform
+# https://github.com/sansigma/microservices-terraform
+# The configuration schema is defined by markethub.proto file
+type: google.api.Service
+config_version: 3
+
+#
+# Name of the service configuration.
+# name: api.endpoints.<MY_PROJECT_ID>.cloud.goog
+#
+name: ${service-name}
+endpoints:
+- name: ${service-name}
+  target: ${lb-address}  # YOUR EXTERNAL IP ADDRESS
+
+#
+# API title to appear in the user interface (Google Cloud Console).
+#
+title: MarketHub gRPC API
+apis:
+- name: ssigmaapi.markethub.v1.MarketHubServiceV1
+
+#
+# API usage restrictions.
+#
+# FIXME: anyone can access
+usage:
+  rules:
+  - selector: ssigmaapi.markethub.v1.MarketHubServiceV1.GetTrades
+    allow_unregistered_calls: true
+  - selector: ssigmaapi.markethub.v1.MarketHubServiceV1.GetOrderBooks
+    allow_unregistered_calls: true
+  - selector: ssigmaapi.markethub.v1.MarketHubServiceV1.GetTradesAndOrderBooks
+    allow_unregistered_calls: true
