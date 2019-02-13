@@ -5,13 +5,29 @@ package ssigmaapi.markethub.v1;
 import "ssigmaapi/type/market.proto";
 import "ssigmaapi/type/trade.proto";
 import "ssigmaapi/type/orderbook.proto";
+import "google/api/annotations.proto";
 
 option go_package = "github.com/sansigma/ssigmaapigo/markethub/v1;markethub";
 
 service MarketHubServiceV1 {
-    rpc GetTrades (GetTradesRequest) returns (stream GetTradesResponse) {}
-    rpc GetOrderBooks (GetOrderBooksRequest) returns (stream GetOrderBooksResponse) {}
-    rpc GetTradesAndOrderBooks (GetTradesAndOrderBooksRequest) returns (stream GetTradesAndOrderBooksResponse) {}
+    rpc GetTrades (GetTradesRequest) returns (stream GetTradesResponse) {
+        option (google.api.http) = {
+            post: "/v1/market-hub/get-trades/{velocity_windowing_size}/{volatility_windowing_size}/{volume_windowing_size}"
+            body: "markets"
+        };
+    }
+    rpc GetOrderBooks (GetOrderBooksRequest) returns (stream GetOrderBooksResponse) {
+        option (google.api.http) = {
+            post: "/v1/market-hub/get-order-books"
+            body: "markets"
+        };
+    }
+    rpc GetTradesAndOrderBooks (GetTradesAndOrderBooksRequest) returns (stream GetTradesAndOrderBooksResponse) {
+        option (google.api.http) = {
+            post: "/v1/market-hub/get-trades-and-order-books"
+            body: "*"
+        };
+    }
 }
 
 message GetTradesRequest {
@@ -28,7 +44,7 @@ message GetTradesResponse {
 }
 
 message GetOrderBooksRequest {
-    repeated ssigmaapi.type.Market market = 1;
+    repeated ssigmaapi.type.Market markets = 1;
 }
 
 message GetOrderBooksResponse {
