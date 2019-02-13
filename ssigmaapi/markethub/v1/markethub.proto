@@ -13,7 +13,7 @@ service MarketHubServiceV1 {
     rpc GetTrades (GetTradesRequest) returns (stream GetTradesResponse) {
         option (google.api.http) = {
             post: "/v1/market-hub/get-trades/{velocity_windowing_size}/{volatility_windowing_size}/{volume_windowing_size}"
-            body: "markets"
+            body: "*"
         };
     }
     rpc GetOrderBooks (GetOrderBooksRequest) returns (stream GetOrderBooksResponse) {
