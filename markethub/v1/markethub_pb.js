@@ -14,6 +14,7 @@ var global = Function('return this')();
 var ssigmaapi_type_market_pb = require('../../../ssigmaapi/type/market_pb.js');
 var ssigmaapi_type_trade_pb = require('../../../ssigmaapi/type/trade_pb.js');
 var ssigmaapi_type_orderbook_pb = require('../../../ssigmaapi/type/orderbook_pb.js');
+var google_api_annotations_pb = require('../../../google/api/annotations_pb.js');
 goog.exportSymbol('proto.ssigmaapi.markethub.v1.ExchangeStatus', null, global);
 goog.exportSymbol('proto.ssigmaapi.markethub.v1.GetOrderBooksRequest', null, global);
 goog.exportSymbol('proto.ssigmaapi.markethub.v1.GetOrderBooksResponse', null, global);
