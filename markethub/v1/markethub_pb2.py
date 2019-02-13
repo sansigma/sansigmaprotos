@@ -15,6 +15,7 @@ _sym_db = _symbol_database.Default()
 from ssigmaapi.type import market_pb2 as ssigmaapi_dot_type_dot_market__pb2
 from ssigmaapi.type import trade_pb2 as ssigmaapi_dot_type_dot_trade__pb2
 from ssigmaapi.type import orderbook_pb2 as ssigmaapi_dot_type_dot_orderbook__pb2
+from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -22,9 +23,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='ssigmaapi.markethub.v1',
   syntax='proto3',
   serialized_options=_b('Z6github.com/sansigma/ssigmaapigo/markethub/v1;markethub'),
-  serialized_pb=_b('\n&ssigmaapi/markethub/v1/markethub.proto\x12\x16ssigmaapi.markethub.v1\x1a\x1bssigmaapi/type/market.proto\x1a\x1assigmaapi/type/trade.proto\x1a\x1essigmaapi/type/orderbook.proto\"\x9e\x01\n\x10GetTradesRequest\x12\'\n\x07markets\x18\x01 \x03(\x0b\x32\x16.ssigmaapi.type.Market\x12\x1f\n\x17velocity_windowing_size\x18\x02 \x01(\x03\x12!\n\x19volatility_windowing_size\x18\x03 \x01(\x03\x12\x1d\n\x15volume_windowing_size\x18\x04 \x01(\x03\"\x9a\x01\n\x11GetTradesResponse\x12\x44\n\x12trades_with_market\x18\x01 \x03(\x0b\x32(.ssigmaapi.markethub.v1.TradesWithMarket\x12?\n\x0f\x65xchange_status\x18\x02 \x03(\x0b\x32&.ssigmaapi.markethub.v1.ExchangeStatus\">\n\x14GetOrderBooksRequest\x12&\n\x06market\x18\x01 \x03(\x0b\x32\x16.ssigmaapi.type.Market\"\x93\x01\n\x15GetOrderBooksResponse\x12&\n\x03\x61ll\x18\x01 \x03(\x0b\x32\x19.ssigmaapi.type.OrderBook\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\x12?\n\x0f\x65xchange_status\x18\x03 \x03(\x0b\x32&.ssigmaapi.markethub.v1.ExchangeStatus\"\xa3\x01\n\x1dGetTradesAndOrderBooksRequest\x12<\n\ntrades_req\x18\x01 \x01(\x0b\x32(.ssigmaapi.markethub.v1.GetTradesRequest\x12\x44\n\x0eorderbooks_req\x18\x02 \x01(\x0b\x32,.ssigmaapi.markethub.v1.GetOrderBooksRequest\"\xe7\x01\n\x1eGetTradesAndOrderBooksResponse\x12=\n\ntrades_res\x18\x01 \x01(\x0b\x32).ssigmaapi.markethub.v1.GetTradesResponse\x12\x45\n\x0eorderbooks_res\x18\x02 \x01(\x0b\x32-.ssigmaapi.markethub.v1.GetOrderBooksResponse\x12?\n\x0f\x65xchange_status\x18\x03 \x03(\x0b\x32&.ssigmaapi.markethub.v1.ExchangeStatus\"\xa0\x02\n\x17TradeWithAdditionalInfo\x12$\n\x05trade\x18\x01 \x01(\x0b\x32\x15.ssigmaapi.type.Trade\x12\x10\n\x08velocity\x18\x02 \x01(\x01\x12\x14\n\x0c\x61\x63\x63\x65leration\x18\x03 \x01(\x01\x12\x12\n\nvolatility\x18\x04 \x01(\x01\x12\x13\n\x0bvolume_base\x18\x05 \x01(\x01\x12\x14\n\x0cvolume_quote\x18\x06 \x01(\x01\x12\x15\n\rmomentum_rate\x18\x07 \x01(\x01\x12\x1f\n\x17velocity_windowing_size\x18\x08 \x01(\x03\x12!\n\x19volatility_windowing_size\x18\t \x01(\x03\x12\x1d\n\x15volume_windowing_size\x18\n \x01(\x03\"{\n\x10TradesWithMarket\x12&\n\x06market\x18\x01 \x01(\x0b\x32\x16.ssigmaapi.type.Market\x12?\n\x06trades\x18\x02 \x03(\x0b\x32/.ssigmaapi.markethub.v1.TradeWithAdditionalInfo\"0\n\x0e\x45xchangeStatus\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12\x0c\n\x04open\x18\x02 \x01(\x08\x32\xfa\x02\n\x12MarketHubServiceV1\x12\x64\n\tGetTrades\x12(.ssigmaapi.markethub.v1.GetTradesRequest\x1a).ssigmaapi.markethub.v1.GetTradesResponse\"\x00\x30\x01\x12p\n\rGetOrderBooks\x12,.ssigmaapi.markethub.v1.GetOrderBooksRequest\x1a-.ssigmaapi.markethub.v1.GetOrderBooksResponse\"\x00\x30\x01\x12\x8b\x01\n\x16GetTradesAndOrderBooks\x12\x35.ssigmaapi.markethub.v1.GetTradesAndOrderBooksRequest\x1a\x36.ssigmaapi.markethub.v1.GetTradesAndOrderBooksResponse\"\x00\x30\x01\x42\x38Z6github.com/sansigma/ssigmaapigo/markethub/v1;markethubb\x06proto3')
+  serialized_pb=_b('\n&ssigmaapi/markethub/v1/markethub.proto\x12\x16ssigmaapi.markethub.v1\x1a\x1bssigmaapi/type/market.proto\x1a\x1assigmaapi/type/trade.proto\x1a\x1essigmaapi/type/orderbook.proto\x1a\x1cgoogle/api/annotations.proto\"\x9e\x01\n\x10GetTradesRequest\x12\'\n\x07markets\x18\x01 \x03(\x0b\x32\x16.ssigmaapi.type.Market\x12\x1f\n\x17velocity_windowing_size\x18\x02 \x01(\x03\x12!\n\x19volatility_windowing_size\x18\x03 \x01(\x03\x12\x1d\n\x15volume_windowing_size\x18\x04 \x01(\x03\"\x9a\x01\n\x11GetTradesResponse\x12\x44\n\x12trades_with_market\x18\x01 \x03(\x0b\x32(.ssigmaapi.markethub.v1.TradesWithMarket\x12?\n\x0f\x65xchange_status\x18\x02 \x03(\x0b\x32&.ssigmaapi.markethub.v1.ExchangeStatus\">\n\x14GetOrderBooksRequest\x12&\n\x06market\x18\x01 \x03(\x0b\x32\x16.ssigmaapi.type.Market\"\x93\x01\n\x15GetOrderBooksResponse\x12&\n\x03\x61ll\x18\x01 \x03(\x0b\x32\x19.ssigmaapi.type.OrderBook\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\x12?\n\x0f\x65xchange_status\x18\x03 \x03(\x0b\x32&.ssigmaapi.markethub.v1.ExchangeStatus\"\xa3\x01\n\x1dGetTradesAndOrderBooksRequest\x12<\n\ntrades_req\x18\x01 \x01(\x0b\x32(.ssigmaapi.markethub.v1.GetTradesRequest\x12\x44\n\x0eorderbooks_req\x18\x02 \x01(\x0b\x32,.ssigmaapi.markethub.v1.GetOrderBooksRequest\"\xe7\x01\n\x1eGetTradesAndOrderBooksResponse\x12=\n\ntrades_res\x18\x01 \x01(\x0b\x32).ssigmaapi.markethub.v1.GetTradesResponse\x12\x45\n\x0eorderbooks_res\x18\x02 \x01(\x0b\x32-.ssigmaapi.markethub.v1.GetOrderBooksResponse\x12?\n\x0f\x65xchange_status\x18\x03 \x03(\x0b\x32&.ssigmaapi.markethub.v1.ExchangeStatus\"\xa0\x02\n\x17TradeWithAdditionalInfo\x12$\n\x05trade\x18\x01 \x01(\x0b\x32\x15.ssigmaapi.type.Trade\x12\x10\n\x08velocity\x18\x02 \x01(\x01\x12\x14\n\x0c\x61\x63\x63\x65leration\x18\x03 \x01(\x01\x12\x12\n\nvolatility\x18\x04 \x01(\x01\x12\x13\n\x0bvolume_base\x18\x05 \x01(\x01\x12\x14\n\x0cvolume_quote\x18\x06 \x01(\x01\x12\x15\n\rmomentum_rate\x18\x07 \x01(\x01\x12\x1f\n\x17velocity_windowing_size\x18\x08 \x01(\x03\x12!\n\x19volatility_windowing_size\x18\t \x01(\x03\x12\x1d\n\x15volume_windowing_size\x18\n \x01(\x03\"{\n\x10TradesWithMarket\x12&\n\x06market\x18\x01 \x01(\x0b\x32\x16.ssigmaapi.type.Market\x12?\n\x06trades\x18\x02 \x03(\x0b\x32/.ssigmaapi.markethub.v1.TradeWithAdditionalInfo\"0\n\x0e\x45xchangeStatus\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12\x0c\n\x04open\x18\x02 \x01(\x08\x32\xcb\x04\n\x12MarketHubServiceV1\x12\xd6\x01\n\tGetTrades\x12(.ssigmaapi.markethub.v1.GetTradesRequest\x1a).ssigmaapi.markethub.v1.GetTradesResponse\"r\x82\xd3\xe4\x93\x02l\"g/v1/market-hub/get-trades/{velocity_windowing_size}/{volatility_windowing_size}/{volume_windowing_size}:\x01*0\x01\x12\x99\x01\n\rGetOrderBooks\x12,.ssigmaapi.markethub.v1.GetOrderBooksRequest\x1a-.ssigmaapi.markethub.v1.GetOrderBooksResponse\")\x82\xd3\xe4\x93\x02#\"\x1e/v1/market-hub/get-order-books:\x01*0\x01\x12\xbf\x01\n\x16GetTradesAndOrderBooks\x12\x35.ssigmaapi.markethub.v1.GetTradesAndOrderBooksRequest\x1a\x36.ssigmaapi.markethub.v1.GetTradesAndOrderBooksResponse\"4\x82\xd3\xe4\x93\x02.\")/v1/market-hub/get-trades-and-order-books:\x01*0\x01\x42\x38Z6github.com/sansigma/ssigmaapigo/markethub/v1;markethubb\x06proto3')
   ,
-  dependencies=[ssigmaapi_dot_type_dot_market__pb2.DESCRIPTOR,ssigmaapi_dot_type_dot_trade__pb2.DESCRIPTOR,ssigmaapi_dot_type_dot_orderbook__pb2.DESCRIPTOR,])
+  dependencies=[ssigmaapi_dot_type_dot_market__pb2.DESCRIPTOR,ssigmaapi_dot_type_dot_trade__pb2.DESCRIPTOR,ssigmaapi_dot_type_dot_orderbook__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -76,8 +77,8 @@ _GETTRADESREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=156,
-  serialized_end=314,
+  serialized_start=186,
+  serialized_end=344,
 )
 
 
@@ -114,8 +115,8 @@ _GETTRADESRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=317,
-  serialized_end=471,
+  serialized_start=347,
+  serialized_end=501,
 )
 
 
@@ -145,8 +146,8 @@ _GETORDERBOOKSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=473,
-  serialized_end=535,
+  serialized_start=503,
+  serialized_end=565,
 )
 
 
@@ -190,8 +191,8 @@ _GETORDERBOOKSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=538,
-  serialized_end=685,
+  serialized_start=568,
+  serialized_end=715,
 )
 
 
@@ -228,8 +229,8 @@ _GETTRADESANDORDERBOOKSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=688,
-  serialized_end=851,
+  serialized_start=718,
+  serialized_end=881,
 )
 
 
@@ -273,8 +274,8 @@ _GETTRADESANDORDERBOOKSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=854,
-  serialized_end=1085,
+  serialized_start=884,
+  serialized_end=1115,
 )
 
 
@@ -367,8 +368,8 @@ _TRADEWITHADDITIONALINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1088,
-  serialized_end=1376,
+  serialized_start=1118,
+  serialized_end=1406,
 )
 
 
@@ -405,8 +406,8 @@ _TRADESWITHMARKET = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1378,
-  serialized_end=1501,
+  serialized_start=1408,
+  serialized_end=1531,
 )
 
 
@@ -443,8 +444,8 @@ _EXCHANGESTATUS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1503,
-  serialized_end=1551,
+  serialized_start=1533,
+  serialized_end=1581,
 )
 
 _GETTRADESREQUEST.fields_by_name['markets'].message_type = ssigmaapi_dot_type_dot_market__pb2._MARKET
@@ -544,8 +545,8 @@ _MARKETHUBSERVICEV1 = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=1554,
-  serialized_end=1932,
+  serialized_start=1584,
+  serialized_end=2171,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetTrades',
@@ -554,7 +555,7 @@ _MARKETHUBSERVICEV1 = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETTRADESREQUEST,
     output_type=_GETTRADESRESPONSE,
-    serialized_options=None,
+    serialized_options=_b('\202\323\344\223\002l\"g/v1/market-hub/get-trades/{velocity_windowing_size}/{volatility_windowing_size}/{volume_windowing_size}:\001*'),
   ),
   _descriptor.MethodDescriptor(
     name='GetOrderBooks',
@@ -563,7 +564,7 @@ _MARKETHUBSERVICEV1 = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETORDERBOOKSREQUEST,
     output_type=_GETORDERBOOKSRESPONSE,
-    serialized_options=None,
+    serialized_options=_b('\202\323\344\223\002#\"\036/v1/market-hub/get-order-books:\001*'),
   ),
   _descriptor.MethodDescriptor(
     name='GetTradesAndOrderBooks',
@@ -572,7 +573,7 @@ _MARKETHUBSERVICEV1 = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETTRADESANDORDERBOOKSREQUEST,
     output_type=_GETTRADESANDORDERBOOKSRESPONSE,
-    serialized_options=None,
+    serialized_options=_b('\202\323\344\223\002.\")/v1/market-hub/get-trades-and-order-books:\001*'),
   ),
 ])
 _sym_db.RegisterServiceDescriptor(_MARKETHUBSERVICEV1)
