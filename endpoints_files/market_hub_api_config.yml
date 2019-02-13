@@ -1,4 +1,4 @@
-# ${hoge} is template for terraform
+# this file contains template variable for terraform
 # https://github.com/sansigma/microservices-terraform
 # The configuration schema is defined by markethub.proto file
 type: google.api.Service
