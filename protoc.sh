@@ -9,7 +9,7 @@ PROTO_SRC=./
 PROTO_DEST=./gen/pb-typescript
 
 mkdir -p ${PROTO_DEST}
-git clone git@github.com:googleapis/googleapis.git
+git clone https://github.com/googleapis/googleapis.git
 mv googleapis/google ./
 
 for file in `find ssigmaapi -name '*.proto'`; do
