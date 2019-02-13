@@ -21,7 +21,7 @@ $ docker run --rm -v $(pwd):$(pwd) -w $(pwd) znly/protoc \
     --include_imports \
     --include_source_info \
     -I. \
-    --descriptor_set_out=api_descriptor_files/market_hub_api_descriptor.pb \
+    --descriptor_set_out=endpoints_files/market_hub_api_descriptor.pb \
     ssigmaapi/markethub/v1/markethub.proto
 ```
 
