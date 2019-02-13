@@ -6,6 +6,7 @@ var ssigmaapi_markethub_v1_markethub_pb = require('../../../ssigmaapi/markethub/
 var ssigmaapi_type_market_pb = require('../../../ssigmaapi/type/market_pb.js');
 var ssigmaapi_type_trade_pb = require('../../../ssigmaapi/type/trade_pb.js');
 var ssigmaapi_type_orderbook_pb = require('../../../ssigmaapi/type/orderbook_pb.js');
+var google_api_annotations_pb = require('../../../google/api/annotations_pb.js');
 
 function serialize_ssigmaapi_markethub_v1_GetOrderBooksRequest(arg) {
   if (!(arg instanceof ssigmaapi_markethub_v1_markethub_pb.GetOrderBooksRequest)) {
