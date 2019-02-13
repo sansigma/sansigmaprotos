@@ -19,7 +19,7 @@ service MarketHubServiceV1 {
     rpc GetOrderBooks (GetOrderBooksRequest) returns (stream GetOrderBooksResponse) {
         option (google.api.http) = {
             post: "/v1/market-hub/get-order-books"
-            body: "markets"
+            body: "*"
         };
     }
     rpc GetTradesAndOrderBooks (GetTradesAndOrderBooksRequest) returns (stream GetTradesAndOrderBooksResponse) {
@@ -44,7 +44,7 @@ message GetTradesResponse {
 }
 
 message GetOrderBooksRequest {
-    repeated ssigmaapi.type.Market markets = 1;
+    repeated ssigmaapi.type.Market market = 1;
 }
 
 message GetOrderBooksResponse {
