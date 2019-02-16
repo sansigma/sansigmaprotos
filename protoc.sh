@@ -22,7 +22,7 @@ for file in `find ssigmaapi -name '*.proto'`; do
 
     grpc_tools_node_protoc \
       --plugin=protoc-gen-ts=$(which protoc-gen-ts) \
-      --ts_out=${PROTO_DEST} \
+      --ts_out=service=true:${PROTO_DEST} \
       -I ${PROTO_SRC} \
       ${file}
 done
