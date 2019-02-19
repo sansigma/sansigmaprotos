@@ -24,4 +24,3 @@ $ docker run --rm -v $(pwd):$(pwd) -w $(pwd) znly/protoc \
     --descriptor_set_out=endpoints_files/market_hub_api_descriptor.pb \
     ssigmaapi/markethub/v1/markethub.proto
 ```
-
