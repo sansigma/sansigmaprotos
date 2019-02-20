@@ -12,7 +12,7 @@ jobs:
     - checkout
     - run:
         name: Lint
-        command: for file in `find ssigmaapi -name '*.proto'`; do docker run -v $(pwd):/$(pwd) -w $(pwd) znly/protoc -I. --lint_out=. $file; done
+        command: for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run -v $(pwd):/$(pwd) -w $(pwd) znly/protoc -I. --lint_out=. $file; done
     - persist_to_workspace:
         root: .
         paths:
@@ -31,10 +31,10 @@ jobs:
         command: ls
     - run:
         name: Generate gRPC for go
-        command: for file in `find ssigmaapi -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l go -i ./ ; done
+        command: for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l go -i ./ ; done
     - run:
         name: Generate gRPC for python
-        command: for file in `find ssigmaapi -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l python -i ./ ; done
+        command: for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l python -i ./ ; done
     - run:
         name: Generate gRPC for typescript
         command: docker run -t --rm -v $(pwd):$(pwd) -w $(pwd) kaito22/grpc-gen-typescript:0.1.0 ./protoc.sh
@@ -63,15 +63,15 @@ jobs:
             echo "go repository is not found"
             exit -1
           fi
-          git -C ./ssigmaapigo rm --cached -r .
-          rm -r ssigmaapigo/*
-          cp -r gen/pb-go/github.com/kaito2/ssigmaapigo/* ssigmaapigo/
-          cp -r version_manage/go/* ssigmaapigo/
+          git -C ./${CIRCLE_PROJECT_REPONAME}go rm --cached -r .
+          rm -r ${CIRCLE_PROJECT_REPONAME}go/*
+          cp -r gen/pb-go/github.com/kaito2/${CIRCLE_PROJECT_REPONAME}go/* ${CIRCLE_PROJECT_REPONAME}go/
+          cp -r version_manage/go/* ${CIRCLE_PROJECT_REPONAME}go/
           result=0
-          git -C ./ssigmaapigo add .
-          git -C ./ssigmaapigo commit -m "gen" || result=$?
+          git -C ./${CIRCLE_PROJECT_REPONAME}go add .
+          git -C ./${CIRCLE_PROJECT_REPONAME}go commit -m "gen" || result=$?
           if [ $result -eq 0 ]; then
-            git -C ./ssigmaapigo push origin master 2> /dev/null
+            git -C ./${CIRCLE_PROJECT_REPONAME}go push origin master 2> /dev/null
           fi
 
     - run:
@@ -84,14 +84,14 @@ jobs:
             echo "python repository is not found"
             exit -1
           fi
-          git -C ./ssigmaapipython rm --cached -r .
-          rm -r ssigmaapipython/*
-          cp -r gen/pb_python/ssigmaapi/* ssigmaapipython/
+          git -C ./${CIRCLE_PROJECT_REPONAME}python rm --cached -r .
+          rm -r ${CIRCLE_PROJECT_REPONAME}python/*
+          cp -r gen/pb_python/${CIRCLE_PROJECT_REPONAME}/* ${CIRCLE_PROJECT_REPONAME}python/
           result=0
-          git -C ./ssigmaapipython add .
-          git -C ./ssigmaapipython commit -m "gen" || result=$?
+          git -C ./${CIRCLE_PROJECT_REPONAME}python add .
+          git -C ./${CIRCLE_PROJECT_REPONAME}python commit -m "gen" || result=$?
           if [ $result -eq 0 ]; then
-            git -C ./ssigmaapipython push origin master 2> /dev/null
+            git -C ./${CIRCLE_PROJECT_REPONAME}python push origin master 2> /dev/null
           fi
     - run:
         name: git commit typescript-src
@@ -103,14 +103,14 @@ jobs:
             echo "typescript repository is not found"
             exit -1
           fi
-          git -C ./ssigmaapitypescript rm --cached -r .
-          rm -r ssigmaapitypescript/*
-          cp -r gen/pb-typescript/ssigmaapi/* ssigmaapitypescript/
+          git -C ./${CIRCLE_PROJECT_REPONAME}typescript rm --cached -r .
+          rm -r ${CIRCLE_PROJECT_REPONAME}typescript/*
+          cp -r gen/pb-typescript/${CIRCLE_PROJECT_REPONAME}/* ${CIRCLE_PROJECT_REPONAME}typescript/
           result=0
-          git -C ./ssigmaapitypescript add .
-          git -C ./ssigmaapitypescript commit -m "gen" || result=$?
+          git -C ./${CIRCLE_PROJECT_REPONAME}typescript add .
+          git -C ./${CIRCLE_PROJECT_REPONAME}typescript commit -m "gen" || result=$?
           if [ $result -eq 0 ]; then
-            git -C ./ssigmaapitypescript push origin master 2> /dev/null
+            git -C ./${CIRCLE_PROJECT_REPONAME}typescript push origin master 2> /dev/null
           fi
 
 workflows:
