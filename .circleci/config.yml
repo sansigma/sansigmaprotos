@@ -2,7 +2,7 @@ version: 2
 
 references:
   defaults: &defaults
-    working_directory: ~/grpc-gen
+    working_directory: /grpc-gen
     machine: true
 
 jobs:
@@ -55,6 +55,7 @@ jobs:
             git -C ./ssigmaapigo rm --cached -r .
             rm -r ssigmaapigo/*
             cp -r gen/pb-go/github.com/sansigma/ssigmaapigo/* ssigmaapigo/
+            cp -r version_manage/* ssigmaapigo/
             git -C ./ssigmaapigo add .
             git -C ./ssigmaapigo commit -m "gen"
             git -C ./ssigmaapigo push origin master
