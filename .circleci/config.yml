@@ -45,8 +45,8 @@ jobs:
       - run:
           name: git config
           command: |
-            git config user.email "doumintyu1017@gmail.com"
-            git config user.name "Generator Bot"
+            git config --global user.email "doumintyu1017@gmail.com"
+            git config --global user.name "Generator Bot"
       - run:
           name: git clone go
           command: |
