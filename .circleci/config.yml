@@ -93,16 +93,16 @@ workflows:
     - lint
     - build:
         requires:
-          - lint
+        - lint
         filters:
           branches:
             only:
-              - master
+            - master
     - push:
-      requires:
+        requires:
         - lint
         - build
-      filters:
-        branches:
-          only:
+        filters:
+          branches:
+            only:
             - master
