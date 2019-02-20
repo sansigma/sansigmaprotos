@@ -57,7 +57,12 @@ jobs:
         name: git clone go
         command: |
           echo "clone go"
-          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git
+          clonesuccess=0
+          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git || clonesuccess=$?
+          if [ $clonesuccess -eq 128 ]; then
+            echo "go repository is not found"
+            exit -1
+          fi
           git -C ./ssigmaapigo rm --cached -r .
           rm -r ssigmaapigo/*
           cp -r gen/pb-go/github.com/kaito2/ssigmaapigo/* ssigmaapigo/
@@ -73,7 +78,12 @@ jobs:
         name: git commit python-src
         command: |
           echo "clone python"
-          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git
+          clonesuccess=0
+          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git || clonesuccess=$?
+          if [ $clonesuccess -eq 128 ]; then
+            echo "python repository is not found"
+            exit -1
+          fi
           git -C ./ssigmaapipython rm --cached -r .
           rm -r ssigmaapipython/*
           cp -r gen/pb_python/ssigmaapi/* ssigmaapipython/
@@ -87,7 +97,12 @@ jobs:
         name: git commit typescript-src
         command: |
           echo "clone typescript"
-          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}typescript.git
+          clonesuccess=0
+          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}typescript.git || clonesuccess=$?
+          if [ $clonesuccess -eq 128 ]; then
+            echo "typescript repository is not found"
+            exit -1
+          fi
           git -C ./ssigmaapitypescript rm --cached -r .
           rm -r ssigmaapitypescript/*
           cp -r gen/pb-typescript/ssigmaapi/* ssigmaapitypescript/
