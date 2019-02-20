@@ -2,7 +2,7 @@ version: 2
 
 references:
   defaults: &defaults
-    working_directory: ~/grpc-gen
+    working_directory: /grpc-gen
     machine: true
 
 jobs:
@@ -32,6 +32,9 @@ jobs:
       - run:
           name: Generate gRPC for go
           command: for file in `find ssigmaapi -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l go -i ./ ; done
+      - run:
+          name: Generate gRPC for python
+          command: for file in `find ssigmaapi -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l python -i ./ ; done
       - persist_to_workspace:
           root: .
           paths:
@@ -41,24 +44,47 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: .
+        at: .
       - run:
-          name: git config
-          command: |
-            git config --global user.email "doumintyu1017@gmail.com"
-            git config --global user.name "Generator Bot"
+        name: git config
+        command: |
+          git config --global user.email "doumintyu1017@gmail.com"
+          git config --global user.name "Generator Bot"
       - run:
-          name: git clone go
-          command: |
-            echo "clone go"
-            git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git
-            git -C ./ssigmaapigo rm --cached -r .
-            rm -r ssigmaapigo/*
-            cp -r gen/pb-go/github.com/kaito2/ssigmaapigo/* ssigmaapigo/
-            cp -r version_manage/go/* ssigmaapigo/
-            git -C ./ssigmaapigo add .
-            git -C ./ssigmaapigo commit -m "gen"
-            git -C ./ssigmaapigo push origin master
+        name: git clone go
+        command: |
+          echo "clone go"
+          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git
+          git -C ./ssigmaapigo rm --cached -r .
+          rm -r ssigmaapigo/*
+          cp -r gen/pb-go/github.com/kaito2/ssigmaapigo/* ssigmaapigo/
+          cp -r version_manage/go/* ssigmaapigo/
+          git -C ./ssigmaapigo add .
+          git -C ./ssigmaapigo commit -m "gen"
+          git -C ./ssigmaapigo push origin master
+      - run:
+        name: git commit python-src
+        command: |
+          if [ `git branch -r --list origin/generated/python | wc -l` -eq 1 ]; then
+            echo "checkout generated/python"
+            git fetch origin
+            git worktree add -b generated/python ../python-src origin/generated/python
+            git -C ../python-src rm `git -C ../python-src ls-files`
+          else
+            echo "create generated/python"
+            git worktree add --detach ../python-src
+            git -C ../python-src checkout --orphan generated/python
+            git -C ../python-src rm --cached -r .
+            git -C ../python-src clean -d -f
+          fi
+          cp -a gen/pb_python/ssigmaapi/* ../python-src/
+          git -C ../python-src add -A
+          git -C ../python-src status
+          result=0
+          git -C ../python-src commit -m "AUTO GENERATED [ci skip]" || result=$?
+          if [ $result -eq 0 ]; then
+            git -C ../python-src push upstream generated/python 2> /dev/null
+          fi
 
 workflows:
   version: 2
@@ -66,17 +92,17 @@ workflows:
     jobs:
     - lint
     - build:
-        requires:
-          - lint
-        filters:
-          branches:
-            only:
-              - master
+      requires:
+      - lint
+      filters:
+      branches:
+      only:
+      - master
     - push:
-        requires:
-          - lint
-          - build
-        filters:
-          branches:
-            only:
-              - master
+      requires:
+      - lint
+      - build
+      filters:
+      branches:
+      only:
+      - master
