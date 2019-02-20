@@ -60,8 +60,11 @@ jobs:
           cp -r gen/pb-go/github.com/kaito2/ssigmaapigo/* ssigmaapigo/
           cp -r version_manage/go/* ssigmaapigo/
           git -C ./ssigmaapigo add .
-          git -C ./ssigmaapigo commit -m "gen"
-          git -C ./ssigmaapigo push origin master
+          git -C ./ssigmaapigo commit -m "gen" || result=$?
+          if [ $result -eq 0 ]; then
+            git -C ./ssigmaapigo push origin master 2> /dev/null
+          fi
+
     - run:
         name: git commit python-src
         command: |
