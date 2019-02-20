@@ -92,17 +92,17 @@ workflows:
     jobs:
     - lint
     - build:
-      requires:
-      - lint
-      filters:
-      branches:
-      only:
-      - master
+    requires:
+    - lint
+    filters:
+    branches:
+    only:
+    - master
     - push:
-      requires:
-      - lint
-      - build
-      filters:
-      branches:
-      only:
-      - master
+    requires:
+    - lint
+    - build
+    filters:
+    branches:
+    only:
+    - master
