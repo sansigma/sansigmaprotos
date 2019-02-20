@@ -72,26 +72,16 @@ jobs:
     - run:
         name: git commit python-src
         command: |
-          git remote add upstream https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git
-          if [ `git branch -r --list origin/generated/python | wc -l` -eq 1 ]; then
-            echo "checkout generated/python"
-            git fetch origin
-            git worktree add -b generated/python ../python-src origin/generated/python
-            git -C ../python-src rm `git -C ../python-src ls-files`
-          else
-            echo "create generated/python"
-            git worktree add --detach ../python-src
-            git -C ../python-src checkout --orphan generated/python
-            git -C ../python-src rm --cached -r .
-            git -C ../python-src clean -d -f
-          fi
-          cp -a gen/pb_python/ssigmaapi/* ../python-src/
-          git -C ../python-src add -A
-          git -C ../python-src status
+          echo "clone go"
+          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git
+          git -C ./ssigmaapipython rm --cached -r .
+          rm -r ssigmaapipython/*
+          cp -r gen/pb_python/ssigmaapi/* ssigmaapigopython/
           result=0
-          git -C ../python-src commit -m "AUTO GENERATED [ci skip]" || result=$?
+          git -C ./ssigmaapipython add .
+          git -C ./ssigmaapipython commit -m "gen" || result=$?
           if [ $result -eq 0 ]; then
-            git -C ../python-src push upstream generated/python 2> /dev/null
+            git -C ./ssigmaapipython push origin master 2> /dev/null
           fi
     - run:
         name: git commit typescript-src
