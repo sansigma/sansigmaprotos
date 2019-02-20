@@ -76,7 +76,7 @@ jobs:
           git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git
           git -C ./ssigmaapipython rm --cached -r .
           rm -r ssigmaapipython/*
-          cp -r gen/pb_python/ssigmaapi/* ssigmaapigopython/
+          cp -r gen/pb_python/ssigmaapi/* ssigmaapipython/
           result=0
           git -C ./ssigmaapipython add .
           git -C ./ssigmaapipython commit -m "gen" || result=$?
