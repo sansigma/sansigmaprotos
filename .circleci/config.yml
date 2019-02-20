@@ -87,6 +87,7 @@ jobs:
           git -C ./${CIRCLE_PROJECT_REPONAME}python rm --cached -r .
           rm -r ${CIRCLE_PROJECT_REPONAME}python/*
           cp -r gen/pb_python/${CIRCLE_PROJECT_REPONAME}/ ${CIRCLE_PROJECT_REPONAME}python/
+          cp -r version_manage/python/* ${CIRCLE_PROJECT_REPONAME}python/
           result=0
           git -C ./${CIRCLE_PROJECT_REPONAME}python add .
           git -C ./${CIRCLE_PROJECT_REPONAME}python commit -m "gen" || result=$?
