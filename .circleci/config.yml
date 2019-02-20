@@ -55,7 +55,7 @@ jobs:
             git -C ./ssigmaapigo rm --cached -r .
             rm -r ssigmaapigo/*
             cp -r gen/pb-go/github.com/sansigma/ssigmaapigo/ ssigmaapigo/
-            git -C ./ssigmaapigo git push origin master
+            git -C ./ssigmaapigo push origin master
 
 workflows:
   version: 2
