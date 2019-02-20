@@ -65,6 +65,7 @@ jobs:
     - run:
         name: git commit python-src
         command: |
+          git remote add upstream https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git
           if [ `git branch -r --list origin/generated/python | wc -l` -eq 1 ]; then
             echo "checkout generated/python"
             git fetch origin
