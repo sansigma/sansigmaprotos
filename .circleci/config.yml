@@ -90,7 +90,7 @@ jobs:
           git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}typescript.git
           git -C ./ssigmaapitypescript rm --cached -r .
           rm -r ssigmaapitypescript/*
-          cp -r gen/pb_typescript/ssigmaapi/* ssigmaapitypescript/
+          cp -r gen/pb-typescript/ssigmaapi/* ssigmaapitypescript/
           result=0
           git -C ./ssigmaapitypescript add .
           git -C ./ssigmaapitypescript commit -m "gen" || result=$?
