@@ -35,6 +35,9 @@ jobs:
     - run:
         name: Generate gRPC for python
         command: for file in `find ssigmaapi -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l python -i ./ ; done
+    - run:
+        name: Generate gRPC for typescript
+        command: docker run -t --rm -v $(pwd):$(pwd) -w $(pwd) kaito22/grpc-gen-typescript:0.1.0 ./protoc.sh
     - persist_to_workspace:
         root: .
         paths:
@@ -59,6 +62,7 @@ jobs:
           rm -r ssigmaapigo/*
           cp -r gen/pb-go/github.com/kaito2/ssigmaapigo/* ssigmaapigo/
           cp -r version_manage/go/* ssigmaapigo/
+          result=0
           git -C ./ssigmaapigo add .
           git -C ./ssigmaapigo commit -m "gen" || result=$?
           if [ $result -eq 0 ]; then
@@ -88,6 +92,29 @@ jobs:
           git -C ../python-src commit -m "AUTO GENERATED [ci skip]" || result=$?
           if [ $result -eq 0 ]; then
             git -C ../python-src push upstream generated/python 2> /dev/null
+          fi
+    - run:
+        name: git commit typescript-src
+        command: |
+          if [ `git branch -r --list origin/generated/typescript | wc -l` -eq 1 ]; then
+            echo "checkout generated/typescript"
+            git fetch origin
+            git worktree add -b generated/typescript ../typescript-src origin/generated/typescript
+            git -C ../typescript-src rm `git -C ../typescript-src ls-files`
+          else
+            echo "create generated/typescript"
+            git worktree add --detach ../typescript-src
+            git -C ../typescript-src checkout --orphan generated/typescript
+            git -C ../typescript-src rm --cached -r .
+            git -C ../typescript-src clean -d -f
+          fi
+          cp -a gen/pb-typescript/ssigmaapi/* ../typescript-src/
+          git -C ../typescript-src add -A
+          git -C ../typescript-src status
+          result=0
+          git -C ../typescript-src commit -m "AUTO GENERATED [ci skip]" || result=$?
+          if [ $result -eq 0 ]; then
+            git -C ../typescript-src push upstream generated/typescript 2> /dev/null
           fi
 
 workflows:
