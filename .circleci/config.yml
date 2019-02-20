@@ -72,7 +72,7 @@ jobs:
     - run:
         name: git commit python-src
         command: |
-          echo "clone go"
+          echo "clone python"
           git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git
           git -C ./ssigmaapipython rm --cached -r .
           rm -r ssigmaapipython/*
@@ -86,25 +86,16 @@ jobs:
     - run:
         name: git commit typescript-src
         command: |
-          if [ `git branch -r --list origin/generated/typescript | wc -l` -eq 1 ]; then
-            echo "checkout generated/typescript"
-            git fetch origin
-            git worktree add -b generated/typescript ../typescript-src origin/generated/typescript
-            git -C ../typescript-src rm `git -C ../typescript-src ls-files`
-          else
-            echo "create generated/typescript"
-            git worktree add --detach ../typescript-src
-            git -C ../typescript-src checkout --orphan generated/typescript
-            git -C ../typescript-src rm --cached -r .
-            git -C ../typescript-src clean -d -f
-          fi
-          cp -a gen/pb-typescript/ssigmaapi/* ../typescript-src/
-          git -C ../typescript-src add -A
-          git -C ../typescript-src status
+          echo "clone typescript"
+          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}typescript.git
+          git -C ./ssigmaapitypescript rm --cached -r .
+          rm -r ssigmaapitypescript/*
+          cp -r gen/pb_typescript/ssigmaapi/* ssigmaapitypescript/
           result=0
-          git -C ../typescript-src commit -m "AUTO GENERATED [ci skip]" || result=$?
+          git -C ./ssigmaapitypescript add .
+          git -C ./ssigmaapitypescript commit -m "gen" || result=$?
           if [ $result -eq 0 ]; then
-            git -C ../typescript-src push upstream generated/typescript 2> /dev/null
+            git -C ./ssigmaapitypescript push origin master 2> /dev/null
           fi
 
 workflows:
