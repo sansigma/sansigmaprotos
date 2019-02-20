@@ -52,7 +52,10 @@ jobs:
           command: |
             echo "clone go"
             git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git
-            ls
+            git -C ./ssigmaapigo rm --cached -r .
+            rm -r ssigmaapigo/*
+            cp -r gen/pb-go/github.com/sansigma/ssigmaapigo/ ssigmaapigo/
+            git -C ./ssigmaapigo git push origin master
 
 workflows:
   version: 2
