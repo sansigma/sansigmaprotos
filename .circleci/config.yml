@@ -54,7 +54,7 @@ jobs:
             git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git
             git -C ./ssigmaapigo rm --cached -r .
             rm -r ssigmaapigo/*
-            cp -r gen/pb-go/github.com/sansigma/ssigmaapigo/ ssigmaapigo/
+            cp -r gen/pb-go/github.com/sansigma/ssigmaapigo/* ssigmaapigo/
             git -C ./ssigmaapigo add .
             git -C ./ssigmaapigo commit -m "gen"
             git -C ./ssigmaapigo push origin master
