@@ -38,8 +38,7 @@ jobs:
     - run:
         name: Generate gRPC for swift
         command: |
-          chown -R $USER:$USER ./
-          mkdir -p gen/pb-swift/
+          sudo mkdir -p gen/pb-swift/
           for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run --rm -v $(pwd):$(pwd) -w $(pwd) kaito2/swift-protoc:0.1.3 --swift_out=./gen/pb-swift --swiftgrpc_out=./gen/pb-swift -I. $file ; done
     - run:
         name: Generate gRPC for typescript
