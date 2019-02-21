@@ -9,8 +9,10 @@ PROTO_SRC=./
 PROTO_DEST=./gen/pb-typescript
 
 mkdir -p ${PROTO_DEST}
-git clone https://github.com/googleapis/googleapis.git
-mv googleapis/google ./
+mkdir -p ./google/api
+for f in annotations http; do
+    curl -L -o ./google/api/${f}.proto https://raw.githubusercontent.com/grpc-ecosystem/grpc-gateway/master/third_party/googleapis/google/api/${f}.proto;
+done
 
 for file in `find ssigmaapi -name '*.proto'`; do
     grpc_tools_node_protoc \
