@@ -155,7 +155,7 @@ jobs:
           fi
           git -C ./${CIRCLE_PROJECT_REPONAME}cpp rm --cached -r .
           rm -r ${CIRCLE_PROJECT_REPONAME}cpp/*
-          cp -r gen/pb-cpp/${CIRCLE_PROJECT_REPONAME}/ ${CIRCLE_PROJECT_REPONAME}cpp/
+          cp -r gen/pb-cpp/${CIRCLE_PROJECT_REPONAME}/* ${CIRCLE_PROJECT_REPONAME}cpp/
           result=0
           git -C ./${CIRCLE_PROJECT_REPONAME}cpp add .
           git -C ./${CIRCLE_PROJECT_REPONAME}cpp commit -m "gen" || result=$?
