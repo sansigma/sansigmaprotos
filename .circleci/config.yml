@@ -174,7 +174,7 @@ jobs:
           fi
           git -C ./${CIRCLE_PROJECT_REPONAME}csharp rm --cached -r .
           rm -r ${CIRCLE_PROJECT_REPONAME}csharp/*
-          cp -r gen/pb-csharp/${CIRCLE_PROJECT_REPONAME}/* ${CIRCLE_PROJECT_REPONAME}csharp/
+          cp -r gen/pb-csharp/* ${CIRCLE_PROJECT_REPONAME}csharp/
           result=0
           git -C ./${CIRCLE_PROJECT_REPONAME}csharp add .
           git -C ./${CIRCLE_PROJECT_REPONAME}csharp commit -m "gen" || result=$?
