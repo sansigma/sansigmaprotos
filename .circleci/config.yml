@@ -25,7 +25,7 @@ jobs:
         at: .
     - run:
         name: Clean up
-        command: rm -rf gen
+        command: rm -rf gen google
     - run:
         name: Check dir
         command: ls
@@ -43,6 +43,12 @@ jobs:
     - run:
         name: Generate gRPC for typescript
         command: docker run -t --rm -v $(pwd):$(pwd) -w $(pwd) kaito22/grpc-gen-typescript:0.1.0 ./protoc.sh
+    - run:
+        name: Generate gRPC for cpp
+        command: for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l cpp -i ./ ; done
+    - run:
+        name: Generate gRPC for csharp
+        command: for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l csharp -i ./ ; done
     - persist_to_workspace:
         root: .
         paths:
@@ -136,6 +142,44 @@ jobs:
           git -C ./${CIRCLE_PROJECT_REPONAME}typescript commit -m "gen" || result=$?
           if [ $result -eq 0 ]; then
             git -C ./${CIRCLE_PROJECT_REPONAME}typescript push origin master 2> /dev/null
+          fi
+    - run:
+        name: git commit cpp-src
+        command: |
+          echo "clone cpp"
+          clonesuccess=0
+          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}cpp.git || clonesuccess=$?
+          if [ $clonesuccess -eq 128 ]; then
+            echo "cpp repository is not found"
+            exit -1
+          fi
+          git -C ./${CIRCLE_PROJECT_REPONAME}cpp rm --cached -r .
+          rm -r ${CIRCLE_PROJECT_REPONAME}cpp/*
+          cp -r gen/pb-cpp/${CIRCLE_PROJECT_REPONAME}/* ${CIRCLE_PROJECT_REPONAME}cpp/
+          result=0
+          git -C ./${CIRCLE_PROJECT_REPONAME}cpp add .
+          git -C ./${CIRCLE_PROJECT_REPONAME}cpp commit -m "gen" || result=$?
+          if [ $result -eq 0 ]; then
+            git -C ./${CIRCLE_PROJECT_REPONAME}cpp push origin master 2> /dev/null
+          fi
+    - run:
+        name: git commit csharp-src
+        command: |
+          echo "clone csharp"
+          clonesuccess=0
+          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}csharp.git || clonesuccess=$?
+          if [ $clonesuccess -eq 128 ]; then
+            echo "csharp repository is not found"
+            exit -1
+          fi
+          git -C ./${CIRCLE_PROJECT_REPONAME}csharp rm --cached -r .
+          rm -r ${CIRCLE_PROJECT_REPONAME}csharp/*
+          cp -r gen/pb-csharp/${CIRCLE_PROJECT_REPONAME}/* ${CIRCLE_PROJECT_REPONAME}csharp/
+          result=0
+          git -C ./${CIRCLE_PROJECT_REPONAME}csharp add .
+          git -C ./${CIRCLE_PROJECT_REPONAME}csharp commit -m "gen" || result=$?
+          if [ $result -eq 0 ]; then
+            git -C ./${CIRCLE_PROJECT_REPONAME}csharp push origin master 2> /dev/null
           fi
 
 workflows:
