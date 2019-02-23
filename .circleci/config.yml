@@ -170,6 +170,7 @@ jobs:
           clonesuccess=0
           git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}csharp.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
+            echo "branch ${CIRCLE_BRANCH} is not existed"
             git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}csharp.git
             git -C ./${CIRCLE_PROJECT_REPONAME}csharp checkout -b ${CIRCLE_BRANCH}
           fi
