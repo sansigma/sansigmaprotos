@@ -70,7 +70,7 @@ jobs:
           echo "clone go"
           clonesuccess=0
           git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git || clonesuccess=$?
-          if [ $clonesuccess -eq 128 ]; then
+          if [ $clonesuccess != 0 ]; then
             git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git
             git -C ./${CIRCLE_PROJECT_REPONAME}go checkout -b ${CIRCLE_BRANCH}
           fi
@@ -92,7 +92,7 @@ jobs:
           echo "clone python"
           clonesuccess=0
           git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git || clonesuccess=$?
-          if [ $clonesuccess -eq 128 ]; then
+          if [ $clonesuccess != 0 ]; then
             git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git
             git -C ./${CIRCLE_PROJECT_REPONAME}python checkout -b ${CIRCLE_BRANCH}
           fi
@@ -112,7 +112,7 @@ jobs:
           echo "clone swift"
           clonesuccess=0
           git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}swift.git || clonesuccess=$?
-          if [ $clonesuccess -eq 128 ]; then
+          if [ $clonesuccess != 0 ]; then
             git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}swift.git
             git -C ./${CIRCLE_PROJECT_REPONAME}swift checkout -b ${CIRCLE_BRANCH}
           fi
@@ -131,7 +131,7 @@ jobs:
           echo "clone typescript"
           clonesuccess=0
           git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}typescript.git || clonesuccess=$?
-          if [ $clonesuccess -eq 128 ]; then
+          if [ $clonesuccess != 0 ]; then
             git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}typescript.git
             git -C ./${CIRCLE_PROJECT_REPONAME}typescript checkout -b ${CIRCLE_BRANCH}
           fi
@@ -150,7 +150,7 @@ jobs:
           echo "clone cpp"
           clonesuccess=0
           git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}cpp.git || clonesuccess=$?
-          if [ $clonesuccess -eq 128 ]; then
+          if [ $clonesuccess != 0 ]; then
             git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}cpp.git
             git -C ./${CIRCLE_PROJECT_REPONAME}cpp checkout -b ${CIRCLE_BRANCH}
           fi

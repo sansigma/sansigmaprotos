@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package ssigmaapi.type;
-
-option go_package = "github.com/kaito2/ssigmaapigo/type/hoge;hoge";
-
-message Hoge {
-    string huga = 1;
-}
