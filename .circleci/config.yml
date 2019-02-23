@@ -69,7 +69,7 @@ jobs:
         command: |
           echo "clone go"
           clonesuccess=0
-          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git || clonesuccess=$?
+          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             echo "go repository is not found"
             exit -1
@@ -90,7 +90,7 @@ jobs:
         command: |
           echo "clone python"
           clonesuccess=0
-          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git || clonesuccess=$?
+          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             echo "python repository is not found"
             exit -1
@@ -110,7 +110,7 @@ jobs:
         command: |
           echo "clone swift"
           clonesuccess=0
-          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}swift.git || clonesuccess=$?
+          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}swift.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             echo "swift repository is not found"
             exit -1
@@ -129,7 +129,7 @@ jobs:
         command: |
           echo "clone typescript"
           clonesuccess=0
-          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}typescript.git || clonesuccess=$?
+          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}typescript.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             echo "typescript repository is not found"
             exit -1
@@ -148,7 +148,7 @@ jobs:
         command: |
           echo "clone cpp"
           clonesuccess=0
-          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}cpp.git || clonesuccess=$?
+          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}cpp.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             echo "cpp repository is not found"
             exit -1
@@ -167,7 +167,7 @@ jobs:
         command: |
           echo "clone csharp"
           clonesuccess=0
-          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}csharp.git || clonesuccess=$?
+          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}csharp.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             echo "csharp repository is not found"
             exit -1
