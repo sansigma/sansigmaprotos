@@ -72,7 +72,7 @@ jobs:
           git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git
-            git -C checkout ./${CIRCLE_PROJECT_REPONAME}go -b ${GH_TOKEN}
+            git -C ./${CIRCLE_PROJECT_REPONAME}go checkout -b ${GH_TOKEN}
           fi
           git -C ./${CIRCLE_PROJECT_REPONAME}go rm --cached -r .
           rm -r ${CIRCLE_PROJECT_REPONAME}go/*
