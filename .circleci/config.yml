@@ -69,7 +69,7 @@ jobs:
         command: |
           echo "clone go"
           clonesuccess=0
-          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git || clonesuccess=$?
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             echo "go repository is not found"
             exit -1
@@ -82,7 +82,7 @@ jobs:
           git -C ./${CIRCLE_PROJECT_REPONAME}go add .
           git -C ./${CIRCLE_PROJECT_REPONAME}go commit -m "gen" || result=$?
           if [ $result -eq 0 ]; then
-            git -C ./${CIRCLE_PROJECT_REPONAME}go push origin master 2> /dev/null
+            git -C ./${CIRCLE_PROJECT_REPONAME}go push origin ${CIRCLE_BRANCH} 2> /dev/null
           fi
 
     - run:
@@ -90,7 +90,7 @@ jobs:
         command: |
           echo "clone python"
           clonesuccess=0
-          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git || clonesuccess=$?
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             echo "python repository is not found"
             exit -1
@@ -103,14 +103,14 @@ jobs:
           git -C ./${CIRCLE_PROJECT_REPONAME}python add .
           git -C ./${CIRCLE_PROJECT_REPONAME}python commit -m "gen" || result=$?
           if [ $result -eq 0 ]; then
-            git -C ./${CIRCLE_PROJECT_REPONAME}python push origin master 2> /dev/null
+            git -C ./${CIRCLE_PROJECT_REPONAME}python push origin ${CIRCLE_BRANCH} 2> /dev/null
           fi
     - run:
         name: git commit swift-src
         command: |
           echo "clone swift"
           clonesuccess=0
-          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}swift.git || clonesuccess=$?
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}swift.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             echo "swift repository is not found"
             exit -1
@@ -122,14 +122,14 @@ jobs:
           git -C ./${CIRCLE_PROJECT_REPONAME}swift add .
           git -C ./${CIRCLE_PROJECT_REPONAME}swift commit -m "gen" || result=$?
           if [ $result -eq 0 ]; then
-            git -C ./${CIRCLE_PROJECT_REPONAME}swift push origin master 2> /dev/null
+            git -C ./${CIRCLE_PROJECT_REPONAME}swift push origin ${CIRCLE_BRANCH} 2> /dev/null
           fi
     - run:
         name: git commit typescript-src
         command: |
           echo "clone typescript"
           clonesuccess=0
-          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}typescript.git || clonesuccess=$?
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}typescript.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             echo "typescript repository is not found"
             exit -1
@@ -141,14 +141,14 @@ jobs:
           git -C ./${CIRCLE_PROJECT_REPONAME}typescript add .
           git -C ./${CIRCLE_PROJECT_REPONAME}typescript commit -m "gen" || result=$?
           if [ $result -eq 0 ]; then
-            git -C ./${CIRCLE_PROJECT_REPONAME}typescript push origin master 2> /dev/null
+            git -C ./${CIRCLE_PROJECT_REPONAME}typescript push origin ${CIRCLE_BRANCH} 2> /dev/null
           fi
     - run:
         name: git commit cpp-src
         command: |
           echo "clone cpp"
           clonesuccess=0
-          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}cpp.git || clonesuccess=$?
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}cpp.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             echo "cpp repository is not found"
             exit -1
@@ -160,14 +160,14 @@ jobs:
           git -C ./${CIRCLE_PROJECT_REPONAME}cpp add .
           git -C ./${CIRCLE_PROJECT_REPONAME}cpp commit -m "gen" || result=$?
           if [ $result -eq 0 ]; then
-            git -C ./${CIRCLE_PROJECT_REPONAME}cpp push origin master 2> /dev/null
+            git -C ./${CIRCLE_PROJECT_REPONAME}cpp push origin ${CIRCLE_BRANCH} 2> /dev/null
           fi
     - run:
         name: git commit csharp-src
         command: |
           echo "clone csharp"
           clonesuccess=0
-          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}csharp.git || clonesuccess=$?
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}csharp.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             echo "csharp repository is not found"
             exit -1
@@ -179,7 +179,7 @@ jobs:
           git -C ./${CIRCLE_PROJECT_REPONAME}csharp add .
           git -C ./${CIRCLE_PROJECT_REPONAME}csharp commit -m "gen" || result=$?
           if [ $result -eq 0 ]; then
-            git -C ./${CIRCLE_PROJECT_REPONAME}csharp push origin master 2> /dev/null
+            git -C ./${CIRCLE_PROJECT_REPONAME}csharp push origin ${CIRCLE_BRANCH} 2> /dev/null
           fi
 
 workflows:
@@ -190,15 +190,8 @@ workflows:
     - build:
         requires:
         - lint
-        filters:
-          branches:
-            only:
-            - master
+
     - push:
         requires:
         - lint
         - build
-        filters:
-          branches:
-            only:
-            - master
