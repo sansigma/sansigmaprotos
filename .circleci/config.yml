@@ -91,7 +91,7 @@ jobs:
         command: |
           echo "clone python"
           clonesuccess=0
-          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git || clonesuccess=$?
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git
             git -C ./${CIRCLE_PROJECT_REPONAME}python checkout -b ${CIRCLE_BRANCH}
@@ -111,7 +111,7 @@ jobs:
         command: |
           echo "clone swift"
           clonesuccess=0
-          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}swift.git || clonesuccess=$?
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}swift.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}swift.git
             git -C ./${CIRCLE_PROJECT_REPONAME}swift checkout -b ${CIRCLE_BRANCH}
@@ -130,7 +130,7 @@ jobs:
         command: |
           echo "clone typescript"
           clonesuccess=0
-          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}typescript.git || clonesuccess=$?
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}typescript.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git
             git -C ./${CIRCLE_PROJECT_REPONAME}swift checkout -b ${CIRCLE_BRANCH}
@@ -149,7 +149,7 @@ jobs:
         command: |
           echo "clone cpp"
           clonesuccess=0
-          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}cpp.git || clonesuccess=$?
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}cpp.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}cpp.git
             git -C ./${CIRCLE_PROJECT_REPONAME}cpp checkout -b ${CIRCLE_BRANCH}
@@ -168,7 +168,7 @@ jobs:
         command: |
           echo "clone csharp"
           clonesuccess=0
-          git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}csharp.git || clonesuccess=$?
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}csharp.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
             git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}csharp.git
             git -C ./${CIRCLE_PROJECT_REPONAME}csharp checkout -b ${CIRCLE_BRANCH}
