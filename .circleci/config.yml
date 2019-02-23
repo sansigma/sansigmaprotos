@@ -174,7 +174,7 @@ jobs:
             git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}csharp.git
             git -C ./${CIRCLE_PROJECT_REPONAME}csharp checkout -b ${CIRCLE_BRANCH}
           fi
-          git -C ./${CIRCLE_PROJECT_REPONAME}csharp rm -r .
+          git -C ./${CIRCLE_PROJECT_REPONAME}csharp rm --cached -r .
           rm -r ${CIRCLE_PROJECT_REPONAME}csharp/*
           cp -r gen/pb-csharp/* ${CIRCLE_PROJECT_REPONAME}csharp/
           result=0
