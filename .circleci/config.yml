@@ -93,8 +93,8 @@ jobs:
           clonesuccess=0
           git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
-            echo "python repository is not found"
-            exit -1
+            git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git
+            git -C ./${CIRCLE_PROJECT_REPONAME}python checkout -b ${CIRCLE_BRANCH}
           fi
           git -C ./${CIRCLE_PROJECT_REPONAME}python rm --cached -r .
           rm -r ${CIRCLE_PROJECT_REPONAME}python/*
@@ -113,8 +113,8 @@ jobs:
           clonesuccess=0
           git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}swift.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
-            echo "swift repository is not found"
-            exit -1
+            git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}swift.git
+            git -C ./${CIRCLE_PROJECT_REPONAME}swift checkout -b ${CIRCLE_BRANCH}
           fi
           git -C ./${CIRCLE_PROJECT_REPONAME}swift rm --cached -r .
           rm -r ${CIRCLE_PROJECT_REPONAME}swift/*
@@ -132,8 +132,8 @@ jobs:
           clonesuccess=0
           git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}typescript.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
-            echo "typescript repository is not found"
-            exit -1
+            git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git
+            git -C ./${CIRCLE_PROJECT_REPONAME}swift checkout -b ${CIRCLE_BRANCH}
           fi
           git -C ./${CIRCLE_PROJECT_REPONAME}typescript rm --cached -r .
           rm -r ${CIRCLE_PROJECT_REPONAME}typescript/*
@@ -151,8 +151,8 @@ jobs:
           clonesuccess=0
           git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}cpp.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
-            echo "cpp repository is not found"
-            exit -1
+            git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}cpp.git
+            git -C ./${CIRCLE_PROJECT_REPONAME}cpp checkout -b ${CIRCLE_BRANCH}
           fi
           git -C ./${CIRCLE_PROJECT_REPONAME}cpp rm --cached -r .
           rm -r ${CIRCLE_PROJECT_REPONAME}cpp/*
@@ -170,8 +170,8 @@ jobs:
           clonesuccess=0
           git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}csharp.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
-            echo "csharp repository is not found"
-            exit -1
+            git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}csharp.git
+            git -C ./${CIRCLE_PROJECT_REPONAME}csharp checkout -b ${CIRCLE_BRANCH}
           fi
           git -C ./${CIRCLE_PROJECT_REPONAME}csharp rm --cached -r .
           rm -r ${CIRCLE_PROJECT_REPONAME}csharp/*
