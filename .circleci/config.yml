@@ -104,7 +104,7 @@ jobs:
           git -C ./${CIRCLE_PROJECT_REPONAME}python add .
           git -C ./${CIRCLE_PROJECT_REPONAME}python commit -m "gen" || result=$?
           if [ $result -eq 0 ]; then
-            git -C ./${CIRCLE_PROJECT_REPONAME}python push origin ${CIRCLE_BRANCH} 2> /dev/null
+            git -C ./${CIRCLE_PROJECT_REPONAME}python push origin ${CIRCLE_BRANCH}
           fi
     - run:
         name: git commit swift-src
