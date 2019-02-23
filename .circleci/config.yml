@@ -71,10 +71,6 @@ jobs:
           clonesuccess=0
           git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
-            echo "go repository is not found"
-            exit -1
-          fi
-          if [ $clonesuccess -eq 255 ]; then
             git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git
             git -C checkout -b ${GH_TOKEN}
           fi
