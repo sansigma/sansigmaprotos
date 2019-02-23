@@ -132,8 +132,8 @@ jobs:
           clonesuccess=0
           git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}typescript.git || clonesuccess=$?
           if [ $clonesuccess -eq 128 ]; then
-            git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git
-            git -C ./${CIRCLE_PROJECT_REPONAME}swift checkout -b ${CIRCLE_BRANCH}
+            git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}typescript.git
+            git -C ./${CIRCLE_PROJECT_REPONAME}typescript checkout -b ${CIRCLE_BRANCH}
           fi
           git -C ./${CIRCLE_PROJECT_REPONAME}typescript rm --cached -r .
           rm -r ${CIRCLE_PROJECT_REPONAME}typescript/*
