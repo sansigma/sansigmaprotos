@@ -9,146 +9,180 @@ jobs:
   lint:
     <<: *defaults
     steps:
-      - checkout
-      - run:
-          name: Lint
-          command: for file in `find ssigmaapi -name '*.proto'`; do docker run -v $(pwd):/$(pwd) -w $(pwd) znly/protoc -I. --lint_out=. $file; done
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
+    - checkout
+    - run:
+        name: Lint
+        command: for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run -v $(pwd):/$(pwd) -w $(pwd) znly/protoc -I. --lint_out=. $file; done
+    - persist_to_workspace:
+        root: .
+        paths:
+        - .
 
   build:
     <<: *defaults
     steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: Clean up
-          command: rm -rf gen
-      - run:
-          name: Check dir
-          command: ls
-      - run:
-          name: Generate gRPC for go
-          command: for file in `find ssigmaapi -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l go -i ./ ; done
-      - run:
-          name: Generate gRPC for python
-          command: for file in `find ssigmaapi -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l python -i ./ ; done
-      - run:
-          name: Generate gRPC for typescript
-          command: docker run -t --rm -v $(pwd):$(pwd) -w $(pwd) kaito22/grpc-gen-typescript:0.1.0 ./protoc.sh
-      - run:
-          name: Generate gRPC for web
-          command: for file in `find ssigmaapi -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l web -i ./ ; done
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
+    - attach_workspace:
+        at: .
+    - run:
+        name: Clean up
+        command: rm -rf gen google
+    - run:
+        name: Check dir
+        command: ls
+    - run:
+        name: Generate gRPC for go
+        command: for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l go -i ./ ; done
+    - run:
+        name: Generate gRPC for python
+        command: for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l python -i ./ ; done
+    - run:
+        name: Generate gRPC for swift
+        command: |
+          sudo mkdir -p gen/pb-swift/
+          for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run --rm -v $(pwd):$(pwd) -w $(pwd) kaito2/swift-protoc:0.1.3 --swift_out=./gen/pb-swift --swiftgrpc_out=./gen/pb-swift -I. $file ; done
+    - run:
+        name: Generate gRPC for typescript
+        command: docker run -t --rm -v $(pwd):$(pwd) -w $(pwd) kaito22/grpc-gen-typescript:0.1.0 ./protoc.sh
+    - run:
+        name: Generate gRPC for cpp
+        command: for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l cpp -i ./ ; done
+    - run:
+        name: Generate gRPC for csharp
+        command: for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l csharp -i ./ ; done
+    - persist_to_workspace:
+        root: .
+        paths:
+        - .
 
   push:
     <<: *defaults
     steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: git config
-          command: |
-            git config user.email "doumintyu1017@gmail.com"
-            git config user.name "Generator Bot"
-            git remote add upstream https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git
-      - run:
-          name: git commit go-src
-          command: |
-            if [ `git branch -r --list origin/generated/go | wc -l` -eq 1 ]; then
-              echo "checkout generated/go"
-              git fetch origin
-              git worktree add -b generated/go ../go-src origin/generated/go
-              git -C ../go-src rm `git -C ../go-src ls-files`
-            else
-              echo "create generated/go"
-              git worktree add --detach ../go-src
-              git -C ../go-src checkout --orphan generated/go
-              git -C ../go-src rm --cached -r .
-              git -C ../go-src clean -d -f
-            fi
-            cp -a gen/pb-go/github.com/sansigma/ssigmaapigo/* ../go-src/
-            git -C ../go-src add -A
-            git -C ../go-src status
-            result=0
-            git -C ../go-src commit -m "AUTO GENERATED [ci skip]" || result=$?
-            if [ $result -eq 0 ]; then
-              git -C ../go-src push upstream generated/go 2> /dev/null
-            fi
-      - run:
-          name: git commit python-src
-          command: |
-            if [ `git branch -r --list origin/generated/python | wc -l` -eq 1 ]; then
-              echo "checkout generated/python"
-              git fetch origin
-              git worktree add -b generated/python ../python-src origin/generated/python
-              git -C ../python-src rm `git -C ../python-src ls-files`
-            else
-              echo "create generated/python"
-              git worktree add --detach ../python-src
-              git -C ../python-src checkout --orphan generated/python
-              git -C ../python-src rm --cached -r .
-              git -C ../python-src clean -d -f
-            fi
-            cp -a gen/pb_python/ssigmaapi/* ../python-src/
-            git -C ../python-src add -A
-            git -C ../python-src status
-            result=0
-            git -C ../python-src commit -m "AUTO GENERATED [ci skip]" || result=$?
-            if [ $result -eq 0 ]; then
-              git -C ../python-src push upstream generated/python 2> /dev/null
-            fi
-      - run:
-          name: git commit typescript-src
-          command: |
-            if [ `git branch -r --list origin/generated/typescript | wc -l` -eq 1 ]; then
-              echo "checkout generated/typescript"
-              git fetch origin
-              git worktree add -b generated/typescript ../typescript-src origin/generated/typescript
-              git -C ../typescript-src rm `git -C ../typescript-src ls-files`
-            else
-              echo "create generated/typescript"
-              git worktree add --detach ../typescript-src
-              git -C ../typescript-src checkout --orphan generated/typescript
-              git -C ../typescript-src rm --cached -r .
-              git -C ../typescript-src clean -d -f
-            fi
-            cp -a gen/pb-typescript/ssigmaapi/* ../typescript-src/
-            git -C ../typescript-src add -A
-            git -C ../typescript-src status
-            result=0
-            git -C ../typescript-src commit -m "AUTO GENERATED [ci skip]" || result=$?
-            if [ $result -eq 0 ]; then
-              git -C ../typescript-src push upstream generated/typescript 2> /dev/null
-            fi
-      - run:
-          name: git commit web-src
-          command: |
-            if [ `git branch -r --list origin/generated/web | wc -l` -eq 1 ]; then
-              echo "checkout generated/web"
-              git fetch origin
-              git worktree add -b generated/web ../web-src origin/generated/web
-              git -C ../web-src rm `git -C ../web-src ls-files`
-            else
-              echo "create generated/web"
-              git worktree add --detach ../web-src
-              git -C ../web-src checkout --orphan generated/web
-              git -C ../web-src rm --cached -r .
-              git -C ../web-src clean -d -f
-            fi
-            cp -a gen/pb-web/ssigmaapi/* ../web-src/
-            git -C ../web-src add -A
-            git -C ../web-src status
-            result=0
-            git -C ../web-src commit -m "AUTO GENERATED [ci skip]" || result=$?
-            if [ $result -eq 0 ]; then
-              git -C ../web-src push upstream generated/web 2> /dev/null
-            fi
+    - attach_workspace:
+        at: .
+    - run:
+        name: git config
+        command: |
+          git config --global user.email "doumintyu1017@gmail.com"
+          git config --global user.name "Generator Bot"
+    - run:
+        name: git clone go
+        command: |
+          echo "clone go"
+          clonesuccess=0
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git || clonesuccess=$?
+          if [ $clonesuccess != 0 ]; then
+            git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}go.git
+            git -C ./${CIRCLE_PROJECT_REPONAME}go checkout -b ${CIRCLE_BRANCH}
+          fi
+          git -C ./${CIRCLE_PROJECT_REPONAME}go rm --cached -r .
+          rm -r ${CIRCLE_PROJECT_REPONAME}go/*
+          cp -r gen/pb-go/github.com/kaito2/${CIRCLE_PROJECT_REPONAME}go/* ${CIRCLE_PROJECT_REPONAME}go/
+          cp -r version_manage/go/* ${CIRCLE_PROJECT_REPONAME}go/
+          result=0
+          git -C ./${CIRCLE_PROJECT_REPONAME}go add .
+          git -C ./${CIRCLE_PROJECT_REPONAME}go commit -m "gen" || result=$?
+          echo "result ${result}"
+          if [ $result -eq 0 ]; then
+            git -C ./${CIRCLE_PROJECT_REPONAME}go push origin ${CIRCLE_BRANCH} 2> /dev/null
+          fi
+
+    - run:
+        name: git commit python-src
+        command: |
+          echo "clone python"
+          clonesuccess=0
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git || clonesuccess=$?
+          if [ $clonesuccess != 0 ]; then
+            git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}python.git
+            git -C ./${CIRCLE_PROJECT_REPONAME}python checkout -b ${CIRCLE_BRANCH}
+          fi
+          git -C ./${CIRCLE_PROJECT_REPONAME}python rm --cached -r .
+          rm -r ${CIRCLE_PROJECT_REPONAME}python/*
+          cp -r gen/pb_python/${CIRCLE_PROJECT_REPONAME}/ ${CIRCLE_PROJECT_REPONAME}python/
+          cp -r version_manage/python/* ${CIRCLE_PROJECT_REPONAME}python/
+          result=0
+          git -C ./${CIRCLE_PROJECT_REPONAME}python add .
+          git -C ./${CIRCLE_PROJECT_REPONAME}python commit -m "gen" || result=$?
+          if [ $result -eq 0 ]; then
+            git -C ./${CIRCLE_PROJECT_REPONAME}python push origin ${CIRCLE_BRANCH}
+          fi
+    - run:
+        name: git commit swift-src
+        command: |
+          echo "clone swift"
+          clonesuccess=0
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}swift.git || clonesuccess=$?
+          if [ $clonesuccess != 0 ]; then
+            git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}swift.git
+            git -C ./${CIRCLE_PROJECT_REPONAME}swift checkout -b ${CIRCLE_BRANCH}
+          fi
+          git -C ./${CIRCLE_PROJECT_REPONAME}swift rm --cached -r .
+          rm -r ${CIRCLE_PROJECT_REPONAME}swift/*
+          cp -r gen/pb-swift/${CIRCLE_PROJECT_REPONAME}/* ${CIRCLE_PROJECT_REPONAME}swift/
+          result=0
+          git -C ./${CIRCLE_PROJECT_REPONAME}swift add .
+          git -C ./${CIRCLE_PROJECT_REPONAME}swift commit -m "gen" || result=$?
+          if [ $result -eq 0 ]; then
+            git -C ./${CIRCLE_PROJECT_REPONAME}swift push origin ${CIRCLE_BRANCH} 2> /dev/null
+          fi
+    - run:
+        name: git commit typescript-src
+        command: |
+          echo "clone typescript"
+          clonesuccess=0
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}typescript.git || clonesuccess=$?
+          if [ $clonesuccess != 0 ]; then
+            git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}typescript.git
+            git -C ./${CIRCLE_PROJECT_REPONAME}typescript checkout -b ${CIRCLE_BRANCH}
+          fi
+          git -C ./${CIRCLE_PROJECT_REPONAME}typescript rm --cached -r .
+          rm -r ${CIRCLE_PROJECT_REPONAME}typescript/*
+          cp -r gen/pb-typescript/${CIRCLE_PROJECT_REPONAME}/* ${CIRCLE_PROJECT_REPONAME}typescript/
+          result=0
+          git -C ./${CIRCLE_PROJECT_REPONAME}typescript add .
+          git -C ./${CIRCLE_PROJECT_REPONAME}typescript commit -m "gen" || result=$?
+          if [ $result -eq 0 ]; then
+            git -C ./${CIRCLE_PROJECT_REPONAME}typescript push origin ${CIRCLE_BRANCH} 2> /dev/null
+          fi
+    - run:
+        name: git commit cpp-src
+        command: |
+          echo "clone cpp"
+          clonesuccess=0
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}cpp.git || clonesuccess=$?
+          if [ $clonesuccess != 0 ]; then
+            git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}cpp.git
+            git -C ./${CIRCLE_PROJECT_REPONAME}cpp checkout -b ${CIRCLE_BRANCH}
+          fi
+          git -C ./${CIRCLE_PROJECT_REPONAME}cpp rm --cached -r .
+          rm -r ${CIRCLE_PROJECT_REPONAME}cpp/*
+          cp -r gen/pb-cpp/${CIRCLE_PROJECT_REPONAME}/* ${CIRCLE_PROJECT_REPONAME}cpp/
+          result=0
+          git -C ./${CIRCLE_PROJECT_REPONAME}cpp add .
+          git -C ./${CIRCLE_PROJECT_REPONAME}cpp commit -m "gen" || result=$?
+          if [ $result -eq 0 ]; then
+            git -C ./${CIRCLE_PROJECT_REPONAME}cpp push origin ${CIRCLE_BRANCH} 2> /dev/null
+          fi
+    - run:
+        name: git commit csharp-src
+        command: |
+          echo "clone csharp"
+          clonesuccess=0
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}csharp.git || clonesuccess=$?
+          if [ $clonesuccess != 0 ]; then
+            echo "branch ${CIRCLE_BRANCH} is not existed"
+            git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}csharp.git
+            git -C ./${CIRCLE_PROJECT_REPONAME}csharp checkout -b ${CIRCLE_BRANCH}
+          fi
+          git -C ./${CIRCLE_PROJECT_REPONAME}csharp rm --cached -r .
+          rm -r ${CIRCLE_PROJECT_REPONAME}csharp/*
+          cp -r gen/pb-csharp/* ${CIRCLE_PROJECT_REPONAME}csharp/
+          result=0
+          git -C ./${CIRCLE_PROJECT_REPONAME}csharp add .
+          git -C ./${CIRCLE_PROJECT_REPONAME}csharp commit -m "gen" || result=$?
+          if [ $result -eq 0 ]; then
+            git -C ./${CIRCLE_PROJECT_REPONAME}csharp push origin ${CIRCLE_BRANCH} 2> /dev/null
+          fi
 
 workflows:
   version: 2
@@ -157,16 +191,9 @@ workflows:
     - lint
     - build:
         requires:
-          - lint
-        filters:
-          branches:
-            only:
-              - master
+        - lint
+
     - push:
         requires:
-          - lint
-          - build
-        filters:
-          branches:
-            only:
-              - master
+        - lint
+        - build
