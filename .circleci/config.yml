@@ -2,7 +2,7 @@ version: 2
 
 references:
   defaults: &defaults
-    working_directory: ~/grpc-gen
+    working_directory: /grpc-gen
     machine: true
 
 jobs:
@@ -39,7 +39,7 @@ jobs:
         name: Generate gRPC for swift
         command: |
           sudo mkdir -p gen/pb-swift/
-          for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run --rm -v $(pwd):$(pwd) -w $(pwd) kaito2/swift-protoc:0.1.3 --swift_out=./gen/pb-swift --swiftgrpc_out=./gen/pb-swift -I. $file ; done
+          for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run --rm -v $(pwd):$(pwd) -w $(pwd) kaito2/swift-protoc:0.1.3 --swift_opt=Visibility=Public --swift_out=./gen/pb-swift --swiftgrpc_out=Visibility=Public:./gen/pb-swift -I. $file ; done
     - run:
         name: Generate gRPC for typescript
         command: docker run -t --rm -v $(pwd):$(pwd) -w $(pwd) kaito22/grpc-gen-typescript:0.1.0 ./protoc.sh
@@ -138,6 +138,7 @@ jobs:
           git -C ./${CIRCLE_PROJECT_REPONAME}typescript rm --cached -r .
           rm -r ${CIRCLE_PROJECT_REPONAME}typescript/*
           cp -r gen/pb-typescript/${CIRCLE_PROJECT_REPONAME}/* ${CIRCLE_PROJECT_REPONAME}typescript/
+          cp -r version_manage/typescript/* ${CIRCLE_PROJECT_REPONAME}typescript/
           result=0
           git -C ./${CIRCLE_PROJECT_REPONAME}typescript add .
           git -C ./${CIRCLE_PROJECT_REPONAME}typescript commit -m "gen" || result=$?
