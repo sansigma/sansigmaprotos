@@ -14,7 +14,7 @@ for f in annotations http; do
     curl -L -o ./google/api/${f}.proto https://raw.githubusercontent.com/grpc-ecosystem/grpc-gateway/master/third_party/googleapis/google/api/${f}.proto;
 done
 
-for file in `find ssigmaapi -name '*.proto'`; do
+for file in `find ${CIRCLE_PROJECT_REPONAME} google -name '*.proto'`; do
     grpc_tools_node_protoc \
       --js_out=import_style=commonjs,binary:${PROTO_DEST} \
       --grpc_out=${PROTO_DEST} \
