@@ -27,6 +27,11 @@ jobs:
         name: Clean up
         command: rm -rf gen google
     - run:
+        name: Get google/api annotations http
+        command: |
+          mkdir -p ./google/api
+          for f in annotations http; do curl -L -o ./google/api/${f}.proto https://raw.githubusercontent.com/grpc-ecosystem/grpc-gateway/master/third_party/googleapis/google/api/${f}.proto; done
+    - run:
         name: Check dir
         command: ls
     - run:
@@ -42,7 +47,10 @@ jobs:
           for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run --rm -v $(pwd):$(pwd) -w $(pwd) kaito2/swift-protoc:0.1.3 --swift_opt=Visibility=Public --swift_out=./gen/pb-swift --swiftgrpc_out=Visibility=Public:./gen/pb-swift -I. $file ; done
     - run:
         name: Generate gRPC for typescript
-        command:  docker run -t --rm -v $(pwd):$(pwd) -w $(pwd) --env CIRCLE_PROJECT_REPONAME=${CIRCLE_PROJECT_REPONAME} kaito22/grpc-gen-typescript:0.1.0 ./protoc.sh
+        command: docker run -t --rm -v $(pwd):$(pwd) -w $(pwd) --env CIRCLE_PROJECT_REPONAME=${CIRCLE_PROJECT_REPONAME} kaito22/grpc-gen-typescript:0.1.0 ./protoc.sh
+    - run:
+        name: Generate gRPC for typescript
+        command: docker run -t --rm -v $(pwd):$(pwd) -w $(pwd) --env CIRCLE_PROJECT_REPONAME=${CIRCLE_PROJECT_REPONAME} kaito2/grpc-gen-web:0.1.0 ./web-protoc.sh
     - run:
         name: Generate gRPC for cpp
         command: for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l cpp -i ./ ; done
@@ -145,6 +153,27 @@ jobs:
           git -C ./${CIRCLE_PROJECT_REPONAME}typescript commit -m "gen" || result=$?
           if [ $result -eq 0 ]; then
             git -C ./${CIRCLE_PROJECT_REPONAME}typescript push origin ${CIRCLE_BRANCH} 2> /dev/null
+          fi
+    - run:
+        name: git commit web-src
+        command: |
+          echo "clone web"
+          clonesuccess=0
+          git clone -b ${CIRCLE_BRANCH} https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}web.git || clonesuccess=$?
+          if [ $clonesuccess != 0 ]; then
+            git clone https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}web.git
+            git -C ./${CIRCLE_PROJECT_REPONAME}web checkout -b ${CIRCLE_BRANCH}
+          fi
+          git -C ./${CIRCLE_PROJECT_REPONAME}web rm --cached -r .
+          rm -r ${CIRCLE_PROJECT_REPONAME}web/*
+          cp -r gen/pb-web/${CIRCLE_PROJECT_REPONAME} ${CIRCLE_PROJECT_REPONAME}web/
+          cp -r gen/pb-web/google ${CIRCLE_PROJECT_REPONAME}web/
+          cp -r version_manage/web/* ${CIRCLE_PROJECT_REPONAME}web/
+          result=0
+          git -C ./${CIRCLE_PROJECT_REPONAME}web add .
+          git -C ./${CIRCLE_PROJECT_REPONAME}web commit -m "gen" || result=$?
+          if [ $result -eq 0 ]; then
+            git -C ./${CIRCLE_PROJECT_REPONAME}web push origin ${CIRCLE_BRANCH} 2> /dev/null
           fi
     - run:
         name: git commit cpp-src
