@@ -5,7 +5,7 @@
 require: [CircleCI CLI](https://circleci.com/docs/2.0/local-cli/#installation)
 
 ```
-$ circleci execute -v $(pwd):/grpc-gen
+$ circleci local execute -v (pwd):/grpc-gen -e CIRCLE_PROJECT_REPONAME=ssigmaapi
 ```
 
 ### generate api_descriptor file
