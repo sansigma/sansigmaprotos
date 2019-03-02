@@ -2,7 +2,7 @@ version: 2
 
 references:
   defaults: &defaults
-    working_directory: /grpc-gen
+    working_directory: ~/grpc-gen
     machine: true
 
 jobs:
