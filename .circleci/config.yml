@@ -138,6 +138,7 @@ jobs:
           git -C ./${CIRCLE_PROJECT_REPONAME}typescript rm --cached -r .
           rm -r ${CIRCLE_PROJECT_REPONAME}typescript/*
           cp -r gen/pb-typescript/${CIRCLE_PROJECT_REPONAME} ${CIRCLE_PROJECT_REPONAME}typescript/
+          cp -r gen/pb-typescript/google ${CIRCLE_PROJECT_REPONAME}typescript/
           cp -r version_manage/typescript/* ${CIRCLE_PROJECT_REPONAME}typescript/
           result=0
           git -C ./${CIRCLE_PROJECT_REPONAME}typescript add .
