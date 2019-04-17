@@ -84,7 +84,7 @@ jobs:
           fi
           git -C ./${CIRCLE_PROJECT_REPONAME}go rm --cached -r .
           rm -r ${CIRCLE_PROJECT_REPONAME}go/*
-          cp -r gen/pb-go/github.com/kaito2/${CIRCLE_PROJECT_REPONAME}go/* ${CIRCLE_PROJECT_REPONAME}go/
+          cp -r gen/pb-go/github.com/sansigma/${CIRCLE_PROJECT_REPONAME}go/* ${CIRCLE_PROJECT_REPONAME}go/
           cp -r version_manage/go/* ${CIRCLE_PROJECT_REPONAME}go/
           result=0
           git -C ./${CIRCLE_PROJECT_REPONAME}go add .
