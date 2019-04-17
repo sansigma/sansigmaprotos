@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package ssigmaapi.vitess.v1;
+package ssigmaapi.flnd.v1;
 
 import "google/protobuf/empty.proto";
 
-option go_package = "github.com/kaito2/ssigmaapigo/vitess/v1;vitess";
+option go_package = "github.com/sansigma/ssigmaapigo/flnd/v1;flnd";
 
 message VitessMessage {
     string text = 1;
