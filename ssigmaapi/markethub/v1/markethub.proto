@@ -7,7 +7,7 @@ import "ssigmaapi/type/trade.proto";
 import "ssigmaapi/type/orderbook.proto";
 import "google/api/annotations.proto";
 
-option go_package = "github.com/kaito2/ssigmaapigo/markethub/v1;markethub";
+option go_package = "github.com/sansigma/ssigmaapigo/markethub/v1;markethub";
 
 service MarketHubServiceV1 {
     rpc GetTrades (GetTradesRequest) returns (stream GetTradesResponse) {

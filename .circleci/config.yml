@@ -44,13 +44,13 @@ jobs:
         name: Generate gRPC for swift
         command: |
           sudo mkdir -p gen/pb-swift/
-          for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run --rm -v $(pwd):$(pwd) -w $(pwd) kaito2/swift-protoc:0.1.3 --swift_opt=Visibility=Public --swift_out=./gen/pb-swift --swiftgrpc_out=Visibility=Public:./gen/pb-swift -I. $file ; done
+          for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run --rm -v $(pwd):$(pwd) -w $(pwd) sansigma/swift-protoc:0.1.3 --swift_opt=Visibility=Public --swift_out=./gen/pb-swift --swiftgrpc_out=Visibility=Public:./gen/pb-swift -I. $file ; done
     - run:
         name: Generate gRPC for typescript
-        command: docker run -t --rm -v $(pwd):$(pwd) -w $(pwd) --env CIRCLE_PROJECT_REPONAME=${CIRCLE_PROJECT_REPONAME} kaito22/grpc-gen-typescript:0.1.0 ./protoc.sh
+        command: docker run -t --rm -v $(pwd):$(pwd) -w $(pwd) --env CIRCLE_PROJECT_REPONAME=${CIRCLE_PROJECT_REPONAME} sansigma/grpc-gen-typescript:0.1.0 ./protoc.sh
     - run:
         name: Generate gRPC for typescript
-        command: docker run -t --rm -v $(pwd):$(pwd) -w $(pwd) --env CIRCLE_PROJECT_REPONAME=${CIRCLE_PROJECT_REPONAME} kaito2/grpc-gen-web:0.1.0 ./web-protoc.sh
+        command: docker run -t --rm -v $(pwd):$(pwd) -w $(pwd) --env CIRCLE_PROJECT_REPONAME=${CIRCLE_PROJECT_REPONAME} sansigma/grpc-gen-web:0.1.0 ./web-protoc.sh
     - run:
         name: Generate gRPC for cpp
         command: for file in `find ${CIRCLE_PROJECT_REPONAME} -name '*.proto'`; do docker run -v $(pwd):/defs namely/protoc-all -f $file -l cpp -i ./ ; done
@@ -84,7 +84,7 @@ jobs:
           fi
           git -C ./${CIRCLE_PROJECT_REPONAME}go rm --cached -r .
           rm -r ${CIRCLE_PROJECT_REPONAME}go/*
-          cp -r gen/pb-go/github.com/kaito2/${CIRCLE_PROJECT_REPONAME}go/* ${CIRCLE_PROJECT_REPONAME}go/
+          cp -r gen/pb-go/github.com/sansigma/${CIRCLE_PROJECT_REPONAME}go/* ${CIRCLE_PROJECT_REPONAME}go/
           cp -r version_manage/go/* ${CIRCLE_PROJECT_REPONAME}go/
           result=0
           git -C ./${CIRCLE_PROJECT_REPONAME}go add .
