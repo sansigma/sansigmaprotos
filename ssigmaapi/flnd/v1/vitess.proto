@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package ssigmaapi.vitess.v1;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/kaito2/ssigmaapigo/vitess/v1;vitess";
+
+message VitessMessage {
+    string text = 1;
+}
+
+service VitessServiceV1 {
+    rpc GetMessage (google.protobuf.Empty) returns (VitessMessage) {}
+    rpc CreateMessage (VitessMessage) returns (google.protobuf.Empty) {}
+    rpc UpdateMessage (VitessMessage) returns (google.protobuf.Empty) {}
+    rpc DeleteMessage (VitessMessage) returns (google.protobuf.Empty) {}
+}
